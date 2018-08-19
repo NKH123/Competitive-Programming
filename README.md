@@ -1,2 +1,2 @@
 # Competitive-Coding
-Contains codes of problems from Codeforces, HackerRank, CodeChef and HackerEarth.
+Contains solutions to problems from Codeforces, HackerRank, CodeChef and HackerEarth.
