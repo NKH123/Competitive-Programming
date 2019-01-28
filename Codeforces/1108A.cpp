@@ -33,6 +33,20 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
+    int q;
+    cin>>q;
+    while(q--){
+    	int l1,r1,l2,r2;
+    	cin>>l1>>r1>>l2>>r2;
+    	int a;
+    	int b;
+    	a=l1;
+    	b=r2;
+    	if(a==b){
+    		a=r1;
+    	}
+    	cout<<a<<" "<<b<<"\n";
+    }
     
     return 0;
 }

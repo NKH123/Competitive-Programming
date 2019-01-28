@@ -33,6 +33,39 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
-    return 0;
+	int n;
+	cin>>n;
+	vi a;
+	a.resize(n);
+	REP(i,0,n)cin>>a[i];
+	sort(a.begin(),a.end());
+    //print(a);
+	int x=a[n-1];
+	int y;
+	int f=0;
+	for(int i=0;i<(n-1);i++){
+		if(x%a[i]!=0){
+			f=1;
+			break;
+		}
+	}
+	if(f==0){
+
+		for(int i=0;i<(n-1);i++){
+			if(a[i]==a[i+1]){
+				y=a[i];
+			}
+		}
+		//y=a[n-2];
+	}
+	else{
+		for(int i=0;i<(n-1);i++){
+			if(x%a[i]!=0){
+				y=a[i];
+
+			}
+		}
+	}
+	cout<<x<<" "<<y<<"\n";
+	return 0;
 }

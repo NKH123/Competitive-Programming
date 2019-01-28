@@ -10,7 +10,6 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -26,13 +25,52 @@ ll power(ll x, ll y)
 	else
 		return (((x*temp)%mod)*temp)%mod; 
 }
-
+bool same(string s){
+	char a=s[0];
+	for(int i=0;i<s.size();i++){
+		if(a!=s[i]){
+			return false;
+		}
+	}
+	return true;
+}
+bool ispal(string s){
+	int l=0,r=s.size()-1;
+	while(l<=r){
+		if(s[l]!=s[r]){
+			return false;
+		}
+		l++;
+		r--;
+	}
+	return true;
+}
+vl a[300005];
+vector<bool>col;
 int main()
 {   ios::sync_with_stdio(false);
     //freopen("a.in", "r", stdin);
     //freopen("b.in", "r", stdin);
-    //freopen("c.in", "r", stdin);
+    //freopen("c.in", "r", stdin);int
     //freopen("d.in", "r", stdin);
-    
+	int t;
+	cin>>t;
+	while(t--){
+		int n,m;
+		cin>>n>>m;
+		col.resize(n);
+		memset(col,0,sizeof(col));
+		REP(i,0,m){
+			int u,v;
+			cin>>u>>v;
+			u--;
+			v--;
+			a[u].PB(v);
+			a[v].PB(u);
+		}
+		is
+	}
+
+
     return 0;
 }

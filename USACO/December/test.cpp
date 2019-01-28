@@ -10,7 +10,6 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -26,13 +25,32 @@ ll power(ll x, ll y)
 	else
 		return (((x*temp)%mod)*temp)%mod; 
 }
-
+void print(vi a){
+	REP(i,0,a.size()){
+		cout<<a[i]<<" ";
+	}
+	cout<<"\n";
+}
 int main()
 {   ios::sync_with_stdio(false);
     //freopen("a.in", "r", stdin);
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    vi a;
+    REP(i,0,10){
+    	a.PB(i);
+    }
+    print(a);
+    a.erase(a.begin());
+    print(a);
+    a.insert(a.begin(),0);
+    print(a);
+    a.erase(a.begin()+a.size()-1);
+    print(a);
+    a.insert(a.begin()+a.size()-1,9);
+    print(a);
+
+
     return 0;
 }

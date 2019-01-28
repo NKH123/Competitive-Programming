@@ -32,7 +32,15 @@ int main()
     //freopen("a.in", "r", stdin);
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
-    //freopen("d.in", "r", stdin);
-    
+    //freopen("d.in", "int r", stdin);
+    int n,a,b;
+    cin>>n>>a>>b;
+    if(a<b)swap(a,b);
+    int bb=0;
+    if((a+b)>n){
+    	bb=(a+b)-n;
+    }
+    int aa=b;
+    cout<<aa<<" "<<bb<<"\n";
     return 0;
 }

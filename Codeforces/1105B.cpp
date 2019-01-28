@@ -10,7 +10,6 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -33,6 +32,49 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
-    return 0;
+	int n,k;
+	cin>>n>>k;
+	string s;
+	cin>>s;
+	int a[26];
+	memset(a,0,sizeof(a));
+	int sam=0;
+	bool flag=0;
+	if(k==1){
+		for(int i=0;i<n;i++){
+			a[s[i]-'a']++;
+		}
+	}
+	else{
+		//cout<<"imhere\n";
+		for(int i=1;i<(n);i++){
+    	//trace(i);
+			//trace(s[i]);
+    	//trace(sam);
+			if(s[i]==s[i-1]){
+				//cout<<"here\n";
+				sam++;
+				if((sam%(k-1))==0 && flag!=1){
+					a[s[i]-'a']++;
+					sam=0;
+					flag=1;
+				}
+				else if((sam%(k-1))==0){
+					flag=0;
+				}
+
+			}
+			else{
+				sam=0;
+				flag=0;
+			}
+			//trace(sam);
+		}
+	}
+	int ans=0;
+	for(int i=0;i<26;i++){
+		ans=max(ans,a[i]);
+	}
+	cout<<ans<<"\n";
+	return 0;
 }

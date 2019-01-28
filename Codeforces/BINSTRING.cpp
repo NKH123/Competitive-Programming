@@ -33,6 +33,21 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
-    return 0;
+	while(true){
+		int n;
+		cin>>n;
+		string s="";
+		string t;
+		for(int i=0;i<n;i++){
+			t=s;
+			reverse(t.begin(),t.end());
+			for(int j=0;j<t.size();j++){
+				if(t[j]=='0')t[j]='1';
+				else t[j]='0';
+			}
+			s=s+"0"+t;
+		}
+		cout<<s<<"\n";
+	}
+	return 0;
 }

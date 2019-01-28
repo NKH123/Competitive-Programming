@@ -33,6 +33,35 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    int t;
+    cin>>t;
+    vl a;
+    vl b;
+    while(t--){
+    	int n;
+    	cin>>n;
+    	a.resize(n);
+    	b.resize(n);
+    	REP(i,0,n)cin>>a[i];
+    	REP(i,0,n)cin>>b[i];
+    	if(a[0]!=0 || b[n-1]!=0 || a[n-1]!=b[0]){
+    		cout<<"No\n";
+    		continue;
+    	}
+    	ll sum=a[n-1];
+    	int f=1;
+    	for(int i=1;i<(n-1);i++){
+    		if(((a[i]+b[i])<sum)|| (a[i]<=0 || b[i]<=0 || a[i]>(sum+b[i]) || b[i]>(sum+a[i]))){
+    			cout<<"No\n";
+    			f=0;
+    			break;
+    		}
+
+    	}
+    	if(!f)continue;
+    	else{
+    		cout<<"Yes\n";
+    	}
+    }
     return 0;
 }

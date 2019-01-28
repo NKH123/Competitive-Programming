@@ -10,22 +10,8 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
-
-
-ll power(ll x, ll y) 
-{
-	ll temp;
-	if( y == 0)
-		return 1;
-	temp = power(x, y/2);
-	if (y%2 == 0)
-		return (temp*temp)%mod;
-	else
-		return (((x*temp)%mod)*temp)%mod; 
-}
 
 int main()
 {   ios::sync_with_stdio(false);
@@ -33,6 +19,23 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
-    return 0;
+	ll n,p;
+	int t;
+	cin>>t;
+	while(t--){
+		cin>>n>>p;
+		if(n==1 || n==2){
+			cout<<p*p*p<<"\n";
+		}
+		/*else if(n==2){
+			if()
+		}*/
+		else{
+			ll ans=0;
+			ll i=(n/2)+1;
+			ans+=(p-((n%i)+1)+1)*(p-((n%i)+1)+1)+(p-(n+1)+1)*((p-((n%i)+1)+1))+(p-(n+1)+1)*(p-(n+1)+1);
+			cout<<ans<<"\n";
+		}
+	}
+	return 0;
 }

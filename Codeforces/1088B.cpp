@@ -7,25 +7,8 @@ using namespace std;
 #define REP(i,a,b) for (int i = a; i <b; i++)
 typedef long long ll;
 typedef vector<int> vi;
-typedef vector<long long> vl;
 typedef pair<int,int> pi;
-#define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
-#define mod 1000000007
-
-
-ll power(ll x, ll y) 
-{
-	ll temp;
-	if( y == 0)
-		return 1;
-	temp = power(x, y/2);
-	if (y%2 == 0)
-		return (temp*temp)%mod;
-	else
-		return (((x*temp)%mod)*temp)%mod; 
-}
 
 int main()
 {   ios::sync_with_stdio(false);
@@ -33,6 +16,32 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    int n,k;
+    cin>>n>>k;
+    vi a;
+    a.resize(n);
+    REP(i,0,n){
+        cin>>a[i];
+    }
+    sort(a.begin(),a.end());
+    int K=k;
+    int i=0;
+    int diff=0;
+    while(k--){
+        while(a[i]-diff==0){
+            i++;
+            
+        }
+        if(i!=n){
+        cout<<a[i]-diff<<"\n";
+        diff=diff+a[i]-diff;
+        }
+        else{
+           cout<<0<<"\n";
+        }
+
+
+    }
+
     return 0;
 }

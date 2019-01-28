@@ -33,6 +33,21 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    int n,m;
+    cin>>n>>m;
+    vi a;
+    a.resize(n);
+    b.resize(m);
+    ll ans=0;
+    REP(i,0,n)cin>>a[i];
+    REP(i,0,m)cin>>b[i];
+    for(int i=0;i<m;i++){
+    	ans+=a[i]*b[i];
+    }
+    ll ANS=0;
+    for(int i=1;i<(n-m);i++){
+    	ANS=ans-a[i-1]*b[0]+a[i+m]*
+    }
+
     return 0;
 }

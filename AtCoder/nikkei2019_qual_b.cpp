@@ -33,6 +33,22 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    int n;
+    cin>>n;
+    string a,b,c;
+    cin>>a>>b>>c;
+    int ans=0;
+    REP(i,0,n){
+    	if(a[i]!=b[i] && b[i]!=c[i] && a[i]!=c[i]){
+    		ans+=2;
+    	}
+    	if(a[i]==b[i]==c[i]){
+
+    	}
+    	if((a[i]==b[i] && b[i]!=c[i])||(a[i]==c[i] && c[i]!=b[i])||(b[i]==c[i] && c[i]!=a[i])){
+    		ans+=1;
+    	}
+    }
+    cout<<ans<<"\n";
     return 0;
 }

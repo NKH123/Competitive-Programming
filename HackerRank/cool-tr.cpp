@@ -10,7 +10,6 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -26,13 +25,38 @@ ll power(ll x, ll y)
 	else
 		return (((x*temp)%mod)*temp)%mod; 
 }
-
+bool isP(long double x) 
+{   
+  // Find floating point value of  
+  // square root of x. 
+  long double sr = sqrt(x); 
+  
+  // If square root is an integer 
+  return ((sr - floor(sr)) == 0); 
+} 
 int main()
 {   ios::sync_with_stdio(false);
     //freopen("a.in", "r", stdin);
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
+    int t;
+    cin>>t;
+    while(t--){
+    	ll a,b;
+    	cin>>a>>b;
+    	if(a>b){
+    		swap(a,b);
+    	}
+    	double c=a*a+b*b;
+    	double d=b*b-a*a;
+    	if(isP(c)||isP(d)){
+    		cout<<"yes\n";
+    	}
+    	else{
+    		cout<<"no\n";
+    	}
+    }
     
     return 0;
 }

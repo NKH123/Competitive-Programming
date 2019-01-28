@@ -10,7 +10,6 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -33,6 +32,34 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    int n,k;
+    cin>>n>>k;
+    vi a;
+    a.resize(n);
+    REP(i,0,n){
+    	cin>>a[i];
+    }
+    int ans=-1;
+    int bb[1000];
+    for(int b=0;b<n;b++){
+    	memset(bb,0,sizeof(bb));
+    	int istart=-(b/k);
+
+    	int e=0,s=0;
+    	for(int i=(istart);(b+i*k<n);i++){
+    		bb[b+i*k]=1;
+    	}
+    	for(int i=0;i<n;i++){
+    		if(a[i]==1){
+    			if(!bb[i])e++;
+    		}
+
+    		if(a[i]==(-1)){
+    			if(!bb[i])s++;
+    		}
+    	}
+    	ans=max(ans,abs(e-s));
+    }
+    cout<<ans<<"\n";
     return 0;
 }

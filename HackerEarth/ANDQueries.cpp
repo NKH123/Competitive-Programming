@@ -10,7 +10,6 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -29,10 +28,41 @@ ll power(ll x, ll y)
 
 int main()
 {   ios::sync_with_stdio(false);
-    //freopen("a.in", "r", stdin);
+    freopen("a.in", "r", stdin);
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
+    int n;
+    cin>>n;
+    vi a;
+    a.resize(n);
+    REP(i,0,n){
+    	cin>>a[i];
+    }
+    int m;
+    cin>>m;
+    while(m--){
+    	int l,r,x;
+    	cin>>l>>r>>x;
+    	l--;
+    	r--;
+    	ll ans=0;
+    	for(int i=l;i<=r;i++){
+    		for(int j=l;j<=r;j++){
+    			for(int k=l;k<=r;k++){
+    				//trace(i);
+    				//trace(j);
+    				//trace(k);
+    				if((a[i]&a[j]&a[k])==x){
+    				//s	cout<<"I'm here\n";
+    					ans++;
+    					ans=ans%llp;
+    				}
+    			}
+    		}
+    	}
+    	cout<<ans<<"\n";
+    }
     
     return 0;
 }

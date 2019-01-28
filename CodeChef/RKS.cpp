@@ -26,13 +26,51 @@ ll power(ll x, ll y)
 	else
 		return (((x*temp)%mod)*temp)%mod; 
 }
-
+bool row[1000006];
+bool col[1000006];
 int main()
 {   ios::sync_with_stdio(false);
     //freopen("a.in", "r", stdin);
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    int t;
+    cin>>t;
+    int n,k;
+
+    while(t--){
+    	cin>>n>>k;
+    	memset(row,false,sizeof(row));
+    	memset(col,false,sizeof(col));
+    	while(k--){
+    		int A,B;
+    		cin>>A>>B;
+    		row[A]=true;
+    		col[B]=true;
+    	}
+    	int i=1,j=1;
+    	int ct=0;
+    	vector<pair<int,int> > pa;
+    	pa.clear();
+    	while(i<=n && j<=n){
+    		while(row[i]==true){
+    			i++;
+    		}
+    		while(col[j]==true){
+    			j++;
+    		}
+    		if(i>n || j>n)break;
+    		pa.PB({i,j});
+    		row[i]=true;
+    		col[j]=true;
+    		i++;
+    		j++;
+    	}
+    	cout<<pa.size()<<" ";
+    	for(auto g:pa){
+    		cout<<g.F<<" "<<g.S<<" ";
+    	}
+    	cout<<"\n";
+    }
     return 0;
 }

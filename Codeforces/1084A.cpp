@@ -7,25 +7,8 @@ using namespace std;
 #define REP(i,a,b) for (int i = a; i <b; i++)
 typedef long long ll;
 typedef vector<int> vi;
-typedef vector<long long> vl;
 typedef pair<int,int> pi;
-#define trace(x) cout<<#x<<"="<<x<<"\n";
-#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
-#define mod 1000000007
-
-
-ll power(ll x, ll y) 
-{
-	ll temp;
-	if( y == 0)
-		return 1;
-	temp = power(x, y/2);
-	if (y%2 == 0)
-		return (temp*temp)%mod;
-	else
-		return (((x*temp)%mod)*temp)%mod; 
-}
 
 int main()
 {   ios::sync_with_stdio(false);
@@ -33,6 +16,34 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
+    int n;
+    cin>>n;
+    vi a;
+    a.resize(n);
+    REP(i,0,n){
+    	cin>>a[i];
+    }
+    /*int N=n/2;
+    if(n%2==0)N--;
+    int fl=N;
+    /*if(n%2==0){
+    	N--;
+    }
+    int fl=0;
+    int sum=0;
+    do{
+    	sum=sum+a[fl];
+    	fl++;
+    }while(sum<(n/2) && fl<n);
+    fl--;
+    int ans=0;*/
+    //cout<<"fl="<<fl<<"\n";
+    int ans=0;
+    REP(i,0,n){
+    	ans+=a[i]*2*2*i;
+    }
+    cout<<ans<<"\n";
+
+
     return 0;
 }

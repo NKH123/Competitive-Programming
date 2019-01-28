@@ -26,13 +26,76 @@ ll power(ll x, ll y)
 	else
 		return (((x*temp)%mod)*temp)%mod; 
 }
+int ans=0;
+string s;
+void fun(int I){
+	//trace(I);
+	int n=s.size();
+	int len=1;
+	for(int i=I;i<(n-1);i++){
+		if(s[i]==s[i+1]){
+			len++;
+		}
+		else{
+			break;
+		}
 
+	}
+	//trace(len);
+	char rep;
+	if(s[I]=='R'){
+		rep='G';
+	}
+	if(s[I]=='G'){
+		rep='B';
+	}
+	if(s[I]=='B'){
+		rep='R';
+	}
+	if(len%2==0){
+		/*if(I==0){
+
+		}
+		else{
+
+		}*/
+		if(I!=0){
+			if (rep==s[I-1]){
+				rep='R'+'G'+'B'-rep-s[I];
+			}
+		}
+		for(int i=0;i<len;i++){
+			if(i%2==0){
+				s[i+I]=rep;
+				ans++;
+			}
+		}
+	}
+	else{
+		for(int i=0;i<len;i++){
+			if((i%2)!=0){
+				s[i+I]=rep;
+				ans++;
+			}
+		}
+	}
+}
 int main()
 {   ios::sync_with_stdio(false);
     //freopen("a.in", "r", stdin);
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    
-    return 0;
+	int n;
+	cin>>n;
+
+	cin>>s;
+	for(int i=0;i<(n-1);i++){
+		if(s[i]==s[i+1]){
+			fun(i);
+		}
+	}
+	cout<<ans<<"\n";
+	cout<<s<<"\n";		
+	return 0;
 }
