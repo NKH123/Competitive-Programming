@@ -57,7 +57,14 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 int main(){
 	ios::sync_with_stdio(false);
 
-
+    int a,b;
+    cin>>a>>b;
+    if(b%a==0){
+        cout<<a+b<<"\n";
+    }
+    else{
+        cout<<b-a<<"\n";
+    }
 
 
 	return 0;

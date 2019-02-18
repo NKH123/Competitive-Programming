@@ -57,8 +57,47 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 int main(){
 	ios::sync_with_stdio(false);
 
+    int n;
+    cin>>n;
+    vi a(n);
+    ll sum=0;
+    REP(i,0,n){
+        
+        cin>>a[i];
+        sum+=a[i];
+    }
+    sort(a.begin(),a.end());
+    ll red;
+    ll div;
+    //deb(sum);
+    for(int i=1;i<n;i++){
+        red=-1;div=-1;
+        for(int j=2;j<=(a[i]);j++){
+            if(a[i]%j==0){
+                if(a[0]*j<a[i]){
+                    //red=max(red,a[0]+a[i]-a[0]*j-a[i]/j);
+                    if(red<(a[0]+a[i]-a[0]*j-a[i]/j)){
+                        div=j;
+                        red=a[0]+a[i]-a[0]*j-a[i]/j;
+                    }
+                }
+            }
 
+        }
+          if(div!=-1){
+        /*                deb(i);
+                deb(a[i]);
+                deb(div);
+                deb(red);*/
+                sum=sum-red;
+                a[i]=a[i]/div;
+                sort(a.begin(),a.end());
+                /*deb(a);
+                deb(sum);*/
+            }
 
+    }
+    cout<<sum<<"\n";
 
 	return 0;
 }

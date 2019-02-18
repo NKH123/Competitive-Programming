@@ -56,6 +56,46 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int main(){
 	ios::sync_with_stdio(false);
+    int n;
+    cin>>n;
+    vi a(n);
+    set<int>ss;
+    vi A(n);
+    REP(i,0,n){
+        cin>>a[i];
+        A[i]=a[i];
+        ss.insert(a[i]);
+    }
+    //a.resize(distance(a.begin(),unique(a.begin(),a.end())));
+    vi b;
+    for(int i=0;i<n;i++){
+        
+            if(ss.find(-1*a[i])==ss.end()){
+                b.PB(a[i]);
+            }
+        
+    }
+    sort(b.begin(),b.end());
+    if(b.size()<3){
+        cout<<0<<"\n";
+        return 0;
+    }
+    else{
+        ll ans=0;
+        int comp=b[b.size()-3];
+        //deb(b);
+        //deb(comp);
+        REP(i,0,n){
+            if(A[i]<comp && A[i]>0) {
+          //      deb(A[i]);
+                ans=ans+A[i]+mod;
+                ans=ans%mod;
+
+            }
+        }
+        cout<<ans<<"\n";
+    }
+    
 
 
 

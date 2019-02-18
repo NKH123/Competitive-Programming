@@ -57,7 +57,37 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 int main(){
 	ios::sync_with_stdio(false);
 
+    int n,v;
+    cin>>n>>v;
+    int rem=n-1;
+    /*for(int i=1;i<n;i++){
 
+    }*/
+    if(v>rem){
+        cout<<rem<<"\n";
+        return 0;
+    }
+    int cur=0;
+    int curp=1;
+    ll ans=0;
+    /*while(rem>0){
+        cur=min(v,cur+min(rem,v));
+        deb(rem);
+        deb(cur);
+        if(!(cur>rem))
+        ans=ans+curp*(min(v,rem-cur));
+        deb(ans);
+        rem--;
+        curp++;
+        cur--;
+    }*/
+    ans+=v;
+    //ans+=(n-(v+1));
+    int K=n-(v+1);
+    for(int i=0;i<(n-(v+1));i++){
+        ans+=i+2;
+    }
+    cout<<ans<<"\n";
 
 
 	return 0;

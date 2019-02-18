@@ -10,6 +10,7 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
+#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -56,7 +57,29 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int main(){
 	ios::sync_with_stdio(false);
-
+    int f=0;
+    int N,K;
+    for(int n=2;n<=100;n++){
+        for(int k=n+1;k<=100;k++){
+            trace(n);
+            trace(k);
+            double up=(n-1)*1.0/(n*(n+k))+(n+k-1)*1.0/((n+k)*(n+2*k));
+            double down=(n-1)*1.0/(n*n);
+            if(down<up){
+                f=1;
+                N=n;K=k;
+            }
+            trace(up);
+            trace(down);
+             cout<<"\n\n\n\n";
+        }
+       
+    }
+    if(f){
+        cout<<"Not normal\n";
+        trace(N);
+        trace(K);
+    }
 
 
 

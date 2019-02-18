@@ -56,9 +56,22 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int main(){
 	ios::sync_with_stdio(false);
-
-
-
+int t;
+cin>>t;
+while(t--){
+    int n;
+    cin>>n;
+    vi a(n);
+    REP(i,0,n)cin>>a[i];
+    int ct=0;
+    sort(a.begin(),a.end());
+    REP(i,0,n){
+        if(ct>=a[i]){
+            ct++;
+        }
+    }
+    cout<<ct<<"\n";
+}
 
 	return 0;
 }

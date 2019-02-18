@@ -57,8 +57,25 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 int main(){
 	ios::sync_with_stdio(false);
 
-
-
+    int n;
+    cin>>n;
+    vl a(n);
+    REP(i,0,n)cin>>a[i];
+    sort(a.begin(),a.end());
+    int I=0;
+    while(I<(n-1)){
+        for(int i=I+1;i<n;i++){
+            a[i]=a[i]%a[I];
+        }
+        sort(a.begin(),a.end());
+        for(int i=I;i<n;i++){
+            if(a[i]!=0){
+                I=i;
+                break;
+            }
+        }
+    }
+    cout<<a[n-1]<<"\n";
 
 	return 0;
 }

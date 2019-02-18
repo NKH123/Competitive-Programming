@@ -56,7 +56,44 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int main(){
 	ios::sync_with_stdio(false);
+    int n,m;
+    cin>>n>>m;
+    vl aa(n);
+    vl bb(n);
+    //memset(aa,0,sizeof(aa));
+    REP(i,0,n){
+        //deb(i);
 
+        int k;
+        cin>>k;
+        //deb(k);
+        REP(j,0,k){
+            ll aaa;
+            cin>>aaa;
+            //deb("before");
+            //deb(aa[i]);
+            bb[i]=bb[i]|(1L<<aaa);
+            aa[i]=(bb[i]|bb[i]);
+
+           // deb(aaa);
+           // cout<<bitset<64>(aaa)<<"\n";
+         //   deb("after");
+     //       deb(aa[i]);
+       //     cout<<bitset<64>(aa[i])<<"\n";
+       //
+        }
+    }
+    ll ans=(1L<<40)-1;
+    //deb(ans);
+    //cout<<bitset<64>(ans)<<"\n";
+    REP(i,0,n){
+        ans=ans&aa[i];
+    }
+    //deb(ans);
+    //cout<<bitset<64>(ans)<<"\n";
+    //deb(aa);
+
+    cout<<__builtin_popcountll(ans)<<"\n";
 
 
 

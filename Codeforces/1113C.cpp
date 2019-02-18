@@ -57,7 +57,15 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 int main(){
 	ios::sync_with_stdio(false);
 
-
+    int n;
+    cin>>n;
+    vi a(n+1);
+    REP(i,1,n+1)cin>>a[i];
+    vi par(n+1);
+    par[0]=0;
+    REP(i,1,n+1){
+        par[i]=par[i-1]^a[i];
+    }
 
 
 	return 0;

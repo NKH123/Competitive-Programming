@@ -56,8 +56,22 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int main(){
 	ios::sync_with_stdio(false);
+    int n,m;
+    cin>>n>>m;
+    vi b(m+1);
+    REP(i,0,n){
+        int p,B;
+        cin>>p>>B;
+        if(b[B]<p){
+            b[B]=p;
+        }
+    }
+    ll ans=0;
+    REP(i,1,m+1){
+        ans+=b[i];
+    }
 
-
+    cout<<ans<<"\n";
 
 
 	return 0;

@@ -52,13 +52,79 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-
+string B;
+bool inn(int j){
+    char A=j+'a';
+    REP(i,0,B.size()){
+        if(B[i]==A){
+            return true;
+        }
+    }
+    return false;
+}
 
 int main(){
 	ios::sync_with_stdio(false);
 
+    int t;
+    cin>>t;
+    string A;
+
+    int a[26];
+    vector<vector <int> > b;
+    while(t--){
+        REP(i,0,26)a[i]=0;
+        b.clear();
+        B="";
+        int n;
+        cin>>n;
+        cin>>A;
+        for(int i=0;i<A.size();i++){
+            if(a[A[i]-'a']==0){
+                B=B+A[i];
+                a[A[i]-'a']++;
+            }
+            else{
+                a[A[i]-'a']++;
+            }
+        }
+        //deb(B);
+        char first=B[0];
+        b.resize(n);
+        for(int i=0;i<n;i++){
+            b[i].resize(26);
+        }
+        b[0][A[0]-'a']++;
+        for(int i=1;i<n;i++){
+            for(int j=0;j<26;j++){
+                b[i][j]=b[i-1][j];
+            }
+            b[i][A[i]-'a']++;
+        }
+        //deb(b);
+        ll ans=0;
+
+        for(int i=0;i<n;i++){
+            if(A[i]==B[0]){
+                 ll tans=1;
+                for(int j=0;j<26;j++){
+                   
+                    if(j!=(B[0]-'a')){
+                        if(inn(j)){
+                            //deb(j);
+                            //deb('a'+j);
+                            tans=((tans%mod)*((b[n-1][j]-b[i][j])%mod))%mod;
+                        }
+                    }
+                }
+                ans+=tans;
+                ans=ans%mod;
+            }
+        }
+        cout<<ans<<"\n";
+
+    }
 
 
-
-	return 0;
+    return 0;
 }

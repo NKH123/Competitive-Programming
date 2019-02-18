@@ -10,6 +10,7 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
+#define print(x) cout<<#x<<" is "; for(int i=0;i<x.size();i++){cout<<x[i]<<" ";}cout<<"\n"
 #define llp 1000000007
 #define mod 1000000007
 
@@ -56,8 +57,21 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int main(){
 	ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--){
+        ll n,m,k;
+        cin>>n>>k>>m;
+        if(m%2==0){
+            ll num11=1;
+            ll den11=n;
 
+        }
+        else{
 
+        }
+
+    }
 
 
 	return 0;
