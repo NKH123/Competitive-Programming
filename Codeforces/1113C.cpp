@@ -1,72 +1,73 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <vector>
+
 using namespace std;
-#define F first
-#define S second
-#define PB push_back
-#define MP make_pair
-#define REP(i,a,b) for (int i = a; i <b; i++)
-typedef long long ll;
-typedef vector<int> vi;
-typedef vector<long long> vl;
-typedef pair<int,int> pi;
-#define trace(x) cout<<#x<<"="<<x<<"\n";
-#define llp 1000000007
-#define mod 1000000007
 
-template < typename F, typename S >
-ostream& operator << ( ostream& os, const pair< F, S > & p ) {
-    return os << "(" << p.first << ", " << p.second << ")";
-}
+const int MAX_N = 1e4 + 5, MAX_DIGIT = 9, oo = 1e6;
+int max_length_with_last_digit[MAX_N][MAX_DIGIT];
+int digit_cost[MAX_DIGIT + 1] = {0,2,5,5,4,5,6,3,7,6};
 
-template < typename T >
-ostream &operator << ( ostream & os, const vector< T > &v ) {
-    os << "{";
-    typename vector< T > :: const_iterator it;
-    for( it = v.begin(); it != v.end(); it++ ) {
-        if( it != v.begin() ) os << ", ";
-        os << *it;
-    }
-    return os << "}";
-}
+int main()
+{
+    int total_cost, no_of_digits;
+    cin >> total_cost >> no_of_digits;
 
-template < typename T >
-ostream &operator << ( ostream & os, const set< T > &v ) {
-    os << "[";
-    typename set< T > :: const_iterator it;
-    for ( it = v.begin(); it != v.end(); it++ ) {
-        if( it != v.begin() ) os << ", ";
-        os << *it;
-    }
-    return os << "]";
-}
-
-template < typename F, typename S >
-ostream &operator << ( ostream & os, const map< F, S > &v ) {
-    os << "[";
-    typename map< F , S >::const_iterator it;
-    for( it = v.begin(); it != v.end(); it++ ) {
-        if( it != v.begin() ) os << ", ";
-        os << it -> first << " = " << it -> second ;
-    }
-    return os << "]";
-}
-
-#define deb(x) cerr << #x << " = " << x << endl;
-
-
-int main(){
-	ios::sync_with_stdio(false);
-
-    int n;
-    cin>>n;
-    vi a(n+1);
-    REP(i,1,n+1)cin>>a[i];
-    vi par(n+1);
-    par[0]=0;
-    REP(i,1,n+1){
-        par[i]=par[i-1]^a[i];
+    vector <int> is_present(MAX_DIGIT + 1, false);
+    for(int i = 1; i <= no_of_digits; i++)
+    {
+        int digit;
+        cin >> digit;
+        is_present[digit] = true;
     }
 
+    vector <int> max_length(total_cost + 1, -oo);
+    max_length[0] = 0;
 
-	return 0;
+    for(int cost = 1; cost <= total_cost; cost++)
+    {
+        for(int last_digit = 1; last_digit <= MAX_DIGIT; last_digit++)
+        {
+            if(!is_present[last_digit] || digit_cost[last_digit] > cost)
+                continue;
+
+            int remaining_cost = cost - digit_cost[last_digit];
+
+            max_length_with_last_digit[cost][last_digit] = 1 + max_length[remaining_cost];
+
+            max_length[cost] = max(max_length[cost], max_length_with_last_digit[cost][last_digit]);
+        }
+    }
+
+    vector <int> answer;
+
+for(int cost = total_cost; cost > 0; )
+    {
+        for(int last_digit = MAX_DIGIT; last_digit >= 1; last_digit--)
+        {
+            if(!is_present[last_digit])
+                continue;
+
+            if(max_length_with_last_digit[cost][last_digit] == max_length[cost])
+            {
+                answer.push_back(last_digit);
+
+                cost -= digit_cost[last_digit];
+
+                break;
+            }
+        }
+    }
+
+    for(int i = 0; i < answer.size(); i++)
+        cout << answer[i];
+
+    return 0;
 }
+
+    © 2019 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+

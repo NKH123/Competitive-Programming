@@ -56,16 +56,26 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int main(){
 	ios::sync_with_stdio(false);
-    ll n, m, k;
-    cin>>n>>m>>k;
-    vl a(n);
-    REP(i,0,n)cin>>a[i];
-    sort(a.begin(),a.end());
-    ll times=m/(k+1);
-    ll ans=((a[n-1])*k +a[n-2])*times;
-    if((times*(k+1))<m){
-        ans+=(m-(times*(k+1)))*a[n-1];
+    int q;
+    cin>>q;
+    while(q--){
+        ll n,a,b;
+        cin>>n>>a>>b;
+        ll B=b/2;
+        ll ans=0;
+        if(B<a){
+            ans=ans+(n/2)*b;
+            if(n%2){
+                ans+=a;
+            }
+        }
+        else{
+            ans=n*a;
+        }
+        cout<<ans<<"\n";
     }
-    cout<<ans<<"\n";
+
+
+
 	return 0;
 }
