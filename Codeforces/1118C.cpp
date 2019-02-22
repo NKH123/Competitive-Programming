@@ -95,10 +95,10 @@ int main(){
                     }
                     if(aa[i]%4 !=0){
                         if(aa[i]%2!=0){
-                            
+                            aa[i]
                         }
                         else{
-                            
+
                         }
                     }
 
