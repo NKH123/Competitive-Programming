@@ -37,7 +37,7 @@ ostream &operator << ( ostream & os, const set< T > &v ) {
         if( it != v.begin() ) os << ", ";
         os << *it;
     }
-    return os << "]";
+    return os << "]";   
 }
 
 template < typename F, typename S >
@@ -55,73 +55,35 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 
 int main(){
-    ios::sync_with_stdio(false);
-    int n;
-    cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-    vi b(n);
-    sort(a.begin(),a.end());
-    deb(a);
-    b[0]=a[0];
-    b[1]=a[1];
-   /* if(n>2){
-        b[n-1]=a[2];
-    }
-    int I=3;
-    for(int i=2;i<(n-1);i++){
-        b[i]=a[I];
-        I++;
-    }*/
-    if(n==2){
-        REP(i,0,2){
-            cout<<a[i]<<" ";
-        }
-        cout<<"\n";
-        return 0;
-    }
-    int final;
-    int init=max(a[2]-a[0],a[n-1]-a[2]);
-    int I=2;
-    for(int i=2;i<(n-1);i++){
-        int init1=max(a[i]-a[0],a[n-1]-a[i]);
-
-        if(init>init1){
-            init=init1;
-            I=i;
+	ios::sync_with_stdio(false);
+    string s;
+    cin>>s;
+    vector<char>ss;
+    REP(i,0,s.size()){
+        if(s[i]!='/'){
+            ss.PB(s[i]);
         }
     }
-    int i2=max(a[n-1]-a[0],a[n-1]-a[n-2]);
-    int f=0;
-    if(i2<init){
-        I=n-1;
-        init=i2;
-    }
-    if(!f){
-        int II=0;
-        deb(I);
-        b[n-1]=a[I];
-        for(int i=0;i<n;i++){
-            if(i==I)continue;
-            b[II]=a[i];
-            II++;
-        }
-        deb(b);
+
+    int month=(ss[4]-'0')*10+(ss[5]-'0');
+    int day=(ss[6]-'0')*10+(ss[7]-'0');
+    //deb(month);
+    //deb(day);
+
+    if(month <= 4){
+        /*if(day<=30)
+        cout<<"Heisei\n";
+        else if(month!=4){
+            cout<<"Heisei\n";
+        }*/
+        cout<<"Heisei\n";
     }
 
-
-
-
-
-
-
-
-    REP(i,0,n){
-        cout<<b[i]<<" ";
+    else{
+        cout<<"TBD\n";
     }
-    cout<<"\n";
 
 
 
-    return 0;
+	return 0;
 }

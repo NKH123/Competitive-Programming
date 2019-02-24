@@ -55,73 +55,14 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 
 int main(){
-    ios::sync_with_stdio(false);
-    int n;
-    cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-    vi b(n);
-    sort(a.begin(),a.end());
-    deb(a);
-    b[0]=a[0];
-    b[1]=a[1];
-   /* if(n>2){
-        b[n-1]=a[2];
-    }
-    int I=3;
-    for(int i=2;i<(n-1);i++){
-        b[i]=a[I];
-        I++;
-    }*/
-    if(n==2){
-        REP(i,0,2){
-            cout<<a[i]<<" ";
-        }
-        cout<<"\n";
-        return 0;
-    }
-    int final;
-    int init=max(a[2]-a[0],a[n-1]-a[2]);
-    int I=2;
-    for(int i=2;i<(n-1);i++){
-        int init1=max(a[i]-a[0],a[n-1]-a[i]);
+	ios::sync_with_stdio(false);
 
-        if(init>init1){
-            init=init1;
-            I=i;
-        }
-    }
-    int i2=max(a[n-1]-a[0],a[n-1]-a[n-2]);
-    int f=0;
-    if(i2<init){
-        I=n-1;
-        init=i2;
-    }
-    if(!f){
-        int II=0;
-        deb(I);
-        b[n-1]=a[I];
-        for(int i=0;i<n;i++){
-            if(i==I)continue;
-            b[II]=a[i];
-            II++;
-        }
-        deb(b);
-    }
+    ll w1,h1,w2,h2;
+    cin>>w1>>h1>>w2>>h2;
+    ll ans=2*(max(w1,w2)+2)+2*(h1+h2);
+
+    cout<<ans<<"\n";
 
 
-
-
-
-
-
-
-    REP(i,0,n){
-        cout<<b[i]<<" ";
-    }
-    cout<<"\n";
-
-
-
-    return 0;
+	return 0;
 }

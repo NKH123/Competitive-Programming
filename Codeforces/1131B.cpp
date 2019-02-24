@@ -55,73 +55,71 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 
 int main(){
-    ios::sync_with_stdio(false);
+	ios::sync_with_stdio(false);
     int n;
     cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-    vi b(n);
-    sort(a.begin(),a.end());
-    deb(a);
-    b[0]=a[0];
-    b[1]=a[1];
-   /* if(n>2){
-        b[n-1]=a[2];
-    }
-    int I=3;
-    for(int i=2;i<(n-1);i++){
-        b[i]=a[I];
-        I++;
-    }*/
-    if(n==2){
-        REP(i,0,2){
-            cout<<a[i]<<" ";
-        }
-        cout<<"\n";
-        return 0;
-    }
-    int final;
-    int init=max(a[2]-a[0],a[n-1]-a[2]);
-    int I=2;
-    for(int i=2;i<(n-1);i++){
-        int init1=max(a[i]-a[0],a[n-1]-a[i]);
-
-        if(init>init1){
-            init=init1;
-            I=i;
-        }
-    }
-    int i2=max(a[n-1]-a[0],a[n-1]-a[n-2]);
-    int f=0;
-    if(i2<init){
-        I=n-1;
-        init=i2;
-    }
-    if(!f){
-        int II=0;
-        deb(I);
-        b[n-1]=a[I];
-        for(int i=0;i<n;i++){
-            if(i==I)continue;
-            b[II]=a[i];
-            II++;
-        }
-        deb(b);
-    }
-
-
-
-
-
-
-
-
+    vector<pair<int, int > >a;
+  //  unordered_set<pair<int, int > >aa;
+    a.PB({0,0});
+    //aa.insert({A,B});
     REP(i,0,n){
-        cout<<b[i]<<" ";
+        int A,B;
+        cin>>A>>B;
+        a.PB({A,B});
+      //  aa.insert({A,B});
     }
-    cout<<"\n";
+    ll ans=0;
+
+    for(int i=0;i<a.size()-1;i++){
+        int ff=a[i].F,fs=a[i].S,sf=a[i+1].F,ss=a[i+1].S;
+        // inside
+       /* int linc=sf-ff;
+        int rinc=ss-fs;
+        if(fs<=sf){
+
+        }
+        else{
+
+        }
+        */
+        //deb(i);
+        //deb(a[i]);
+        //deb(a[i+1]);
+        int f=0;
+        if(ff<fs){
+            f=0;
+          
+        }
+        else{
+            f=1;
+         
+        }
+        //deb(f);
+        if(a[i]==a[i+1])continue;
+        if(f==0){
+            if(fs<=sf){
+                ll inc=min(sf,ss)-fs+1;
+              //  deb(inc);
+                ans+=inc;
+            }
+            else{
+                continue;
+            }
+        }
+        else{
+            if(ff<=ss){
+                ll inc=min(ss,sf)-ff+1;
+              //  deb(inc);
+                ans+=inc;
+            }
+
+        }
+
+    }
+    if(!ans)ans++;
 
 
 
-    return 0;
+    cout<<ans<<"\n";
+	return 0;
 }
