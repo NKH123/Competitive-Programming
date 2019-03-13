@@ -6,6 +6,7 @@ using namespace std;
 #define MP make_pair
 #define REP(i,a,b) for (int i = a; i <b; i++)
 typedef long long ll;
+#define int ll
 typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
@@ -54,74 +55,30 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-int main(){
-    ios::sync_with_stdio(false);
-    int n;
-    cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-    vi b(n);
-    sort(a.begin(),a.end());
-    deb(a);
-    b[0]=a[0];
-    b[1]=a[1];
-   /* if(n>2){
-        b[n-1]=a[2];
-    }
-    int I=3;
-    for(int i=2;i<(n-1);i++){
-        b[i]=a[I];
-        I++;
-    }*/
-    if(n==2){
-        REP(i,0,2){
-            cout<<a[i]<<" ";
+int32_t main(){
+	ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--){
+        int n,q;
+        cin>>n>>q;
+        while(q--){
+            int tp;
+            cin>>tp;
+            if(tp==0){
+                int l,r;
+                cin>>l>>r;
+            }
+            if(tp==1){
+                int p,k;
+                cin>>p>>k;
+            }
+
         }
-        cout<<"\n";
-        return 0;
-    }
-    int final;
-    int init=max(a[2]-a[0],a[n-1]-a[2]);
-    int I=2;
-    for(int i=2;i<(n-1);i++){
-        int init1=max(a[i]-a[0],a[n-1]-a[i]);
 
-        if(init>init1){
-            init=init1;
-            I=i;
-        }
-    }
-    int i2=max(a[n-1]-a[0],a[n-1]-a[n-2]);
-    int f=0;
-    if(i2<init){
-        I=n-1;
-        init=i2;
-    }
-    if(!f){
-        int II=0;
-        deb(I);
-        b[n-1]=a[I];
-        for(int i=0;i<n;i++){
-            if(i==I)continue;
-            b[II]=a[i];
-            II++;
-        }
-        deb(b);
     }
 
 
 
-
-
-
-
-
-    REP(i,0,n){
-        cout<<b[i]<<" ";
-    }
-    cout<<"\n";
-
-
-
-    return 0;
+	return 0;
 }

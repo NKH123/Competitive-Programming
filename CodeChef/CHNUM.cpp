@@ -6,7 +6,6 @@ using namespace std;
 #define MP make_pair
 #define REP(i,a,b) for (int i = a; i <b; i++)
 typedef long long ll;
-#define int ll
 typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
@@ -54,73 +53,33 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-vi adj[100005];
-vi val;
-vector<pair<int,int> > cnt;
-map<ll,ll>m;
-bool comp(pair<int,int>A,pair<int,int>B){
-    return A.S>B.S;
-}
-int32_t main(){
-	ios::sync_with_stdio(false);
 
+int main(){
+	ios::sync_with_stdio(false);
     int t;
     cin>>t;
-
+    vl a;
     while(t--){
-        int n,M;
-        m.clear();
-        REP(i,0,100005){
-            adj[i].clear();
+        int n;
+        cin>>n;
+        a.resize(n);
+        int pos=0,neg=0;
+        REP(i,0,n){cin>>a[i];
+            if(a[i]>0)pos++;
+            else neg++;
         }
-       
-        cin>>n>>M;
-         val.resize(n);
-        cnt.clear();
-        REP(i,0,n){
-            cnt.PB({i,0});
+        int f=0;
+        if(pos==0 || neg==0){
+            f=1;
         }
-
-        REP(i,0,M){
-            int u,v;
-            cin>>u>>v;
-            u--;
-            v--;
-            adj[u].PB(v);
-            adj[v].PB(u);
-            m[u]=m[u]+1;
-            m[v]=m[v]+1;
-            cnt[u].S++;
-            cnt[v].S++;
-          
+        if(f){
+            cout<<max(pos,neg)<<" "<<max(pos,neg)<<"\n";
         }
-        REP(i,0,n){
-            cin>>val[i];
+        else{
+            cout<<max(pos,neg)<<" "<<min(pos,neg)<<"\n";
         }
-    
-        sort(val.begin(),val.end());
-        sort(cnt.begin(),cnt.end(),comp);
-        ll ans=0;
-    
-      
-        for(int i=0;i<cnt.size();i++){
-        
-            if(m[cnt[i].F]>0){
-                ans+=m[cnt[i].F]*val[val.size()-1];
-                val.pop_back();
-      
-                for(auto G:adj[cnt[i].F]){
-                    m[G]--;
-                }
-            }
-        }
-     
-        cout<<ans<<"\n";
-
-
-
-
     }
+
 
 
 	return 0;

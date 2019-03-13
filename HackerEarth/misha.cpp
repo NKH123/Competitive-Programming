@@ -54,72 +54,71 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-vi adj[100005];
-vi val;
-vector<pair<int,int> > cnt;
-map<ll,ll>m;
-bool comp(pair<int,int>A,pair<int,int>B){
-    return A.S>B.S;
-}
+
+void multiply(int F[2][2], int M[2][2]); 
+  
+/* Helper function that calculates F[][] raise to the power n and puts the 
+  result in F[][] 
+  Note that this function is designed only for fib() and won't work as general 
+  power function */
+void power(int F[2][2], int n); 
+  
+int fib(int n) 
+{ 
+  int F[2][2] = {{1,1},{1,0}}; 
+  if (n == 0) 
+      return 0; 
+  power(F, n-1); 
+  
+  return F[0][0]; 
+} 
+  
+void multiply(int F[2][2], int M[2][2]) 
+{ 
+  int x =  ((F[0][0]%mod)*(M[0][0]%mod))%mod + ((F[0][1]%mod)*(M[1][0]%mod)%mod); 
+  int y =  ((F[0][0]%mod)*(M[0][1]%mod))%mod + ((F[0][1]%mod)*(M[1][1]%mod))%mod; 
+  int z =  ((F[1][0]%mod)*(M[0][0]%mod))%mod + ((F[1][1]%mod)*(M[1][0]%mod))%mod; 
+  int w =  ((F[1][0]%mod)*(M[0][1]%mod))%mod + ((F[1][1]%mod)*(M[1][1]%mod))%mod; 
+  
+  F[0][0] = x; 
+  F[0][1] = y; 
+  F[1][0] = z; 
+  F[1][1] = w; 
+} 
+  
+void power(int F[2][2], int n) 
+{ 
+  int i; 
+  int M[2][2] = {{1,1},{1,0}}; 
+  
+  // n - 1 times multiply the matrix to {{1,0},{0,1}} 
+  for (i = 2; i <= n; i++) 
+      multiply(F, M); 
+} 
+  
+vi aaa;
 int32_t main(){
 	ios::sync_with_stdio(false);
 
     int t;
     cin>>t;
-
     while(t--){
-        int n,M;
-        m.clear();
-        REP(i,0,100005){
-            adj[i].clear();
-        }
-       
-        cin>>n>>M;
-         val.resize(n);
-        cnt.clear();
+        int n;
+        cin>>n;
+        aaa.resize(n);
+        REP(i,0,n)cin>>aaa[i];
+        int ans=0;
         REP(i,0,n){
-            cnt.PB({i,0});
-        }
-
-        REP(i,0,M){
-            int u,v;
-            cin>>u>>v;
-            u--;
-            v--;
-            adj[u].PB(v);
-            adj[v].PB(u);
-            m[u]=m[u]+1;
-            m[v]=m[v]+1;
-            cnt[u].S++;
-            cnt[v].S++;
-          
-        }
-        REP(i,0,n){
-            cin>>val[i];
-        }
-    
-        sort(val.begin(),val.end());
-        sort(cnt.begin(),cnt.end(),comp);
-        ll ans=0;
-    
-      
-        for(int i=0;i<cnt.size();i++){
-        
-            if(m[cnt[i].F]>0){
-                ans+=m[cnt[i].F]*val[val.size()-1];
-                val.pop_back();
-      
-                for(auto G:adj[cnt[i].F]){
-                    m[G]--;
+            REP(j,0,n){
+                REP(k,0,n){
+                   ans+=fib(aaa[i]+aaa[j]-aaa[k]);
+                    if(ans>=mod){
+                        ans-=mod;
+                    }
                 }
             }
         }
-     
-        cout<<ans<<"\n";
-
-
-
-
+        cout<<(ans%mod)<<"\n";
     }
 
 

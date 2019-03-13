@@ -6,7 +6,7 @@ using namespace std;
 #define MP make_pair
 #define REP(i,a,b) for (int i = a; i <b; i++)
 typedef long long ll;
-#define int ll
+//#define int ll
 typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
@@ -54,74 +54,84 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-vi adj[100005];
-vi val;
-vector<pair<int,int> > cnt;
-map<ll,ll>m;
-bool comp(pair<int,int>A,pair<int,int>B){
-    return A.S>B.S;
+vi a;
+vector<pair<int, pair<int,int > > >pre[100005];
+vector<pair<int, pair<int,int > > >dum;
+set<int>vals;
+void pre1(){
+    REP(i,0,100005){
+        //deb(i);
+        int inc;
+        for(int j=1;j<=i;j=inc+1){
+            //deb("****");
+            //deb(j);
+            inc=i/(i/j);
+            pre[i].PB({i/j,{j,inc}});
+        }
+    }
 }
+vi sum;
 int32_t main(){
-	ios::sync_with_stdio(false);
-
+    ios::sync_with_stdio(false);
+    
+    //cin>>t;
+     pre1();
+    // for(int i=0;i<10;i++){
+    //     deb(i);
+    //    deb(pre[i]);
+    // }
+    // deb(pre[100]);
+    // deb(pre[3]);
+    // deb(pre[5]);
     int t;
+   // deb("Input t");
     cin>>t;
-
     while(t--){
-        int n,M;
-        m.clear();
-        REP(i,0,100005){
-            adj[i].clear();
-        }
-       
-        cin>>n>>M;
-         val.resize(n);
-        cnt.clear();
-        REP(i,0,n){
-            cnt.PB({i,0});
-        }
-
-        REP(i,0,M){
-            int u,v;
-            cin>>u>>v;
-            u--;
-            v--;
-            adj[u].PB(v);
-            adj[v].PB(u);
-            m[u]=m[u]+1;
-            m[v]=m[v]+1;
-            cnt[u].S++;
-            cnt[v].S++;
-          
-        }
-        REP(i,0,n){
-            cin>>val[i];
-        }
-    
-        sort(val.begin(),val.end());
-        sort(cnt.begin(),cnt.end(),comp);
-        ll ans=0;
-    
-      
-        for(int i=0;i<cnt.size();i++){
+       // deb(t);
+       // deb("I'm here");
+        int n,k;
+        cin>>n>>k;
+        sum.clear();
+        a.resize(n+1);
+        sum.resize(n+5);
+        REP(i,1,n+1)cin>>a[i];
+        int ans=0;
         
-            if(m[cnt[i].F]>0){
-                ans+=m[cnt[i].F]*val[val.size()-1];
-                val.pop_back();
-      
-                for(auto G:adj[cnt[i].F]){
-                    m[G]--;
-                }
+        for(int i=1;i<n+1;i++){
+            // deb(a[i]);
+            for(int j=0;j<pre[a[i]].size();j++){
+                // deb(j);
+                int l=pre[a[i]][j].S.F;
+                int r=pre[a[i]][j].S.S;
+                int val=pre[a[i]][j].F;
+                sum[i+1-l+1]-=val;
+                sum[max(1,i+1-r)]+=val;
+                // deb(sum);
+             
+
             }
         }
-     
-        cout<<ans<<"\n";
-
-
-
+        // deb("before");
+        // deb(sum);
+        for(int i=1;i<n+1;i++){
+            sum[i]=sum[i-1]+sum[i];
+        }
+        // deb("after");
+        // deb(sum);
+        int pos=1;
+        for(int i=1;i<=n;i++){
+            if(sum[i]<=k){
+                break;
+            }
+            else{
+                pos++;
+            }
+        }
+        cout<<pos<<"\n";
+   
 
     }
 
 
-	return 0;
+    return 0;
 }

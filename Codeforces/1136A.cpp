@@ -54,74 +54,35 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-vi adj[100005];
-vi val;
-vector<pair<int,int> > cnt;
-map<ll,ll>m;
-bool comp(pair<int,int>A,pair<int,int>B){
-    return A.S>B.S;
-}
+
 int32_t main(){
 	ios::sync_with_stdio(false);
 
-    int t;
-    cin>>t;
-
-    while(t--){
-        int n,M;
-        m.clear();
-        REP(i,0,100005){
-            adj[i].clear();
-        }
-       
-        cin>>n>>M;
-         val.resize(n);
-        cnt.clear();
-        REP(i,0,n){
-            cnt.PB({i,0});
-        }
-
-        REP(i,0,M){
-            int u,v;
-            cin>>u>>v;
-            u--;
-            v--;
-            adj[u].PB(v);
-            adj[v].PB(u);
-            m[u]=m[u]+1;
-            m[v]=m[v]+1;
-            cnt[u].S++;
-            cnt[v].S++;
-          
-        }
-        REP(i,0,n){
-            cin>>val[i];
-        }
-    
-        sort(val.begin(),val.end());
-        sort(cnt.begin(),cnt.end(),comp);
-        ll ans=0;
-    
-      
-        for(int i=0;i<cnt.size();i++){
+    int n;
+    cin>>n;
+    vi a;
+    REP(i,0,n){
+        int l,r;
+        cin>>l>>r;
+        a.PB(l);
+        a.PB(r);
         
-            if(m[cnt[i].F]>0){
-                ans+=m[cnt[i].F]*val[val.size()-1];
-                val.pop_back();
-      
-                for(auto G:adj[cnt[i].F]){
-                    m[G]--;
-                }
-            }
-        }
-     
-        cout<<ans<<"\n";
-
-
-
-
     }
+    int k;
+    cin>>k;
+    int read=0;
+    for(int i=0;i<a.size();i=i+2){
+        if(a[i]<=k && a[i+1]>=k){
 
+            break;
+        }
+        else{
+            read++;
+        }
+    }
+    //deb(read);
+    int ans=n-read;
+    cout<<ans<<"\n";
 
 	return 0;
 }

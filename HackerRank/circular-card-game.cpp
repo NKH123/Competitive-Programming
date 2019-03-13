@@ -53,75 +53,103 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
+int n;
+vi a;
 
-vi adj[100005];
-vi val;
-vector<pair<int,int> > cnt;
-map<ll,ll>m;
-bool comp(pair<int,int>A,pair<int,int>B){
-    return A.S>B.S;
+void dfs(int i){
+    if(a[i]==-1 || a[i]==0)return;
+    if(a[i]==1){
+        a[i]=-1;
+        if(i!=n-1){
+            if(a[i+1]!=-1)
+                a[i+1]=1^a[i+1];
+        }
+        else{
+            if(a[0]!=-1)
+                a[0]=1^a[0];
+        }
+        if(i!=0){
+            if(a[i-1]!=-1)
+                a[i-1]=1^a[i-1];
+        }
+        else{
+           /* if(n!=2)*/{
+            if(a[n-1]!=-1)
+                a[n-1]=1^a[n-1];
+        }
+    }
+    if(i!=n-1){
+            /*if(a[i+1]!=-1)
+            a[i+1]=1^a[i+1];*/
+        dfs(i+1);
+    }
+    else{
+            /*if(a[0]!=-1)
+         
+            a[0]=1^a[0];*/
+        dfs(0);
+    }
+    if(i!=0){
+            /*if(a[i-1]!=-1)
+            a[i-1]=1^a[i-1];*/
+        dfs(i-1);
+    }
+    else{
+            /*if(a[n-1]!=-1)
+            a[n-1]=1^a[n-1];*/
+        dfs(n-1);
+    }
+
+
+}
 }
 int32_t main(){
 	ios::sync_with_stdio(false);
-
     int t;
     cin>>t;
 
     while(t--){
-        int n,M;
-        m.clear();
-        REP(i,0,100005){
-            adj[i].clear();
-        }
-       
-        cin>>n>>M;
-         val.resize(n);
-        cnt.clear();
-        REP(i,0,n){
-            cnt.PB({i,0});
-        }
-
-        REP(i,0,M){
-            int u,v;
-            cin>>u>>v;
-            u--;
-            v--;
-            adj[u].PB(v);
-            adj[v].PB(u);
-            m[u]=m[u]+1;
-            m[v]=m[v]+1;
-            cnt[u].S++;
-            cnt[v].S++;
-          
-        }
-        REP(i,0,n){
-            cin>>val[i];
-        }
-    
-        sort(val.begin(),val.end());
-        sort(cnt.begin(),cnt.end(),comp);
-        ll ans=0;
-    
-      
-        for(int i=0;i<cnt.size();i++){
-        
-            if(m[cnt[i].F]>0){
-                ans+=m[cnt[i].F]*val[val.size()-1];
-                val.pop_back();
-      
-                for(auto G:adj[cnt[i].F]){
-                    m[G]--;
-                }
+        cin>>n;
+        a.resize(n);
+        REP(i,0,n)cin>>a[i];
+          int f=1;
+        if(n==2){
+            if(a[0]==0 && a[1]==0){
+                f=0;
+            }
+            if(a[0]==0 && a[1]==1){
+                f=1;
+            }
+            if(a[0]==1 && a[1]==0){
+                f=1;
+            }
+            if(a[0]==1 && a[1]==1){
+                f=0;
             }
         }
-     
-        cout<<ans<<"\n";
+        else{
+            for(int i=0;i<n;i++){
+                if(a[i]==1){
+                    dfs(i);
+                }
+            }
 
-
-
-
+            for(int i=0;i<n;i++){
+                if(a[i]!=-1){
+                 f=0;
+                 break;
+             }
+         }
+     }
+     if(f){
+        cout<<"Yes\n";
     }
+    else{
+        cout<<"No\n";
+    }
+}   
 
 
-	return 0;
+
+return 0;
 }

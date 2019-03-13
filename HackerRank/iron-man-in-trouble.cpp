@@ -54,73 +54,27 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-vi adj[100005];
-vi val;
-vector<pair<int,int> > cnt;
-map<ll,ll>m;
-bool comp(pair<int,int>A,pair<int,int>B){
-    return A.S>B.S;
-}
+int f[100000000];
+
 int32_t main(){
 	ios::sync_with_stdio(false);
-
     int t;
     cin>>t;
 
     while(t--){
-        int n,M;
-        m.clear();
-        REP(i,0,100005){
-            adj[i].clear();
+        int a,b,c,d,e,n;
+        cin>>a>>b>>c>>d>>e>>n;
+        f[0]=a;
+        f[1]=b;
+        f[2]=c;
+        for(int i=3;i<min(n+1,100000000LL);i++){
+            f[i]=(f[i-1]%mod+d*(f[n-3])%mod+e*((i%mod)*(i%mod))%mod)%mod;
         }
-       
-        cin>>n>>M;
-         val.resize(n);
-        cnt.clear();
-        REP(i,0,n){
-            cnt.PB({i,0});
-        }
-
-        REP(i,0,M){
-            int u,v;
-            cin>>u>>v;
-            u--;
-            v--;
-            adj[u].PB(v);
-            adj[v].PB(u);
-            m[u]=m[u]+1;
-            m[v]=m[v]+1;
-            cnt[u].S++;
-            cnt[v].S++;
-          
-        }
-        REP(i,0,n){
-            cin>>val[i];
-        }
-    
-        sort(val.begin(),val.end());
-        sort(cnt.begin(),cnt.end(),comp);
-        ll ans=0;
-    
-      
-        for(int i=0;i<cnt.size();i++){
-        
-            if(m[cnt[i].F]>0){
-                ans+=m[cnt[i].F]*val[val.size()-1];
-                val.pop_back();
-      
-                for(auto G:adj[cnt[i].F]){
-                    m[G]--;
-                }
-            }
-        }
-     
-        cout<<ans<<"\n";
-
-
+        cout<<f[min(n,(10000000LL-1LL))]<<"\n";
 
 
     }
+
 
 
 	return 0;
