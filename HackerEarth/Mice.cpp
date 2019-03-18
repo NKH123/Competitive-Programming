@@ -54,43 +54,49 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-vi a;
-vi aa(100005);
-vi Ni;
+
 int32_t main(){
 	ios::sync_with_stdio(false);
     int n;
     cin>>n;
-    // memset(aa,0,sizeof(aa));
-    aa.clear();
-    aa.resize(100005);
-    Ni.resize(n);
-    a.resize(n);
+    vi a(n);
+    vi ct(n+1,0);
     REP(i,0,n){
         cin>>a[i];
-        Ni[i]=1+n-1-a[i];
+        ct[a[i]]++;
     }
-    set<int>ss;
-    REP(i,0,n){
-        ss.insert(Ni[i]);
-    }
-    vi NN(ss.begin(),ss.end());
-    // deb(NN);
-    for(int i=0;i<Ni.size();i++){
-        aa[Ni[i]]++;
-    }
-    for(int i=0;i<NN.size();i++){
-        // deb(i);
-        // deb(NN[i]);
-        // deb(aa[NN[i]]);
-        if(aa[NN[i]]%NN[i]!=0){
-            cout<<"No\n";
-            return 0;
+
+    vi dis;
+    REP(i,0,ct.size()){
+        if(ct[i]){
+            dis.PB(i);
         }
     }
-    cout<<"Yes\n";
+    // deb(dis);
+    // deb(ct);
+    if(dis.size()>2){
+        cout<<"No"<<"\n";
+        return 0;
+    }
+    else{
+        if(dis.size()==1){
+            if(dis[0]>n/2 && dis[0]!=n-1){
+                cout<<"No\n";
+                return 0;
+            }
+        }
+        else{
+            if(dis[0]!=dis[1]-1 || dis[1]>=n){
+                cout<<"No\n";
+                return 0;
+            }
+        }
+        cout<<"Yes\n";
+    }
 
 
 
-return 0;
+
+
+    return 0;
 }
