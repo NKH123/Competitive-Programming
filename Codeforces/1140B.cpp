@@ -57,38 +57,49 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
 	ios::sync_with_stdio(false);
-	int n;
-	cin>>n;
-	vi c(5001);
-	REP(i,0,5001)c[i]=0;
-	vi a;
-	REP(i,0,n){
-		int A;
-		cin>>A;
-		a.PB(A);
-		if(i!=0){
-			if(a[i-1]!=a[i]){
-				c[a[i]]++;
-			}
-		}
-		else{
-			c[a[i]]++;
-		}
-	}
-	int maxind=0;
-	for(int i=0;i<=5000;i++){
-		if(c[maxind]<c[i]){
-			maxind=i;
-		}
-	}
-	int ans=0;
-	
-	REP(i,0,5001){
-		if(i!=maxind){
-			ans+=c[i];
-		}
-	}
-	cout<<ans<<"\n";
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        string s;
+        cin>>s;
+        if(s[0]=='>'){
+            cout<<0<<"\n";
+            continue;
+        }
+        else if(s[s.size()-1]=='<'){
+            cout<<0<<"\n";
+            continue;
+        }
+        else{
+            int mini=1e8;
+            int min1=0;
+            for(int i=0;i<s.size();i++){
+                if(s[i]=='<'){
+                    min1++;
+                }
+                else{
+                    break;
+                }
+            }
+            mini=min(min1,mini);
+            min1=0;
+            for(int i=s.size()-1;i>=0;i--){
+                if(s[i]=='>'){
+                    min1++;
+                }
+                else{
+                    break;
+                }
+            }
+            mini=min(min1,mini);
+            cout<<mini<<"\n";
+
+        }
+    }
+
+
 
 	return 0;
 }

@@ -54,41 +54,41 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
+vi a;
+vector<bool> b;
+void fun(int i){
+    b[i]=1;
+    if(b[a[i]]==1){
+        return;
+    }
+    else{
+        for(int I=i;I<=a[i];I++){
+            if(b[I]==0){
+                fun(I);
+            }
+        }
+    }
+}
+
 
 int32_t main(){
 	ios::sync_with_stdio(false);
-	int n;
-	cin>>n;
-	vi c(5001);
-	REP(i,0,5001)c[i]=0;
-	vi a;
-	REP(i,0,n){
-		int A;
-		cin>>A;
-		a.PB(A);
-		if(i!=0){
-			if(a[i-1]!=a[i]){
-				c[a[i]]++;
-			}
-		}
-		else{
-			c[a[i]]++;
-		}
-	}
-	int maxind=0;
-	for(int i=0;i<=5000;i++){
-		if(c[maxind]<c[i]){
-			maxind=i;
-		}
-	}
-	int ans=0;
-	
-	REP(i,0,5001){
-		if(i!=maxind){
-			ans+=c[i];
-		}
-	}
-	cout<<ans<<"\n";
+    int n;
+    cin>>n;
+    a.resize(n+1);
+    b.resize(n+1);
+    REP(i,1,n)cin>>a[i];
+
+    b[0]=1;
+    int ct=0;
+    for(int i=1;i<=n;i++){
+        if(b[i]==0){
+            ct++;
+            fun(i);
+        }
+    }
+    cout<<ct<<"\n";
+
 
 	return 0;
 }

@@ -54,41 +54,39 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-
+bool comp(pair<int,int>A, pair<int,int> B){
+    return A.F*A.S>B.F*B.S;
+}
 int32_t main(){
 	ios::sync_with_stdio(false);
-	int n;
-	cin>>n;
-	vi c(5001);
-	REP(i,0,5001)c[i]=0;
-	vi a;
-	REP(i,0,n){
-		int A;
-		cin>>A;
-		a.PB(A);
-		if(i!=0){
-			if(a[i-1]!=a[i]){
-				c[a[i]]++;
-			}
-		}
-		else{
-			c[a[i]]++;
-		}
-	}
-	int maxind=0;
-	for(int i=0;i<=5000;i++){
-		if(c[maxind]<c[i]){
-			maxind=i;
-		}
-	}
-	int ans=0;
-	
-	REP(i,0,5001){
-		if(i!=maxind){
-			ans+=c[i];
-		}
-	}
-	cout<<ans<<"\n";
+    int n,k;
+    cin>>n>>k;
+    vi t(n),b(n);
+    vector<pair<int, int > > pp;
+    vi par(n);
+    vi mini(n);
+    REP(i,0,n){
+        cin>>t[i]>>b[i];
+        pp.PB({b[i],t[i]});
+    }
+    sort(pp.begin(),pp.end(),comp);
+    par[0]=pp[0].S;
+    mini[0]=pp[0].F;
+    for(int i=1;i<n;i++){
+        par[i]=par[i-1]+pp[i].S;
+        mini[i]=min(mini[i-1],pp[i].F);
+    }
+    //deb(pp);
+   // deb(par);
+    int maxi=-(1e18);
+    for(int i=0;i< k;i++){
+        int ans=par[i]*mini[i];
+        maxi=max(maxi,ans);
+    }
+    cout<<maxi<<"\n";
+
+
+
 
 	return 0;
 }

@@ -53,42 +53,65 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
+ll power(ll x, ll y) 
+{
+    ll temp;
+    if( y == 0)
+        return 1;
+    temp = power(x, y/2);
+    if (y%2 == 0)
+        return (temp*temp)%mod;
+    else
+        return (((x*temp)%mod)*temp)%mod; 
+}
+vi adj[100005];
+bool vis[100005];
+int ct=0;
+void dfs(int v){
+    ct++;
+    vis[v]=true;
+    for(auto g:adj[v]){
+        if(!vis[g]){
+            dfs(g);
+        }
+    }
+}
 
 
 int32_t main(){
 	ios::sync_with_stdio(false);
-	int n;
-	cin>>n;
-	vi c(5001);
-	REP(i,0,5001)c[i]=0;
-	vi a;
-	REP(i,0,n){
-		int A;
-		cin>>A;
-		a.PB(A);
-		if(i!=0){
-			if(a[i-1]!=a[i]){
-				c[a[i]]++;
-			}
-		}
-		else{
-			c[a[i]]++;
-		}
-	}
-	int maxind=0;
-	for(int i=0;i<=5000;i++){
-		if(c[maxind]<c[i]){
-			maxind=i;
-		}
-	}
-	int ans=0;
-	
-	REP(i,0,5001){
-		if(i!=maxind){
-			ans+=c[i];
-		}
-	}
-	cout<<ans<<"\n";
+    int n,k;
+    cin>>n>>k;
+    memset(vis,false,sizeof(vis));
+    int ans=power(n,k);
+    for(int i=0;i<(n-1);i++ ){
+        int A,B,C;
+        cin>>A>>B>>C;
+        A--;
+        B--;
+        if(C==0){
+            adj[A].PB(B);
+            adj[B].PB(A);
+        }
+    }
+    // deb(ans);
+    for(int i=0;i<n;i++){
+        ct=0;
+        if(!vis[i]){
+            // deb(i);
+            dfs(i);
+            // deb(ct);
+            int diff=power(ct,k);
+            // deb(diff);
+            ans=ans-diff;
+            if(ans<0){
+                ans+=mod;
+            }
+        }
+    }
+    cout<<ans<<"\n";
+
+
 
 	return 0;
 }

@@ -57,38 +57,20 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
 	ios::sync_with_stdio(false);
-	int n;
-	cin>>n;
-	vi c(5001);
-	REP(i,0,5001)c[i]=0;
-	vi a;
-	REP(i,0,n){
-		int A;
-		cin>>A;
-		a.PB(A);
-		if(i!=0){
-			if(a[i-1]!=a[i]){
-				c[a[i]]++;
-			}
-		}
-		else{
-			c[a[i]]++;
-		}
-	}
-	int maxind=0;
-	for(int i=0;i<=5000;i++){
-		if(c[maxind]<c[i]){
-			maxind=i;
-		}
-	}
-	int ans=0;
-	
-	REP(i,0,5001){
-		if(i!=maxind){
-			ans+=c[i];
-		}
-	}
-	cout<<ans<<"\n";
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    int ans=0;
+    for(int i=0;i<s.size();i++){
+        int a=s[i]-'0';
+        if(a%2==0){
+            ans+=(i+1);
+        }
+    }
+    cout<<ans<<"\n";
+
+
 
 	return 0;
 }
