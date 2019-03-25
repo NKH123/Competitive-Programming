@@ -54,43 +54,50 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-bool comp(pair<int,int>A, pair<int,int> B){
-    return A.S<B.S;
-}
+vi a;
+vi rem;
+vi par;
 int32_t main(){
 	ios::sync_with_stdio(false);
-    int n,k;
-    cin>>n>>k;
-    vi t(n),b(n);
-    vector<pair<int, int > > pp;
-    vi par(n);
-    vi mini(n);
-    REP(i,0,n){
-        cin>>t[i]>>b[i];
-        pp.PB({t[i],b[i]});
-    }
-    sort(pp.begin(),pp.end(),comp);
-    int ans=0;
-    int len=0;
-    priority_queue<int>lens;
-    for(int i=n-1;i>=0;i--){
-        int lr=len+pp[i].F;
-
-        int rr=pp[i].S;
-
-        ans=max(lr*rr,ans);
-        len+=pp[i].F;
-        lens.push(-1*pp[i].F);
-        if(lens.size()==k){
-            int PP=lens.top();
-            lens.pop();
-            len+=PP;
-
+    int t;
+    cin>>t;
+    int TT=t;
+    while(t--){
+        int n, p;
+        cin>>n>>p;
+        a.resize(n);
+        REP(i,0,n)cin>>a[i];
+        sort(a.begin(),a.end());
+        int last=0;
+        rem.resize(n);
+        par.resize(n);
+        par[0]=a[0];
+        REP(i,1,n){
+            par[i]=par[i-1]+a[i];
         }
+        int I=p-1;
+        int ans=1e18;
+        // deb(a);
+        // deb(par);
+        for(int i=I;i<n;i++){
+            int sum=par[i];
+            if(i-p<0){
+
+            }
+            else{
+                sum-=par[i-p];
+            }
+
+            int req=a[i]*p;
+            int hours=req-sum;
+            ans=min(hours,ans);
+        }
+        cout<<"Case #"<<TT-t<<": "<<ans<<"\n";
+        
     }
-    cout<<ans<<"\n";
+    
 
 
 
-	return 0;
+    return 0;
 }
