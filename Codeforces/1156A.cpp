@@ -57,62 +57,51 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
 	ios::sync_with_stdio(false);
+
     int n;
     cin>>n;
     vi a(n);
     REP(i,0,n)cin>>a[i];
-    int l=0,r=n-1;
-    vector<char>ans;
-    int len=0;
-    int cumin=-1;
-    while(l<=r){
-        // deb("in");
-        // deb(l);
-        // deb(r);
-        // deb(ans);
-        if(a[l]<a[r] && a[l]>cumin){
-            ans.PB('L');
-            len++;
-                cumin=a[l];
-            l++;
-        
+    int ct=0;
+    for(int i=1;i<n;i++){
+        if(a[i]==2){
+            if(a[i-1]==3){
+                cout<<"Infinite\n";
+                return 0;
+            }
+            else{
+                if(i<2)
+                ct+=3;
+                else{
+                    if(a[i-2]==3){
+                        ct+=2;
+                    }
+                    else{
+                        ct+=3;
+                    }
+                }
+            }
         }
-        else if(a[l]>a[r] && a[r]>cumin) {
-            ans.PB('R');
-            len++;
-              cumin=a[r];
-            r--;
-          
+        else if(a[i]==3){
+            if(a[i-1]==2){
+                cout<<"Infinite\n";
+                return 0;
+            }
+            else{
+                ct+=4;
+            }
         }
-        else if(a[l] >cumin){
-             ans.PB('L');
-            len++;
-            cumin=a[l];
-            l++;
-            
+        else if(a[i]==1){
+            if(a[i-1]==2){
+                ct+=3;
+            }
+            else{
+                ct+=4;
+            }
         }
-        else if(a[r]>cumin){
-            ans.PB('R');
-            len++;
-            cumin=a[r];
-            r--;
-            
-        }
-        else{
-            // deb(l);
-            // deb(r);
-            // deb(cumin);
-            // deb("spec");
-            break;
-        }
-        // deb("out");
-        // deb(ans);
-        
-
     }
-    cout<<len<<"\n";
-    REP(i,0,len)cout<<ans[i];
-    cout<<"\n";
+    cout<<"Finite\n";
+    cout<<ct<<"\n";
 
 
 	return 0;

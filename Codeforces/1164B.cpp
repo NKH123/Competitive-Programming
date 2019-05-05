@@ -53,66 +53,32 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-
+vi a{1,2,3,4,5,6,7,8,9};
+bool check(){
+    int no=0;
+    for(int i=0;i<7;i++){
+        no=no*10+a[i];
+    }
+    for(int i=0;i<7;i++){
+        if(no%a[i]!=0){
+            return false;
+        }
+    }
+    return true;
+}
 
 int32_t main(){
 	ios::sync_with_stdio(false);
-    int n;
-    cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-    int l=0,r=n-1;
-    vector<char>ans;
-    int len=0;
-    int cumin=-1;
-    while(l<=r){
-        // deb("in");
-        // deb(l);
-        // deb(r);
-        // deb(ans);
-        if(a[l]<a[r] && a[l]>cumin){
-            ans.PB('L');
-            len++;
-                cumin=a[l];
-            l++;
-        
-        }
-        else if(a[l]>a[r] && a[r]>cumin) {
-            ans.PB('R');
-            len++;
-              cumin=a[r];
-            r--;
-          
-        }
-        else if(a[l] >cumin){
-             ans.PB('L');
-            len++;
-            cumin=a[l];
-            l++;
-            
-        }
-        else if(a[r]>cumin){
-            ans.PB('R');
-            len++;
-            cumin=a[r];
-            r--;
-            
-        }
-        else{
-            // deb(l);
-            // deb(r);
-            // deb(cumin);
-            // deb("spec");
-            break;
-        }
-        // deb("out");
-        // deb(ans);
-        
 
-    }
-    cout<<len<<"\n";
-    REP(i,0,len)cout<<ans[i];
-    cout<<"\n";
+    
+    do{
+        if(a[0]!=0){
+            if(check()){
+                deb(a);
+            }
+        }
+    }while(next_permutation(a.begin(),a.end()));
+   // deb(a);
 
 
 	return 0;

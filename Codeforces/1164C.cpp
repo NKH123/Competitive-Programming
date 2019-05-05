@@ -53,66 +53,27 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-
+int sum(int a){
+    int sum=0;
+    while(a>0){
+        sum+=a%10;
+        a=a/10;
+    }
+    return sum;
+}
 
 int32_t main(){
 	ios::sync_with_stdio(false);
-    int n;
-    cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-    int l=0,r=n-1;
-    vector<char>ans;
-    int len=0;
-    int cumin=-1;
-    while(l<=r){
-        // deb("in");
-        // deb(l);
-        // deb(r);
-        // deb(ans);
-        if(a[l]<a[r] && a[l]>cumin){
-            ans.PB('L');
-            len++;
-                cumin=a[l];
-            l++;
-        
-        }
-        else if(a[l]>a[r] && a[r]>cumin) {
-            ans.PB('R');
-            len++;
-              cumin=a[r];
-            r--;
-          
-        }
-        else if(a[l] >cumin){
-             ans.PB('L');
-            len++;
-            cumin=a[l];
-            l++;
-            
-        }
-        else if(a[r]>cumin){
-            ans.PB('R');
-            len++;
-            cumin=a[r];
-            r--;
-            
-        }
-        else{
-            // deb(l);
-            // deb(r);
-            // deb(cumin);
-            // deb("spec");
+    int a=29;
+    int ans=-1;
+    for(int i=1;i<=10000000;i++){
+        int aa=29*i;
+        if(aa%100==29 && sum(aa)==29){
+            ans=aa;
             break;
         }
-        // deb("out");
-        // deb(ans);
-        
-
     }
-    cout<<len<<"\n";
-    REP(i,0,len)cout<<ans[i];
-    cout<<"\n";
+    deb(ans );
 
 
 	return 0;
