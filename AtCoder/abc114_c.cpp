@@ -53,24 +53,66 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
+int n;
+vi N;
+int ct=0;
+int eval(){
+    // deb(N);
+    int ans=0;
+    for(int i=0;i<N.size();i++){
+        ans=ans*10+N[i];
+    }
+    return ans;
+}
+bool check(){
+    int f=0;
+    for(int i=0;i<N.size();i++){
+        if(N[i]==3){
+            f=1;
+        }
+    }
+    if(!f)return false;
+    f=0;
+    for(int i=0;i<N.size();i++){
+        if(N[i]==5){
+            f=1;
+        }
+    }
+    if(!f)return false;
+    f=0;
+    for(int i=0;i<N.size();i++){
+        if(N[i]==7){
+            f=1;
+        }
+    }
+    if(!f)return false;
+    return true;
+}
+void fun(){
+    if(eval()>n){
+        return;
+    }
+    else{
+        N.PB(3);
+        if(eval()<=n && check())ct++;
+        fun();
+        N.pop_back();
+        N.PB(5);
+       if(eval()<=n && check())ct++;
+        fun();
+        N.pop_back();
+        N.PB(7);
+       if(eval()<=n && check())ct++;
+        fun();
+        N.pop_back();
+    }
 
-int gcd(int a,int b){
-    if(b==0)return a;
-    else return gcd(b,a%b);
 }
 int32_t main(){
 	ios::sync_with_stdio(false);
-    int n;
     cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-
-    int ans=a[0];
-    for(int i=0;i<n;i++){
-        ans=gcd(ans,a[i]);
-    }
-    cout<<ans<<"\n";
-
+    fun();
+    cout<<ct<<"\n";
 
 	return 0;
 }

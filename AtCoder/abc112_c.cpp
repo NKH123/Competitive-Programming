@@ -54,22 +54,51 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-int gcd(int a,int b){
-    if(b==0)return a;
-    else return gcd(b,a%b);
-}
+
 int32_t main(){
 	ios::sync_with_stdio(false);
     int n;
     cin>>n;
-    vi a(n);
-    REP(i,0,n)cin>>a[i];
-
-    int ans=a[0];
-    for(int i=0;i<n;i++){
-        ans=gcd(ans,a[i]);
+    vi x(n),y(n), h(n);
+    REP(i,0,n){
+        cin>>x[i]>>y[i]>>h[i];
     }
-    cout<<ans<<"\n";
+    for(int i=0;i<=100;i++){
+        
+        for(int j=0;j<=100;j++){
+            // int f=0;
+            int H=-1;
+     
+                for(int k=0;k<n;k++){
+                    if(H==-1){
+                        H=h[k]+abs(i-x[k])+abs(j-y[k]);
+                        break;
+                    }
+
+                }
+            
+            
+            // deb(f);
+            int F=1;
+            // deb(i);
+            // deb(j);
+            // deb(H);
+            for(int k=0;k<n;k++){
+
+                // deb(k);
+                // deb(h[k]+abs(i-x[k])+abs(j-y[k]));
+                if( H!=(h[k]+abs(i-x[k])+abs(j-y[k])) && h[k]!=0){
+                    F=0;
+                    break;
+                }
+            }
+            if(F==1){
+                cout<<i<<" "<<j<<" "<<H<<"\n";
+                return 0;
+            }
+        }
+    }
+
 
 
 	return 0;
