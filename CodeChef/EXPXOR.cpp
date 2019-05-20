@@ -53,39 +53,64 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-const int N = 1e5 + 7;
-const int K = 30;
-int a[N];
-double p[N];
 
+// double dp[2][100005];
+vector<vector<double> >dp(2);
 int32_t main(){
 	ios::sync_with_stdio(false);
-     int t;
+    int t;
     cin>>t;
-    
-    while (t--) {
+    vi b;
+    vector<double>p;
+    while(t--){
         int n;
         cin>>n;
-    
-        for (int i=1; i<=n; i++)    cin>>a[i];
-        for (int i=1; i<=n; i++)    cin>>p[i];
-    
-        double ans = 0;
-    
-        for (int i=0; i<K; i++)
-        {
-            double prob = 0;
-            for (int j=1; j<=n; j++){
-                deb((a[j] & (1<<i)));
-                if (a[j] & (1<<i)){
-                cout<<i<<" "<<j<<"\n";                  
-                    prob = prob * (1-p[j]) + (1-prob) * p[j];
+        dp[0].resize(n+1);
+        dp[1].resize(n+1);
+        b.resize(n+1);
+        p.resize(n+1);
+        b[0]=0;
+        p[0]=1;
+        REP(i,1,n+1){
+            cin>>b[i];
+        }
+        REP(i,1,n+1){
+            cin>>p[i];
+        }
+        double ans=0;
+        // deb(b);
+        // deb(p);
+        for(int i=0;i<=30;i++){
+            // memset(dp,0,sizeof(dp));
+            // deb(i);
+            dp[0][0]=1;
+            dp[1][0]=0;
+            for(int j=1;j<(n+1);j++){
+                // deb(j);
+                int bit=(b[j])&(1L<<i);
+                // deb(bit);
+                if(bit!=0){
+                     // cout<<i<<" "<<j<<"\n";        
+                    // dp[0][j]=p[j]*dp[1][j-1]+(1-p[j])*dp[0][j-1];
+                    dp[1][j]=p[j]*dp[0][j-1]+(1-p[j])*dp[1][j-1];
+                    // dp[1][j]=1-dp[0][j];
+                    dp[0][j]=1-dp[1][j];
+                }
+                else{
+                    // dp[0][j]=p[j]*dp[0][j-1]+(1-p[j])*dp[1][j-1];
+                    // dp[1][j]=p[j]*dp[1][j-1]+(1-p[j])*dp[0][j-1];
+                    dp[0][j]=dp[0][j-1];
+                    dp[1][j]=dp[1][j-1];
                 }
             }
-            deb(prob);
-            ans += prob * (1<<i);
+           // deb(dp[0]);
+           // deb(dp[1]);
+            // deb(dp[1][n]);
+            ans+=(1L<<i)*(1*dp[1][n]+0*dp[0][n]);
         }
-        cout<<setprecision(15)<<fixed<<ans<<"\n";
+        printf("%0.9f\n",ans);
+
+
     }
 
 
