@@ -59,32 +59,24 @@ int32_t main(){
 	ios::sync_with_stdio(false);
     int n;
     cin>>n;
-    string s;
-    cin>>s;
-    int mini=0;
-    int cur=0;
-    for(int i=0;i<s.size();i++){
-        if(s[i]=='-'){
-            cur--;
-        }
-        else{
-            cur++;
-        }
-        mini=min(cur,mini);
+    // deb(n);
+    vi a(n);
+    REP(i,0,n)cin>>a[i];
+    int k=1e18;
+    for(int i=0;i<n;i++){
+        // deb(i);
+        int l=n-i-1,r=i;
+        int fac=max(l,r);
+        // deb(fac);
+        k=min(k,a[i]/fac);
+        // deb(a[i]/fac);
+        // deb(k);
     }
-    int ini=0;
-    if(mini<0){
-        ini=-mini;
-    }
-    for(int i=0;i<s.size();i++){
-        if(s[i]=='-'){
-            ini--;
-        }
-        else{
-            ini++;
-        }
-    }
-    cout<<ini<<"\n";
+
+    cout<<k<<"\n";
+
+
+
 
 	return 0;
 }

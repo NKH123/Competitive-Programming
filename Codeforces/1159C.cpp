@@ -57,34 +57,47 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
 	ios::sync_with_stdio(false);
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    int mini=0;
-    int cur=0;
-    for(int i=0;i<s.size();i++){
-        if(s[i]=='-'){
-            cur--;
-        }
-        else{
-            cur++;
-        }
-        mini=min(cur,mini);
+    int n, m;
+    cin>>n>>m;
+    vi b(n);
+    priority_queue<int>pp;
+    REP(i,0,n){
+        cin>>b[i];
+        pp.push(b[i]);
     }
-    int ini=0;
-    if(mini<0){
-        ini=-mini;
+    vi g(m);
+    vector<bool>sat(m,1);
+    REP(i,0,m)cin>>g[i];
+    int ans=0;
+    int sum=0;
+    int mini=1e9;
+    int maxi=-1;
+    for(int i=0;i<n;i++){
+        ans+=m*b[i];
+        sum+=b[i];
+        mini=min(mini,b[i]);
+        maxi=max(maxi,b[i]);
     }
-    for(int i=0;i<s.size();i++){
-        if(s[i]=='-'){
-            ini--;
+    for(int i=0;i<m;i++){
+        if(g[i]>maxi){
+            sat[i]=0;
         }
-        else{
-            ini++;
+        if(g[i]<maxi){
+            cout<<-1<<"\n";
+            return 0;
         }
     }
-    cout<<ini<<"\n";
-
-	return 0;
+    int ct=0;
+    for(int i=0;i<m;i++){
+        if(sat[i]==0){
+            int ele=pp.top();
+            ct++;
+            ans=ans-ele+(g[i]);
+            if(ct==(m-1)){
+                pp.pop();
+            }
+        }
+    }
+    cout<<ans<<"\n";
+    return 0;
 }
