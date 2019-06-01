@@ -64,7 +64,6 @@ void _swap(int A, int B){
     int come=a[B];
     swap(a[A],a[B]);
     swap(pos[go],pos[come]);
-    // cout<<A<<" "<<B<<"\n";
     ans.PB({A,B});
 }
 
@@ -78,23 +77,10 @@ int32_t main(){
         cin>>a[i];
         pos[a[i]]=i;
     }
-    // if(a[1]!=1){
-    //     _swap(1,pos[1]);
-    // }
     for(int i=1;i<=(n/2);i++){
-        // deb("***************");
-        // deb(i);
-        // deb(a);
         if(a[i]!=i){
             if(pos[i]>n/2){
-                // deb(pos[i]);
                 int go=pos[i];
-                // if(go!=n){
-                // _swap(go,1);
-                // _swap(1,n);
-                // _swap(n,i);
-                
-                // _swap(1,go);
                 if(2*abs(go-i)>=(n)){
                     _swap(i,go);
                 }
@@ -113,9 +99,6 @@ int32_t main(){
 
             }
         }
-        // deb(i);
-        // deb(a);
-        // deb(pos);
     }
     for(int i=(n/2)+1;i<=n;i++){
         if(a[i]!=i){
@@ -138,12 +121,8 @@ int32_t main(){
                 _swap(1,i);
                 _swap(1,go);
             }
-        }
-        // deb(i);
-        // deb(a);
-        // deb(pos);
+        }    
     }
-    // deb(a);
     cout<<ans.size()<<"\n";
     REP(i,0,ans.size()){
         if(ans[i].F>ans[i].S)swap(ans[i].F,ans[i].S);

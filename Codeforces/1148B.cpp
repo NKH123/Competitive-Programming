@@ -68,13 +68,7 @@ int32_t main(){
     vi b(m);
     REP(i,0,m)cin>>b[i];
     b.PB(1e18);
-    int ans=-1;
     int time=-1;
-    // deb(a);
-    // deb(b);
-    // deb(ta);
-    // deb(tb);
-    // deb(k);
     if(k>=n){
         cout<<-1<<"\n";
         return 0;
@@ -82,14 +76,10 @@ int32_t main(){
     for(int i=0;i<n;i++){
         if(i>k)continue;
         int temp=i;
-        // deb(i);
         auto g=lower_bound(b.begin(),b.end(),a[i]+ta)-b.begin();
-        // deb(g);
         int remmoves=k-temp;
         g=min((int)b.size()-1,g+remmoves);
         int ttime=b[g]+tb;
-        // deb(g);
-        // deb(ttime);
         if(time<ttime){
             time=ttime;
         }
@@ -98,8 +88,5 @@ int32_t main(){
         time=-1;
     }
     cout<<time<<"\n";
-
-
-
 	return 0;
 }
