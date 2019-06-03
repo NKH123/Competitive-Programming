@@ -76,26 +76,10 @@ int32_t main(){
 	ios::sync_with_stdio(false);
     int N;
     cin>>N;
-    // N=1000;
-    // memset(a,0,sizeof(a));
     pre();
     for(int i=2;i<=N;i++){
         cout<<val[i]<<" ";
     }
     cout<<"\n";
-    // for(int i=2;i<=N;i++){
-    //     for(int j=2;j<=N;j++){
-    //         if(__gcd(i,j)==1 && val[i]==val[j]){
-    //             deb(i);
-    //             deb(j);
-    //             deb("No");
-    //             return 0;
-    //         }
-    //     }
-    // }
-
-
-
-
     return 0;
 }
