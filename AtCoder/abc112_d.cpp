@@ -53,36 +53,23 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-vector<bool> prime(100005,true);
-void pre(){
-    prime[0]=false;
-    prime[1]=false;
-    for(int i=2;i<=100005;i++){
-        if(prime[i]){
-            for(int j=i*i;j<=100005;j=j+i){
-                prime[j]=false;
+int32_t main(){
+	ios::sync_with_stdio(false);
+    int n, m;
+    cin>>n>>m;
+    int ans=-1;
+    for(int i=1;i*i<=m;i++){
+        if(m%i==0){
+            int d=i;
+            if((m-(m/d)*m)%d==0 && n*d<=m){
+                ans=max(ans,d);
+            }
+             d=m/i;
+            if((m-(m/d)*m)%d==0 && n*d<=m){
+                ans=max(ans,d);
             }
         }
     }
-}
-
-int32_t main(){
-	ios::sync_with_stdio(false);
-    pre();
-    int n;
-    cin>>n;
-    vi P;
-    for(int i=0;i<=55555;i++){
-        if(prime[i] && i%5==1){
-            P.PB(i);
-        }
-        if(P.size()==n){
-            break;
-        }
-    }
-    REP(i,0,n){
-        cout<<P[i]<<" "; 
-    }
-    cout<<"\n";
+    cout<<ans<<"\n";
 	return 0;
 }
