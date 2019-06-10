@@ -66,13 +66,15 @@ int fun(int x){
     int ans=1e18;
     if(x%2==0){
         ans=min(ans,1+fun(x/2));
+        return M[x]=ans;
     }
     if(x%3==0){
         ans=min(ans,1+fun(2*x/3));
-
+        return M[x]=ans;
     }
     if(x%5==0){
         ans=min(ans,1+fun(4*x/5));
+        return M[x]=ans;
     }
     return M[x]=ans;
 }
