@@ -11,7 +11,7 @@ typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define llp 1000000007
+#define sz(x) (int)(x.size())
 #define mod 1000000007
 
 template < typename F, typename S >
@@ -55,11 +55,12 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
+
 int32_t main(){
-	ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
 
 
 
 
-	return 0;
+    return 0;
 }
