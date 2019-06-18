@@ -15,100 +15,103 @@ typedef pair<int,int> pi;
 
 template < typename F, typename S >
 ostream& operator << ( ostream& os, const pair< F, S > & p ) {
-    return os << "(" << p.first << ", " << p.second << ")";
+	return os << "(" << p.first << ", " << p.second << ")";
 }
 
 template < typename T >
 ostream &operator << ( ostream & os, const vector< T > &v ) {
-    os << "{";
-    typename vector< T > :: const_iterator it;
-    for( it = v.begin(); it != v.end(); it++ ) {
-        if( it != v.begin() ) os << ", ";
-        os << *it;
-    }
-    return os << "}";
+	os << "{";
+	typename vector< T > :: const_iterator it;
+	for( it = v.begin(); it != v.end(); it++ ) {
+		if( it != v.begin() ) os << ", ";
+		os << *it;
+	}
+	return os << "}";
 }
 
 template < typename T >
 ostream &operator << ( ostream & os, const set< T > &v ) {
-    os << "[";
-    typename set< T > :: const_iterator it;
-    for ( it = v.begin(); it != v.end(); it++ ) {
-        if( it != v.begin() ) os << ", ";
-        os << *it;
-    }
-    return os << "]";
+	os << "[";
+	typename set< T > :: const_iterator it;
+	for ( it = v.begin(); it != v.end(); it++ ) {
+		if( it != v.begin() ) os << ", ";
+		os << *it;
+	}
+	return os << "]";
 }
 
 template < typename F, typename S >
 ostream &operator << ( ostream & os, const map< F, S > &v ) {
-    os << "[";
-    typename map< F , S >::const_iterator it;
-    for( it = v.begin(); it != v.end(); it++ ) {
-        if( it != v.begin() ) os << ", ";
-        os << it -> first << " = " << it -> second ;
-    }
-    return os << "]";
+	os << "[";
+	typename map< F , S >::const_iterator it;
+	for( it = v.begin(); it != v.end(); it++ ) {
+		if( it != v.begin() ) os << ", ";
+		os << it -> first << " = " << it -> second ;
+	}
+	return os << "]";
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
 vi a={0,2,5,5,4,5,6,3,7,6};
-bool comp(int A,int B){
-    return a[A]<a[B];
+int n, m;
+vi A;
+vi ans;
+int dp[11000];
+int fun(int N){
+	if(N<0){
+		return -1;
+	}
+	if(dp[N]!=-1){
+		return dp[N];
+	}
+	if(N==0){
+		return dp[N]=0;
+	}
+	else{
+		int dig=-1;
+		for(int i=0;i<A.size();i++){
+			int temp=fun(N-a[A[i]]);
+			if(temp==-1)continue;
+			if(temp>dig){
+				dig=temp;
+			}
+		}
+		if(dig==-1){
+			return dp[N]=-1;
+		}
+		else{
+			return dp[N]=1+dig;
+		}
+	}
 }
-
 int main(){
 	ios::sync_with_stdio(false);
-    int n,m;
-    cin>>n>>m;
-
-
-    //deb(a);
-    vi b(m);
-    REP(i,0,m)cin>>b[i];
-    sort(b.begin(),b.end(),comp);
-
-    int times=n/a[b[0]];
-    string ans="";
-    REP(i,0,times){
-        char add='0'+b[0];
-        string Ad="a";
-        Ad[0]=add;
-        ans+=(Ad);
+	memset(dp,-1,sizeof(dp));
+	cin>>n>>m;
+	A.resize(m);
+	REP(i,0,m){
+		cin>>A[i];
+	}
+	sort(A.begin(),A.end());
+	fun(n);
+	int I=n;
+    while(I>0){
+    	int ind=-1;
+    	for(int i=0;i<A.size();i++){
+    		if(I<a[A[i]])continue;
+    		if(dp[I-a[A[i]]]==(dp[I]-1)){
+    			ind=i;
+    		}
+    	}
+    	ans.PB(A[ind]);
+    	I-=a[A[ind]];
     }
-    int prev=b[0];
-    int rem=n%a[b[0]];
-    int I=1;
-    deb(n);
-    deb(b);
-    deb(a);
-    deb("Outside");
-    deb(rem);
-    deb("i'm here");
-    deb(ans);
-    while(rem>0){
-        deb(rem);
-        times=rem/a[b[I]];
-        REP(i,0,times){
-            if(b[I]>=prev){
-                char add='0'+b[I];
-                string Ad="a";
-                Ad[0]=add;
-                ans=Ad+ans;
-            }
-            else{
-                char add='0'+b[I];
-                string Ad="a";
-                Ad[0]=add;
-                ans=ans+Ad;
-            }
-        }
-        rem=rem%a[b[I]];
-        I++;
+    REP(i,0,ans.size()){
+    	cout<<ans[i];
     }
-    cout<<ans<<"\n";
+    cout<<"\n";
 
-    return 0;
+	return 0;
 }
 
 
