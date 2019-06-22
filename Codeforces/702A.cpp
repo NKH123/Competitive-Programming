@@ -6,11 +6,12 @@ using namespace std;
 #define MP make_pair
 #define REP(i,a,b) for (int i = a; i <b; i++)
 typedef long long ll;
+#define int ll
 typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define llp 1000000007
+#define sz(x) (int)(x.size())
 #define mod 1000000007
 
 template < typename F, typename S >
@@ -53,27 +54,22 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
+int n;
+vi a;
 
-int main(){
-	ios::sync_with_stdio(false);
-
-    int n,v;
-    cin>>n>>v;
-    int rem=n-1;
-    if(v>rem){
-        cout<<rem<<"\n";
-        return 0;
-    }
-    int cur=0;
-    int curp=1;
-    ll ans=0;
-    ans+=v;
-    int K=n-(v+1);
-    for(int i=0;i<(n-(v+1));i++){
-        ans+=i+2;
+int32_t main(){
+    ios::sync_with_stdio(false);
+    cin>>n;
+    a.resize(n);
+    REP(i,0,n)cin>>a[i];
+    int ans=1;
+    int l=0,r=0;
+    while(r<n){
+        if(r==(n-1))break;
+        if(a[r+1]>a[r])r++;
+        else l=++r;
+        ans=max(ans,r-l+1);
     }
     cout<<ans<<"\n";
-
-
-	return 0;
+    return 0;
 }

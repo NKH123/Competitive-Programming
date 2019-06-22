@@ -54,100 +54,44 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-int n;
-vi a;
-map<int, int>Ct;
+
+
 int32_t main(){
     ios::sync_with_stdio(false);
-    cin>>n;
-    a.resize(n);
-    vi b;
-    b.resize(n);
-    REP(i,0,n){
-        cin>>a[i];
-        b[i]=a[i];
-    }
-    sort(b.begin(),b.end());
-    set<int>cd;
-    for(int i=1;i<n;i++){
-        cd.insert(b[i]-b[i-1]);
-        Ct[b[i]-b[i-1]]++;
-    }
-    deb(cd);
-    deb(b);
-    // if(cd.size()>3){
-    //     cout<<"-1\n";
-    //     return 0;
-    // }
-    int f=0;
-    for(auto g:Ct){
-        if(g>1 && f==2){
-            cout<<"-1\n";
-            return 0;
+    string s;
+    cin>>s;
+    vi pref(s.size()+1,0);
+    vi suff(s.size()+1,0);
+    for(int i=0;i<s.size();i++){
+        if(s[i]=='Q'){
+            pref[i+1]=pref[i]+1;
         }
-        if(g>1 && f==1){
-            f=2;
-            // cout<<"-1\n";
-            // return 0;
+        else{
+            pref[i+1]=pref[i];
         }
-        if(g>1 && f==0){
-            f=1;
-        }
-
     }
-    if(cd.size()==1){
-        for(int i=0;i<n;i++){
-            if(a[i]==b[0]){
-                cout<<i+1<<"\n";
-                return 0;
+    for(int i=s.size()-1;i>=0;i--){
+        if(i==(s.size()-1)){
+            if(s[i]=='Q'){
+                suff[i+1]=1;
+            }
+        }
+        else{
+            if(s[i]=='Q'){
+                suff[i+1]=suff[i+2]+1;
+            }
+            else{
+                suff[i+1]=suff[i+2];
             }
         }
     }
-    else if(cd.size()==2){
-        int CD=b[2]-b[1];
-        int f=0;
-        for(int i=2;i<n;i++){
-            if(CD!=(b[i]-b[i-1])){
-
-            }
-        }
-
-
-
-    }
-    else if(cd.size()==3){
-        vi CD;
-        for(auto g:cd){
-            CD.PB(g);
-        }
-        map<int, int>M;
-        for(int i=1;i<n;i++){
-            M[b[i]-b[i-1]]++;
-        }
-        int J=-1;
-        for(int i=0;i<3;i++){
-            if(M[CD[i]]==1){
-                J=i;
-                break;
-            }
-        }
-        int ind=-1;
-        for(int i=1;i<n-1;i++){
-            if(((b[i]-b[i-1])==(b[i+1]-b[i]))==CD[J]){
-                ind=i;
-                break;
-            }
-        }
-        for(int i=0;i<n;i++){
-            if(a[i]==b[ind]){
-                cout<<i+1<<"\n";
-                return 0;
-            }
+    int ans=0;
+    for(int i=0;i<s.size();i++){
+        if(s[i]=='A'){
+            if(i!=(s.size()-1))
+            ans+=(pref[i]*suff[i+2]);
         }
     }
-
-
-
-
+    cout<<ans<<"\n";
     return 0;
 }

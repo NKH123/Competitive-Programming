@@ -6,17 +6,18 @@ using namespace std;
 #define MP make_pair
 #define REP(i,a,b) for (int i = a; i <b; i++)
 typedef long long ll;
+#define int ll
 typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
-#define llp 1000000007
+#define sz(x) (int)(x.size())
 #define mod 1000000007
 
 template < typename F, typename S >
 ostream& operator << ( ostream& os, const pair< F, S > & p ) {
     return os << "(" << p.first << ", " << p.second << ")";
-}
+}   
 
 template < typename T >
 ostream &operator << ( ostream & os, const vector< T > &v ) {
@@ -54,26 +55,22 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-int main(){
-	ios::sync_with_stdio(false);
 
-    int n,v;
-    cin>>n>>v;
-    int rem=n-1;
-    if(v>rem){
-        cout<<rem<<"\n";
-        return 0;
-    }
-    int cur=0;
-    int curp=1;
-    ll ans=0;
-    ans+=v;
-    int K=n-(v+1);
-    for(int i=0;i<(n-(v+1));i++){
-        ans+=i+2;
-    }
-    cout<<ans<<"\n";
-
-
-	return 0;
+int32_t main(){
+    ios::sync_with_stdio(false);
+    int N;
+    cin>>N;
+    int ct=0;
+    ct+=N/100;
+    N%=100;
+    ct+=N/20;
+    N%=20;
+    ct+=N/10;
+    N%=10;
+    ct+=N/5;
+    N%=5;
+    ct+=N/1;
+    N%=1;
+    cout<<ct<<"\n";
+    return 0;
 }
