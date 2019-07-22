@@ -25,12 +25,7 @@ ll power(ll x, ll y)
 	else
 		return (((x*temp)%mod)*temp)%mod; 
 }
-ll ans=0;
-void fun(int n){
-	if(n<=0)return;
-	ans+=2*(floor(sqrt(n)));
-	fun(n-((floor(sqrt(n)))*(floor(sqrt(n)))));
-}
+
 
 int main()
 {   ios::sync_with_stdio(false);
@@ -38,24 +33,18 @@ int main()
     //freopen("b.in", "r", stdin);
     //freopen("c.in", "r", stdin);
     //freopen("d.in", "r", stdin);
-    ll n;
+    int n;
     cin>>n;
-   ll a,b;
-    ll A,B;
-    ll maxi=9+(1e9);
-    for(ll i=1;i*i<=n;i++){
-    	if(n%i==0){
-    		a=i;
-    		b=n/i;
-    		if((a+b)<maxi){
-    			maxi=a+b;
-
-    		}
-
-    	}
+    int ans=1+n;
+    for(int i=1;i*i<=n;i++){
+        if((n%i)==0){
+            ans=min(ans,i+(n/i));
+        }
+        else{
+            int div=(n/i)+1;
+            ans=min(ans,i+(div));
+        }
     }
-    //fun(n);
-    cout<<maxi<<"\n";
-    //cout<<ans<<"\n";
+    cout<<ans<<"\n";
     return 0;
 }

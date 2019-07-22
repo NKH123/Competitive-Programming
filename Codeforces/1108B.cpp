@@ -43,29 +43,23 @@ int main()
 	int x=a[n-1];
 	int y;
 	int f=0;
-	for(int i=0;i<(n);i++){
+	for(int i=0;i<(n-1);i++){
 		if(x%a[i]!=0){
 			f=1;
 			break;
 		}
 	}
 	if(f==0){
-		int ct=0;
-		for(int i=0;i<(n);i++){
-			if(a[i]==x){
-				ct++;
+
+		for(int i=0;i<(n-1);i++){
+			if(a[i]==a[i+1]){
+				y=a[i];
 			}
 		}
-		if(ct>1){
-			y=x;
-		}
-		else{
-			y=a[n-2];
-		}
-
+		//y=a[n-2];
 	}
 	else{
-		for(int i=0;i<(n);i++){
+		for(int i=0;i<(n-1);i++){
 			if(x%a[i]!=0){
 				y=a[i];
 
