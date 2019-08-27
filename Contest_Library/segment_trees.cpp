@@ -1,6 +1,6 @@
 
 #define MAXN 100005
-int  n, t[4*MAXN];  //n is size of array, t is the segment tree
+int  t[4*MAXN], lazy[4*MAXN];  //n is size of array, t is the segment tree
 vector<int>a;    //a is the input array from which segtree is built
 
 
@@ -50,6 +50,34 @@ void update(int v, int tl, int tr, int pos, int new_val) {
 			update(v*2+1, tm+1, tr, pos, new_val);
         t[v] = compute(t[v*2] , t[v*2+1]);// t[v*2] + t[v*2+1];
     }
+}
+//lazy propagation push values to children
+void Push(int v, int tl, int tr){
+	if(tl!=tr){
+		lazy[(v<<1)]+=lazy[v];
+		lazy[((v<<1)^1)]+=lazy[v];
+	}
+	t[v]+=lazy[v];
+	lazy[v]=0;
+}
+
+//range updates lazy propagation
+//adds to range l to r x
+void add(int v, int tl, int tr, int l, int r, int x){
+	Push(v,tl,tr);
+	if(l>tr || tl>r){
+		return;
+	}
+	if(l<=tl && tr<=r){
+		lazy[v]+=x;
+		Push(v,tl, tr);
+	}
+	else{
+		int tm=(tl+tr)>>1;
+		add(v<<1,tl, tm,l, r, x);
+		add(v<<1^1,tm+1,tr,l,r, x);
+		t[v]=compute(t[v<<1],t[v<<1^1]);
+	}
 }
 
 
