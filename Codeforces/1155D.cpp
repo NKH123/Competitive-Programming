@@ -55,103 +55,31 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 map<int, int >M;
+int dp[310000][3];
 int32_t main(){
 	ios::sync_with_stdio(false);
     int n, x;
     cin>>n>>x;
-    vi a(n);
-    REP(i,0,n){
+    vi a(n+1);
+    REP(i,1,n+1){
         cin>>a[i];
     }
-    vi b(n);
-    if(n==1){
-        cout<<max(a[0],x*a[0])<<"\n";
-        return 0;
+    for(int i=0;i<=n;i++){
+    	for(int j=0;j<=2;j++){
+    		dp[i][j]=-(1e18);
+    	}
     }
-    REP(i,0,n){
-        b[i]=x*a[i];
+    dp[0][0]=0;
+    int ans=0;
+    for(int i=1;i<=n;i++){
+    	dp[i][0]=max(a[i],a[i]+dp[i-1][0]);
+    	dp[i][1]=max({a[i]*x,a[i]*x+dp[i-1][1],a[i]*x+dp[i-1][0]});
+    	dp[i][2]=max({a[i],a[i]+dp[i-1][2],a[i]+dp[i-1][1]});
+    	ans=max({ans,dp[i][0],dp[i][1],dp[i][2]});
     }
-    vi pref(n);
 
-    REP(i,0,n){
-        if(i==0){
-            pref[i]=b[i];
-        }
-        else{
-            pref[i]=pref[i-1]+b[i];
-        }
-        M[pref[i]]=i;
-    }
-    vi maxa(n);
-    vi maxb(n);
-    maxa[n-1]=max(0LL,a[n-1]);
-    maxb[0]=max(0LL,b[0]);
-    
 
-    int ans=maxa[n-1];
-    for(int i=n-2;i>=0;i--){
-        if(maxa[i+1]+a[i]>=0){
-            maxa[i]=maxa[i+1]+a[i];
-            ans=max(maxa[i],ans);
-        }
-        else{
-            maxa[i]=0;
-        }
-    }
-    ans=max(ans,maxb[0]+maxa[1]);
-    vi Maxa(n);
-    Maxa[0]=max(0LL,a[0]);
-    for(int i=1;i<n;i++){
-        if(Maxa[i-1]+a[i]>=0){
-            Maxa[i]=Maxa[i-1]+a[i];
-
-        }else{
-            Maxa[i]=0;
-        }
-    }
-    for(int i=1;i<n;i++){
-
-        if((maxb[i-1]+b[i])>=0){
-            maxb[i]=maxb[i-1]+b[i];
-            ans=max(ans,maxb[i]);
-        }
-        else{
-            maxb[i]=0;
-        }
-
-    }
-    for(int i=0;i<n;i++){
-        if(i==0){
-            ans=max(ans,maxb[0]+maxa[1]);
-        }
-        else if(i==n-1){
-            if(M.find(pref[n-1]-maxb[n-1])==M.end()){
-                ans=max(ans,maxb[n-1]);
-
-            }
-            else{
-                int L=M[pref[n-1]-maxb[n-1]];
-            // L--;
-            // L++;
-                ans=max(ans,maxb[n-1]+Maxa[L]);
-            }
-        }
-        else{
-            if(M.find(pref[i]-maxb[i])==M.end()){
-                ans=max(ans,maxb[i]+maxa[i+1]);
-
-            }
-            else{
-                int L=M[pref[i]-maxb[i]];
-            // L--;
-            // L++;
-                ans=max(ans,maxb[i]+maxa[i+1]+Maxa[L]);
-            }
-           
-        }
-    }
     cout<<ans<<"\n";
-
 
     return 0;
 }
