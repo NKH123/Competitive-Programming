@@ -58,49 +58,27 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int n, b;
-    cin>>n;
-    cin>>b;
-    int B=b;
-    set<int>primes;
-
-    while(b%2==0){
-        primes.insert(2);
-        b/=2;
-    }
-    for(int i=3;i*i<=b;i+=2){
-        while(b%i==0){
-            primes.insert(i);
-            b/=i;
+    int q;
+    cin>>q;
+    while(q--){
+        int n;
+        cin>>n;
+        int ans=0;
+        if(n==2){
+            ans=2;
         }
+        else{
+            if(n%2==0){
+                ans=0;
+            }
+            else{
+                ans=1;
+            }
+        }
+        cout<<ans<<"\n";
     }
-    if(b>1){
-        primes.insert(b);
-    }
-    int ans=1e18;
-    // deb(primes);
-    for(auto g:primes){
-     int temp=0;
-     int N=n;
-     while(N>0){
-        N/=g;
-        temp+=N;
-    }
-    int times=0;
-    int BB=B;
-    while(BB%g==0){
-        BB/=g;
-        // if(BB>0)
-        times++;
-    }
-    // deb(temp);
-    // deb(times);
-    temp/=times;
-    ans=min(temp,ans);
-}
-cout<<ans<<"\n";
 
 
 
-return 0;
+    return 0;
 }
