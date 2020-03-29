@@ -58,7 +58,31 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    map<int, int>M;
+    REP(i,1,100){
+        n=i;
+        vi x;
+        x.clear();
+        x.PB(n);
+        M[n]++;
+        while(n!=1){
+            
+            if(n%2==0){
+                n=n/2;
+            }
+            else{
+                n--;
+            }
+            x.PB(n);
+            M[n]++;
+        }
+        deb(x);
+    }
+    for(auto g:M){
+        cout<<g.F<<" "<<g.S<<"\n";
+    }
 
     return 0;
 }

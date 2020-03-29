@@ -54,11 +54,48 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-
-
+int dp[11][1005][1005];
+int par[1005][1005];
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, m;
+    cin>>n>>m;
+    memset(dp,0,sizeof(dp));
+    memset(par,0,sizeof(par));
+    for(int i=1;i<=n;i++){
+        for(int j=i;j<=n;j++){
+            dp[0][i][j]=1;
+        }
+    }
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            par[i][j]=dp[0][i][j];
+        }
+    }
+    for(int i=n;i>=1;i--){
+        for(int j=1;j<=n;j++){
+            par[i][j]=((par[i][j]+par[i+1][j]+par[i][j-1])%mod-par[i+1][j-1]+2*mod)%mod;
+        }
+    }
+    for(int i=1;i<m;i++){
+        for(int j=1;j<=n;j++){
+            for(int k=1;k<=n;k++){
+                dp[i][j][k]=par[j][k];
+            }
+        }
+        for(int j=1;j<=n;j++){
+            for(int k=1;k<=n;k++){
+                par[j][k]=dp[i][j][k];
+            }
+        }
+        for(int j=n;j>=1;j--){
+            for(int k=1;k<=n;k++){
+                par[j][k]=((par[j][k]+par[j+1][k]+par[j][k-1])%mod-par[j+1][k-1]+2*mod)%mod;
+            }
+        }
 
-
+    }
+    int ans=par[1][n];
+    cout<<ans<<"\n";
     return 0;
 }

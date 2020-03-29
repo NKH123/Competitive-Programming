@@ -58,7 +58,61 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int q;
+    cin>>q;
+    while(q--){
+        string s;
+        cin>>s;
+        int L=0, R=0, U=0, D=0;
+        REP(i,0,s.size()){
+            if(s[i]=='L'){
+                L++;
+            }
+            if(s[i]=='R'){
+                R++;
+            }
+            if(s[i]=='U'){
+                U++;
+            }
+            if(s[i]=='D'){
+                D++;
+            }
+        }
+        int lr=min(L,R);
+        int ud=min(U,D);
+        if(lr==0 || ud==0){
+            if(lr!=0){
+                cout<<2<<"\n";
+                cout<<"LR\n";
+            }
+            else if(ud!=0){
+                cout<<2<<"\n";
+                cout<<"UD\n";
+            }
+            else{
+                cout<<0<<"\n\n";
+            }
+            continue;
+        }
+        int ans=(lr+ud)*2;
+        // deb(lr);
+        // deb(ud);
+        // exit(0);
+        cout<<ans<<"\n";
+        REP(i,0,lr){
+            cout<<"L";
+        }
+        REP(i,0,ud){
+            cout<<"U";
+        }
+        REP(i,0,lr){
+            cout<<"R";
+        }
+        REP(i,0,ud){
+            cout<<"D";
+        }
+        cout<<"\n";
+    }
 
     return 0;
 }

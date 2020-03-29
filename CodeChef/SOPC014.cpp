@@ -58,7 +58,28 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        if(n%2==0){
+            cout<<5<<"\n";
+            cout<<0<<" "<<n<<"\n";
+            cout<<n<<" "<<0<<"\n";
+            cout<<n<<" "<<n<<"\n";
+            cout<<0<<" "<<0<<"\n";
+            cout<<(n/2)<<" "<<(n/2)<<"\n";
+        }
+        else{
+            cout<<4<<"\n";
+            cout<<0<<" "<<n<<"\n";
+            cout<<n<<" "<<0<<"\n";
+            cout<<n<<" "<<n<<"\n";
+            cout<<0<<" "<<0<<"\n";
+            // cout<<(n/2)<<" "<<(n/2)<<"\n";
+        }
+    }
 
     return 0;
 }

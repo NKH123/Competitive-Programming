@@ -58,7 +58,27 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    vi fact;
+    int N=n;
+    for(int i=2;i*i<=n;i++){
+        if(N%i==0){
+            fact.PB(i);
+            while(N%i==0){
+                N=N/i;
+            }
+        }
+    }
+    if(N!=1){
+        fact.PB(N);
+    }
+    if(fact.size()==1){
+        cout<<fact[0]<<"\n";
+    }
+    else{
+        cout<<1<<"\n";
+    }
 
     return 0;
 }

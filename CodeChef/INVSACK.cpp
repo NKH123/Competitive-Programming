@@ -55,10 +55,36 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-
+int n;
+int query(int a,int b){
+    cout<<"1 "<<a<<" "<<b<<"\n";
+    cin>>a;
+    return a;
+}
 int32_t main(){
     ios::sync_with_stdio(false);
 
-
+    vi w,p;
+    cin>>n;
+    int cur=0,prof=0;
+    REP(i,1,n+1){
+        int lo=cur,hi=10000;
+        int q=query(i,hi);
+        while(hi-lo>1){
+            int mid=(lo+hi)/2;
+            if(query(i,mid)!=q) lo=mid;
+            else hi=mid;
+        }
+        int d=query(i,hi);
+        w.PB(hi-cur);
+        p.PB(d-prof);
+        prof=d;
+        cur=hi;
+    }
+    cout<<2<<"\n";
+    for(auto i:w) cout<<i<<" ";
+    cout<<"\n";
+    for(auto i:p) cout<<i<<" ";
+    cout<<"\n";
     return 0;
 }

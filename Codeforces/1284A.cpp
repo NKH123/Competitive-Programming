@@ -58,7 +58,27 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n, m;
+    cin>>n>>m;
+    vector<string>s(n);
+    vector<string>t(m);
+    REP(i,0,n){
+    	cin>>s[i];
+    }
+    REP(i,0,m){
+    	cin>>t[i];
+    }
+    int q;
+    cin>>q;
+    while(q--){
+    	int y;
+    	cin>>y;
+    	string A, B;
+    	y--;
+    	A=s[y%n];
+    	B=t[y%m];
+    	cout<<A<<B<<"\n";
+    }
 
     return 0;
 }

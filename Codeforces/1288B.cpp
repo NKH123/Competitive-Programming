@@ -54,11 +54,58 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-
-
+int conc(int a, int b){
+    int no=0;
+    int A=a;
+    while(A>0){
+        no++;
+        A=A/10;
+    }
+    int ans=a;
+    for(int i=0;i<no;i++){
+        ans=ans*10;
+    }
+    ans+=b;
+    return ans;
+}
+bool check(int A){
+    int f=1;
+    while(A>0){
+        if(A%10!=0 && A!=1){
+            f=0;
+        }
+        A=A/10;
+    }
+    return f;
+}
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    // for(int i=1;i<=1000;i++){
+    //         for(int j=1;j<=1000;j++){
+    //             if(( (i*j+i+j)==(conc(i,j)))){
+    //                 cout<<i<<" "<<j<<"\n";
+    //             }
+    //         }
+    //     }
+    cin>>t;
+    while(t--){
+        int A, B;
+        cin>>A>>B;
+        int b=B;
+        int no=0;
+        while(b>0){
+            b=b/10;
+            no++;
+        }
+        no--;
+        if(check(B+1)){
+            no++;
+        }
+        int ans=A*no;
+        cout<<ans<<"\n";
 
+    }
 
     return 0;
 }

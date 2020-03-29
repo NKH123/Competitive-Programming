@@ -58,7 +58,62 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    while(t--){
+    	int n;
+    	cin>>n;
+    	string s;
+    	cin>>s;
+    	int l=0, r=n-1;
+    	int ans=0;
+    	int f=1;
+    	bool vis[n];
+    	memset(vis,true, sizeof(vis));
+    	while(l<r){
+    		if(s[l]!=s[r]){
+    			// swap(s[l+1],s[l]);
+    			// // swap(s[r-1],s[r]);
+    			// ans++;
+    			// if(s[l]!=s[r]){
+    			// 	f=0;
+    			// }
+    			if(s[l+1]==s[r] && vis[l]&& vis[l+1]){
+    				vis[l]=false;
+    				vis[l+1]=false;
+    				swap(s[l+1],s[l]);
+    				ans++;
+    			}
+    			else if(s[r-1]==s[l] && vis[r] && vis[r-1]){
+    				vis[r]=false;
+    				vis[r-1]=false;
+    				swap(s[r],s[r-1]);
+    				ans++;
+    			}
+    			else{
+    				f=0;
+    			}
+    		}
+    		if(s[l]!=s[r]){
+    			f=0;
+    		}
+    		if(f==0){
+    			// deb(l);
+    			// deb(r);
+    			// deb(s);
+    			break;
+    		}
+    		l++;
+    		r--;
+    	}
+    	if(f==0){
+    		cout<<"NO\n";
+    	}
+    	else{
+    		cout<<"YES\n";
+    		cout<<ans<<"\n";
+    	}
+    }
 
     return 0;
 }

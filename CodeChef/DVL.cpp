@@ -12,8 +12,8 @@ typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
 #define sz(x) (int)(x.size())
-#define mod 1000000007
-
+#define mod 987654319
+#define endl "\n"
 template < typename F, typename S >
 ostream& operator << ( ostream& os, const pair< F, S > & p ) {
     return os << "(" << p.first << ", " << p.second << ")";
@@ -55,60 +55,72 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-
+int dp[3005][7];
 int32_t main(){
     ios::sync_with_stdio(false);
-    int n, k;
-    cin>>n>>k;
+    int n;
+    cin>>n;
     vi a(n);
     REP(i,0,n){
         cin>>a[i];
     }
-    int l=0, r=0;
-    int ans=abs(a[0]-k);
-    int cur=a[0];
-    while(r<n){
-        if(cur<k){
-            ans=min(ans,abs(cur-k));
-            r++;
-            if(r<n){
-                cur+=a[r];
-            }
-        }
-        else{
-            ans=min(ans,abs(cur-k));
-            l++;
-            if(l>r){
-                r=l;
-                if(r<n)
-                    cur=a[l];
-            }
-            else{
-                cur-=a[l-1];
+    memset(dp,0,sizeof(dp));
+    dp[0][0]=1;
+    vi ind={0,2,1,3,5,4,6};
+    deb(ind);
+    for(int i=0;i<n;i++){
+        dp[i][0]=1;
+        for(int j=0;j<i;j++){
+            for(auto it:ind){
+                if(it==0){
+                    continue;
+                }
+                else if(it==2){
+                    if(a[j]>a[i]){
+                        dp[i][2]=(dp[i][2]+dp[j][0])%mod;
+                    }
+                }
+                else if(it==1){
+                    if(a[j]>a[i]){
+                        dp[i][1]=(dp[i][1]+dp[j][2])%mod;
+                    }
+                }
+                else if(it==3){
+                    if(a[j]>a[i]){
+                        dp[i][3]=(dp[i][3]+dp[j][1])%mod;
+                    }
+                }
+                else if(it==5){
+                    if(a[j]>a[i]){
+                        dp[i][5]=(dp[i][5]+dp[j][3])%mod;
+                    }
+                }
+                else if(it==4){
+                    if(a[j]>a[i]){
+                        dp[i][4]=(dp[i][4]+dp[j][5])%mod;
+                    }
+                }
+                 else if(it==6){
+                    if(a[j]>a[i]){
+                        dp[i][6]=(dp[i][6]+dp[j][4])%mod;
+                    }
+                }
+
             }
         }
     }
-    ans=min(ans,abs(cur-k));
-    if(true){
-        ans=min(ans,k);
+    int ans=0;
+    for(int i=0;i<n;i++){
+        for(int k=0;k<7;k++){
+            cout<<dp[i][k]<<" ";
+        }
+        cout<<"\n";
+    }
+    for(int i=0;i<n;i++){
+        ans=(ans+dp[i][6])%mod;
     }
     cout<<ans<<"\n";
-    // vi par(n);
-    // par[0]=a[0];
-    // for(int i=1;i<n;i++){
-    //     par[i]=a[i]+par[i-1];
-    // }
-    // for(int i=0;i<n;i++){
-    //     int tar;
-    //     if(i==0){
-    //         tar=k;
-    //     }
-    //     else{
-    //         tar=k+par[i-1];
-    //     }
-        
-    // }
-    
+
 
     return 0;
 }

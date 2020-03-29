@@ -58,6 +58,44 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, sx, sy;
+    cin>>n>>sx>>sy;
+    // vi x, y;
+    vector<pair<int, int> >xy;
+    int up=0, down=0, left=0, right=0;
+    REP(i,0,n){
+        int A, B;
+        cin>>A>>B;
+        int X=A, Y=B;
+        xy.PB({A,B});
+        if(Y>=(sy+1)){
+            up++;
+        }
+        if(Y<=(sy-1)){
+            down++;
+        }
+        if(X>=(sx+1)){
+            right++;
+        }
+        if(X<=(sx-1)){
+            left++;
+        }
+
+    }
+    int ans=max({up,down,right,left});
+    cout<<max({up,down,right,left})<<"\n";
+    if(up==ans){
+        cout<<sx<<" "<<(sy+1)<<"\n";
+    }
+    else if(down==ans){
+        cout<<sx<<" "<<(sy-1)<<"\n";
+    }
+    else if(left==ans){
+        cout<<(sx-1)<<" "<<(sy)<<"\n";
+    }
+    else if(right==ans){
+        cout<<(sx+1)<<" "<<(sy)<<"\n";
+    }
 
 
     return 0;

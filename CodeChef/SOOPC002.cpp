@@ -58,7 +58,18 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    REP(i,0,n){
+        int x, y;
+        cin>>x>>y;
+        if(__gcd(x,y)==1){
+            cout<<"NO\n";
+        }
+        else{
+            cout<<"YES\n";
+        }
+    }
 
     return 0;
 }

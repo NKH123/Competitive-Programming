@@ -58,7 +58,24 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int q;
+    cin>>q;
+    while(q--){
+        int a, b, c;
+        cin>>a>>b>>c;
+        int ans=1e18;
+        for(int i=-1;i<=1;i++){
+            for(int j=-1;j<=1;j++){
+                for(int k=-1;k<=1;k++){
+                    int A=a+i;
+                    int B=b+j;
+                    int C=c+k;
+                    ans=min(ans,abs(A-B)+abs(B-C)+abs(A-C));
+                }
+            }
+        }
+        cout<<ans<<"\n";
+    }
 
     return 0;
 }

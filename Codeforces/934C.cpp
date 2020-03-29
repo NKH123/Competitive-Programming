@@ -58,7 +58,62 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n;
+    cin>>n;
+    vi a(n);
+    REP(i,0,n){
+        cin>>a[i];
+    }
+    vi par(n);
+    int ans=0;
+    REP(i,0,n){
+        if(i==0){
+            if(a[i]==1)
+            par[i]=a[i];
+        }
+        else{
+            if(par[i]==1){
+                par[i]=par[i-1]+1;
+            }
+            else{
+                par[i]=par[i-1];
+            }
+        }
+        ans=max(ans,par[i]);
+    }
+    
+    for(int i=0;i<n;i++){
+        if(a[i]==2){
+            int cons=0;
+            int amxi=0;
+            for(int j=0;j<i;j++){
+                if(cons==0){
+                    if(a[i]==2){
+                        cons++;
+                    }
+                    else{
 
+                    }
+                }
+                else{
+                    if(a[i]==2){
+                        cons++;
+                    }
+                    else{
+                        cons=0;
+                    }
+
+                }
+                amxi=max(amxi,cons);
+            }
+            par[i]=par[i]+amxi;
+        }
+    }
+
+    for(int i=0;i<n;i++){
+        ans=max(ans,par[i]);
+    }
+    cout<<ans<<"\n";
 
     return 0;
 }

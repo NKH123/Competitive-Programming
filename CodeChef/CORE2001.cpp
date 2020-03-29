@@ -58,7 +58,54 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int m, n;
+    cin>>m>>n;
+    int dp[m+1][n+1][2];
+    memset(dp,0,sizeof(dp));
+    for(int i=1;i<=n;i++){
+        if(i%2==0){
+            dp[1][i][0]=1;
+        }
+    }
+    for(int i=2;i<=m;i++){
+        for(int j=1;j<=n;j++){
+            for(int k=0;k<2;k++){
+                //1
+                int I, J;
+                I=i-2;
+                J=j-1;
+                if(I>=1 && I<=m && J>=1 && J<=n){
+                    dp[i][j][k]=(dp[i][j][k]+dp[I][J][1^k])%mod;
+                }
 
+                //2
+                I=i-1;
+                J=j-2;
+                if(I>=1 && I<=m && J>=1 && J<=n){
+                     dp[i][j][k]=(dp[i][j][k]+dp[I][J][1^k])%mod;
+                }
 
+                //3
+                I=i-2;
+                J=j+1;
+                if(I>=1 && I<=m && J>=1 && J<=n){
+                     dp[i][j][k]=(dp[i][j][k]+dp[I][J][1^k])%mod;
+                }
+                //4
+                I=i-1;
+                J=j+2;
+                if(I>=1 && I<=m && J>=1 && J<=n){
+                     dp[i][j][k]=(dp[i][j][k]+dp[I][J][1^k])%mod;
+                }
+
+            }
+        }
+    }
+    int ans=0;
+    for(int i=1;i<=n;i++){
+        // ans+=dp[m][i][1];
+        ans=(ans+dp[m][i][1])%mod;
+    }
+    cout<<ans<<"\n";
     return 0;
 }

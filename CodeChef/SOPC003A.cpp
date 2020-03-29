@@ -58,7 +58,35 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    vi a;
+    while(t--){
+        int n;
+        cin>>n;
+        a.clear();
+        a.resize(n);
+        REP(i,0,n){
+            cin>>a[i];
+        }
+        sort(a.begin(),a.end());
+        int l=0, r=0;
+        int ans=0;
+        while(r<n){
+            ans+=(r-l);
+            // deb(r);
+            // deb(l);
+            // deb(r-l);
+            r++;
+            if(r==n){
+                break;
+            }
+            while(a[l]<(ceil((a[r]+1)/2) )){
+                l++;
+            }
+        }
+        cout<<ans<<"\n";
+    }
 
     return 0;
 }

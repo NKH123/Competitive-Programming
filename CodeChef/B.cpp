@@ -55,10 +55,68 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
+long waitingTime(vector<int> t, int p) {
+    int ans=0;
+    for(int i=0;i<p;i++){
+        if(t[i]<t[p]){
+            ans+=t[i];
+        }
+        else{
+            ans+=t[p];
+        }
+    }
+    ans+=t[p];
+    for(int i=p+1;i<t.size();i++){
+        if(t[i]<(t[p]-1)){
+            ans+=(t[i]);
+        }
+        else{
+            ans+=(t[p]-1);
+        }
+    }
+    // deb("2");
+    return ans;
+}
+
+long brute(vector<int> t, int p){
+    int rem=t[p];
+    int ans=0;
+    // deb("2");
+    while(t[p]>0){
+        for(int i=0;i<t.size();i++){
+            if(t[i]>0){
+                t[i]--;
+                ans++;
+            }
+            if(t[p]==0){
+                return ans;
+            }
+        }
+    }
+    // deb("1");
+    return ans;
+}
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
-
+    int n;
+    cin>>n;
+    vi v(n);
+    REP(i,0,n){
+        cin>>v[i];
+    }
+    // deb(v);
+    // deb(n);
+    int p;
+    cin>>p;
+    // deb(p);
+    // deb("here");
+    if(brute(v,p)!=waitingTime(v,p)){
+        deb(v);
+        deb(p);
+    }
+    else{
+        deb(brute(v,p));
+    }
     return 0;
 }

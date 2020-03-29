@@ -58,7 +58,77 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    vi ans,ans1;
+    vi q;
+    vector<int>x;
+    while(t--){
+        // int x;
+        int n;
+        cin>>n;
+        // cin>>x;
+        x.clear();
+        REP(i,0,n){
+            char A;
+            cin>>A;
+            x.PB(A-'0');
+        }
+        ans.clear();
+        ans.resize(n);
+        ans1.clear();
+        ans1.resize(n);
+        ans[0]=1;
+        ans1[0]=1;
+        int f=0;
+        for(int i=1;i<n;i++){
+            if(f==0){
+                if(x[i]==1){
+                    ans[i]=1;
+                    ans1[i]=0;
+                    f=2;
+                }
+                else if(x[i]==2){
+                    ans[i]=1;
+                    ans1[i]=1;
+                }
+                else if(x[i]==0){
+                    ans[i]=0;
+                    ans1[i]=0;
+                    // f=2;
+                }   
 
+            }
+            else if(f==1){
+
+            }
+            else if(f==2){
+                if(x[i]==1){
+                    ans[i]=0;
+                    ans1[i]=1;
+                    f=2;
+                }
+                else if(x[i]==2){
+                    ans[i]=0;
+                    ans1[i]=2;
+                }
+                else if(x[i]==0){
+                    ans[i]=0;
+                    ans1[i]=0;
+                    // f=2;
+                }   
+            }
+        }
+        REP(i,0,n){
+            cout<<ans[i];
+        }
+        cout<<"\n";
+        REP(i,0,n){
+            cout<<ans1[i];
+        }
+        cout<<"\n";
+
+    }
 
     return 0;
 }

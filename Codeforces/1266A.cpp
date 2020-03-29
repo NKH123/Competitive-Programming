@@ -58,7 +58,31 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    REP(i,0,n){
+    	string s;
+    	cin>>s;
+    	int f=0;
+    	int f1=0;
+    	int sum=0;
+    	REP(j,0,s.size()){
+    		if(s[j]=='0'){
+    			f=1;
+    		}
+    		if((s[j]-'0')%2==0){
+    			f1++;
+    		}
+    		sum+=(s[j]-'0');
+    	}
+    	// deb(sum);
+    	if(f==1 && sum%3==0 && f1>1){
+    		cout<<"red\n";
+    	}
+    	else{
+    		cout<<"cyan\n";
+    	}
+    }
 
     return 0;
 }

@@ -58,6 +58,39 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    ll test;
+    cin>>test;
+    while(test--){
+        string s;
+        ll int sa, sb;
+        cin>>s;
+
+        cin>>sa>>sb;
+        ll int apos, bpos;
+        for(int i=0; i<s.size(); i++){
+            if(s[i]=='A')
+                apos=i;
+
+            if(s[i]=='B')
+                bpos=i;
+        }
+        bool flag =false;
+        while(apos<=bpos){
+
+            if(apos==bpos){
+                flag = true;
+                break;
+            }
+            apos+=sa;
+            bpos-=sb;
+        }
+
+        if(flag)
+            cout<<"unsafe\n";
+
+        else
+            cout<<"safe\n";
+    }
 
 
     return 0;

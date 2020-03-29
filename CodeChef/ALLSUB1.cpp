@@ -57,58 +57,76 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 
 int32_t main(){
-    ios::sync_with_stdio(false);
-    int n, k;
-    cin>>n>>k;
-    vi a(n);
-    REP(i,0,n){
-        cin>>a[i];
-    }
-    int l=0, r=0;
-    int ans=abs(a[0]-k);
-    int cur=a[0];
-    while(r<n){
-        if(cur<k){
-            ans=min(ans,abs(cur-k));
-            r++;
-            if(r<n){
-                cur+=a[r];
+    // ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    vi a;
+    vi b;
+    vector<char>Begin;
+    vector<char>End;
+    string s,r;
+    while(t--){
+        s="";
+        r="";
+        cin>>s>>r;
+        a.clear();
+        b.clear();
+        a.resize(2,0);
+        b.resize(2,0);
+        for(int i=0;i<s.size();i++){
+            a[s[i]-'a']++;
+        }
+        for(int i=0;i<r.size();i++){
+            b[r[i]-'a']++;
+        }
+        Begin.clear();
+        End.clear();
+        int f=1;
+        for(int i=0;i<2;i++){
+            if(b[i]<a[i]){
+                f=0;
             }
+        }
+        if(f==0){
+            cout<<"Impossible\n";
         }
         else{
-            ans=min(ans,abs(cur-k));
-            l++;
-            if(l>r){
-                r=l;
-                if(r<n)
-                    cur=a[l];
+            for(int i=0;i<2;i++){
+                b[i]-=a[i];
             }
-            else{
-                cur-=a[l-1];
+            char First=s[0];
+            for(int i=0;i<2;i++){
+                char cur='a'+i;
+                if(b[i]>0){
+                    if(cur<=First){
+                        for(int j=0;j<b[i];j++){
+                            Begin.PB(cur);
+                        }
+                    }
+                    else{
+                        for(int j=0;j<b[i];j++){
+                            End.PB(cur);
+                        }
+                    }
+                }
             }
+            for(int i=0;i<Begin.size();i++){
+                cout<<Begin[i];
+            }
+            // cout<<s;
+            for(int i=0;i<s.size();i++){
+                cout<<s[i];
+            }
+            for(int i=0;i<End.size();i++){
+                cout<<End[i];
+            }
+            cout<<"\n";
         }
+
+
     }
-    ans=min(ans,abs(cur-k));
-    if(true){
-        ans=min(ans,k);
-    }
-    cout<<ans<<"\n";
-    // vi par(n);
-    // par[0]=a[0];
-    // for(int i=1;i<n;i++){
-    //     par[i]=a[i]+par[i-1];
-    // }
-    // for(int i=0;i<n;i++){
-    //     int tar;
-    //     if(i==0){
-    //         tar=k;
-    //     }
-    //     else{
-    //         tar=k+par[i-1];
-    //     }
-        
-    // }
-    
+
+
 
     return 0;
 }

@@ -58,7 +58,53 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int k;
+    cin>>k;
+    while(k--){
+        int n;
+        cin>>n;
+        string s, t;
+        cin>>s>>t;
+        if(s==t){
+            cout<<"Yes\n";
+            continue;
+        }
+        else{
+            int ct=0;
+            char ff,ss;
+            for(int i=0;i<s.size();i++){
+                if(s[i]!=t[i]){
+                    ct++;
+                    ff=s[i];
+                    ss=t[i];
+                }
+            }
+            if(ct==2){
+                int f=0;
+                for(int i=0;i<s.size();i++){
+                    if(s[i]!=t[i]){
+                        if(s[i]==ff && t[i]==ss){
+                            f=1;
+                            break;
+                        }
+                        else{
+                            f=0;
+                            break;
+                        }
+                    }
+                }
+                if(f==1){
+                    cout<<"Yes\n";
+                }
+                else{
+                    cout<<"No\n";
+            }
+        }
+            else{
+                cout<<"No\n";
+            }
+        }
+    }    
 
     return 0;
 }

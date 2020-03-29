@@ -58,7 +58,39 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    vi a;
+    while(t--){
+        int n;
+        cin>>n;
+        string s;
+        cin>>s;
+        a.clear();
+        a.resize(n);
+        int ans=-1;
+        REP(i,0,n){
+            if(s[i]=='A'){
+                a[i]=0;
+            }
+            else{
+                if(i==0){
+                    a[i]=0;
+                }
+                else{
+                    if(s[i-1]=='A'){
+                        a[i]=a[i-1]+1;
+                        s[i]='A';
+                    }
+                    else{
+                        a[i]=0;
+                    }
+                }
+            }
+            ans=max(ans,a[i]);
+        }
+        cout<<ans<<"\n";
+    }
 
     return 0;
 }

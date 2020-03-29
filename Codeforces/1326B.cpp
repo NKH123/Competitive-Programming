@@ -58,7 +58,23 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    vi b(n);
+    REP(i,0,n){
+        cin>>b[i];
+    }
+    vi a(n);
+    a[0]=b[0];
+    int maxi=a[0];
+    REP(i,1,n){
+        a[i]=b[i]+maxi;
+        maxi=max(maxi,a[i]);
+    }
+    REP(i,0,n){
+        cout<<a[i]<<" ";
+    }
+    cout<<"\n";
 
     return 0;
 }

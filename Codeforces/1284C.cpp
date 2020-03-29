@@ -12,7 +12,7 @@ typedef vector<long long> vl;
 typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
 #define sz(x) (int)(x.size())
-#define mod 1000000007
+int mod;
 #define endl "\n"
 template < typename F, typename S >
 ostream& operator << ( ostream& os, const pair< F, S > & p ) {
@@ -58,7 +58,33 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
-
+    int n, m;
+    cin>>n;
+    vi a(n);
+    REP(i,0,n){
+        a[i]=i+1;
+    }
+    int ans=0;
+    deb(a);
+    do{
+        for(int i=1;i<=n;i++){
+            for(int j=0;j<=(n-i);j++){
+                deb(j);
+                int maxi=-1, mini=1e18;
+                for(int k=j;k<(j+i);k++){
+                    maxi=max(maxi,a[k]);
+                    mini=min(mini,a[k]);
+                }
+                deb(i);
+                deb(j);
+                deb(maxi);
+                deb(mini);
+                if( (maxi-mini)==(i-1)){
+                    ans++;
+                }
+            }
+        }
+    }while(next_permutation(a.begin(),a.end()));
+    deb(ans);
     return 0;
 }

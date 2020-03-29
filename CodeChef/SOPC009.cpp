@@ -58,7 +58,44 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    vector<string>a;
+    multiset<string>M;
+    set<string>S;
+    while(t--){
+        int n, d;
+        cin>>n>>d;
+        a.clear();
+        a.resize(n);
+        REP(i,0,n){
+            cin>>a[i];
+        }
+        S.clear();
+        M.clear();
+        for(int i=0;i<d;i++){
+            S.insert(a[i]);
+            M.insert(a[i]);
+        }
+        int ans=S.size();
+        int l=0, r=d-1;
+        while(r<n){
+            l++;
+            M.erase(M.find(a[l-1]));
+            if(M.find(a[l-1])==M.end()){
+                S.erase(a[l-1]);
+            }
+            r++;
+            if(r==n){
+                break;
+            }
+            M.insert(a[r]);
+            S.insert(a[r]);
+            ans=max((int)S.size(),ans);
+        }
+        cout<<ans<<"\n";
 
+    }
 
     return 0;
 }

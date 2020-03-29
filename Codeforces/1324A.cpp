@@ -58,7 +58,40 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--){
+    	int n;
+    	cin>>n;
+    	vi a(n);
+    	a.clear();
+    	a.resize(n);
+    	set<int>S;
+    	S.clear();
+    	REP(i,0,n){
+    		cin>>a[i];
+    		S.insert(a[i]);
+    	}
+    	if(S.size()>2){
+    		cout<<"NO\n";
+    	}
+    	else if(S.size()==1){
+    		cout<<"YES\n";
+    	}
+    	else{
+    		auto pt=S.begin();
+    		int A=*S.begin();
+    		pt++;
+    		int B=*pt;
+    		if(abs(A-B)%2==0){
+    			cout<<"YES\n";
+    		}
+    		else{
+    			cout<<"NO\n";
+    		}
 
+    	}
+    }
 
     return 0;
 }

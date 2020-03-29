@@ -58,7 +58,52 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, m, k;
+    cin>>n>>m>>k;
+    int maxd=1;
+    int maxr=1;
+    for(int i=0;i<k;i++){
+        int x, y;
+        cin>>x>>y;
+        maxd=max(maxd,x);
+        maxr=max(maxr,y);
+    }
+    for(int i=0;i<k;i++){
+        int x, y;
+        cin>>x>>y;
+        // maxd=max(maxd,x);
+        // maxr=max(maxr,y);
+    }
+    vector<char>ans;
+    for(int i=0;i<maxd-1;i++){
+        ans.PB('U');
+    }
+    for(int i=0;i<maxr-1;i++){
+        ans.PB('L');
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m-1;j++){
+            // if(i==0 && j==m-1){
+            //     continue;
+            // }
+            if(i%2==0){
+                ans.PB('R');
+            }
+            else{
+                ans.PB('L');
+            }
+        }
+        if(i!=(n-1)){
+            ans.PB('D');
+        }
+    }
+    cout<<ans.size()<<"\n";
+    REP(i,0,ans.size()){
+        cout<<ans[i];
+    }
+    cout<<"\n";
 
+    
 
     return 0;
 }

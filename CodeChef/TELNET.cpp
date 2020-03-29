@@ -54,11 +54,52 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-
-
+vector<vector<int> >a;
+vector<vector<pair<int, pair<int, int > > > >dp;
+set<int>pos;
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
 
+    while(t--){
+        int n, k;
+        cin>>n>>k;
+        a.clear();
+        dp.clear();
+        a.resize(n,vector<int>(n,0));
+        dp.resize(n*n);
+        pos.clear();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                cin>>a[i][j];
+                if(a[i][j]==1){
+                    dp[0].PB({0,{i,j}});
+                }
+                else{
+                    dp[a[i][j]-1].PB({1e18,{i,j}});
+                }
+            }
+        }
+        int ans=1e18;
+        for(int K=1;K<k;K++){
+            for(int i=0;i<dp[K].size();i++){
+                for(int j=0;j<dp[K-1].size();j++){
+
+                    dp[K][i].F=min(dp[K][i].F,abs(dp[K][i].S.F-dp[K-1][j].S.F)+abs(dp[K][i].S.S-dp[K-1][j].S.S)+dp[K-1][j].F);
+                    if(K==(k-1)){
+                        ans=min(ans,dp[K][i].F);
+                    }
+                }
+
+            }
+        }
+        if(k==1){
+            ans=0;
+        }
+        cout<<ans<<"\n";
+
+    }
 
     return 0;
 }

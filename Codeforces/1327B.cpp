@@ -54,11 +54,57 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-
-
+vector<vector<int> >dt;
+vector<int>md,mp;
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        dt.clear();
+        dt.resize(n);
+        md.clear();
+        mp.clear();
+        mp.resize(n);
+        md.resize(n);
+        REP(i,0,n){
+            int k;
+            cin>>k;
+            dt[i].resize(k);
+            REP(j,0,k){
+                cin>>dt[i][j];
+                if(md[i]==0 && mp[dt[i][j]-1]==0){
+                    md[i]=dt[i][j];
+                    mp[dt[i][j]-1]=i+1;
+                }
+            }
 
+
+        }
+        int f=0, f1=0;
+            int dd, pp;
+            for(int i=0;i<n;i++){
+                if(md[i]==0){
+                    f++;
+                    dd=i+1;
+                }
+                if(mp[i]==0){
+                    f1++;
+                    pp=i+1;
+                }
+            }
+            if(f>0 && f1>0){
+                cout<<"IMPROVE\n";
+                cout<<dd<<" "<<pp<<"\n";
+            }
+            else{
+                cout<<"OPTIMAL\n";
+            
+            }
+
+    }
 
     return 0;
 }

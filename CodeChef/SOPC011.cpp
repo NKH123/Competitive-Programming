@@ -53,12 +53,61 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-
-
+vector<vector<int> >dp;
+vi a;
+vector<int>pp;
+int lan=0;
+void cons(int I){
+    if(I<0){
+        return;
+    }
+    if(dp[I][0]>=dp[I][1]){
+        lan++;
+        cons(I-1);
+    }   
+    else{
+        lan++;
+        pp.PB(I);
+        cons(I-2);
+    }
+}
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
 
+    while(t--){
+        a.clear();
+        dp.clear();
+        int n;
+        cin>>n;
+        a.resize(n);
+        REP(i,0,n){
+            cin>>a[i];
+        }
+        dp.resize(n,vector<int>(2,-1));
+        dp[0][0]=a[0];
+        dp[0][1]=a[0];
+        for(int i=1;i<n;i++){
+            dp[i][0]=a[i]+max(dp[i-1][0],dp[i-1][1]);
+            if(i>1)
+                dp[i][1]=a[i]*a[i-1]+max(dp[i-2][0],dp[i-2][1]);
+            else{
+                dp[i][1]=a[i]*a[i-1];
+            }
+        }
+        cout<<max(dp[n-1][0],dp[n-1][1])<<" ";
+        lan=0;
+        pp.clear();
+        cons(n-1);
+        cout<<lan<<"\n";
+        // deb(pp);
+        cout<<pp.size()<<"\n";
+        for(int i=(int)pp.size()-1;i>=0;i--){
+            cout<<pp[i]<<" "<<(pp[i]+1)<<"\n";
+        }
+    }
 
     return 0;
 }

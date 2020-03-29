@@ -13,7 +13,7 @@ typedef pair<int,int> pi;
 #define trace(x) cout<<#x<<"="<<x<<"\n";
 #define sz(x) (int)(x.size())
 #define mod 1000000007
-#define endl "\n"
+
 template < typename F, typename S >
 ostream& operator << ( ostream& os, const pair< F, S > & p ) {
     return os << "(" << p.first << ", " << p.second << ")";
@@ -58,6 +58,34 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--){
+        string s;
+        cin>>s;
+        string r;
+        cin>>r;
+        vi a(2,0);
+        vi b(2,0);
+        for(int i=0;i<n;i++){
+            if(s[i]=='a'){
+                a[0]++;
+            }
+            else{
+                a[1]++;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(r[i]=='a'){
+                b[0]++;
+            }
+            else{
+                b[1]++;
+            }
+        }
+
+    }
+
 
 
     return 0;

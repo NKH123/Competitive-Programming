@@ -58,7 +58,60 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, k;
+    cin>>n>>k;
+    vector<string>s;
+    multiset<string>m;
+    REP(i,0,n){
+        string T;
+        cin>>T;
+        s.PB(T);
+        m.insert(T);
+    }
+    int ans=0;
+    int A='S'+'E'+'T';
+    int f;
+    for(int i=0;i<n;i++){
+        m.erase(m.find(s[i]));
+        for(int j=i+1;j<n;j++){
+           f=1;
+           m.erase(m.find(s[j]));
+           if(s[i]==s[j]){
+            if(m.find(s[i])!=m.end()){
+                ans++;
+            }
+        }
+        else{
+            string T;
+            for(int K=0;K<k;K++){
+                
+                if(s[i][K]==s[j][K]){
+                    // f=0;
+                    // break;
+                    T+=s[i][K];
+                }
+                else{
+                    T+=char(A-(s[i][K]+s[j][K]));
+                }
+            }
+            if(f==1){
+                // deb(i);
+                // deb(j);
+                // deb(s[i]);
+                // deb(s[j]);
+                // deb(T);
+                if(m.find(T)!=m.end()){
+                    ans++;
+                }
+            }
 
-
-    return 0;
+        }
+    }
+    m.clear();
+    for(int j=i+1;j<n;j++){
+        m.insert(s[j]);
+    }
+}
+cout<<ans<<"\n";
+return 0;
 }

@@ -6,23 +6,23 @@ int rand(int a, int b) {
 }
 
 int main(int argc, char* argv[]) {
-    srand(time(NULL));
-    int t=rand(1,10);
-    printf("%d\n", t);
-    while(t--){
-        int n=rand(1,100);
-        printf("%d\n", n);
-        set<int> used;
-        for(int i = 0; i < n; ++i) {
-            int x;
-        /*do */{
-            x = rand(1, 10000);
-        } /*while(used.count(x));*/
-            printf("%d ", x);
-        /*used.insert(x);*/
-        }
-        cout<<"\n";
-
+    srand(time(NULL)); // atoi(s) converts an array of chars to int
+    int n = rand(2, 10);
+    printf("%d\n", n);
+    set<int> used;
+    for(int i = 0; i < n; ++i) {
+        int x;
+        x = rand(1, 10);
+        // do {
+            
+        // } while(used.count(x));
+        printf("%d ", x);
+        // used.insert(x);
     }
+    int p=rand(0,n);
+    if(p==n){
+        p--;
+    }
+    printf("\n%d\n",p);
     puts("");
 }

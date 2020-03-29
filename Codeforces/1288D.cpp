@@ -58,7 +58,16 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n, m;
+    cin>>n>>m;
+    vi a[n];
+    REP(i,0,n){
+        a[i].resize(m);
+        REP(j,0,m){
+            cin>>a[i][j];
+        }
+    }
+    
 
     return 0;
 }

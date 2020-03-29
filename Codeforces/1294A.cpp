@@ -58,7 +58,27 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    while(t--){
+    	int a, b, c, n;
+    	cin>>a>>b>>c>>n;
+    	// if((n+a+b+c)%3==0){
+    	// 	cout<<"YES\n";
+    	// }
+    	// else{
+    	// 	cout<<"NO\n";
+    	// }
+    	int maxi=max({a,b,c});
+    	int rem=3*maxi-a-b-c;
+    	n=n-rem;
+    	if(n>=0 && n%3==0){
+    		cout<<"YES\n";
+    	}
+    	else{
+    		cout<<"NO\n";
+    	}
+    }
 
     return 0;
 }

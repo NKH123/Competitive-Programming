@@ -58,7 +58,36 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
-
+    int n, m;
+    cin>>n>>m;
+    int N=n;
+    int M=m;
+    n=min(N,M);
+    m=max(N,M);
+    vector<vector<int> >a(n,vector<int>(m,0));
+    if(n==1 && m==1){
+        cout<<0<<"\n";
+        return 0;
+    }
+    REP(i,0,n){
+        REP(j,0,m){
+            a[i][j]=(n+1+j)*(i+1);
+        }
+    }
+    if(N==n && M==m)
+    REP(i,0,n){
+        REP(j,0,m){
+            cout<<a[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    else{
+       REP(i,0,m){
+        REP(j,0,n){
+            cout<<a[j][i]<<" ";
+        }
+        cout<<"\n";
+    } 
+    }
     return 0;
 }

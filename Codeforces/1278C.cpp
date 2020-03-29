@@ -58,7 +58,47 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    vi a;
+    while(t--){
+        int n;
+        cin>>n;
+        // vi a(2*n);
+        a.resize(2*n);
+        int A=0, B=0;
+        REP(i,0,2*n){
+            cin>>a[i];
+            if(a[i]==1){
+                A++;
+            }
+            else{
+                B++;
+            }
+        }
+        int l=n-1, r=n;
+        int ans=0;
+        while(A!=B){
+            int f=0;
+            if(A>B){
+                if(l>=0)
+                if(a[l]==1){
+                    l--;
+                    A--;
+                    f=1;
+                }
+                if(r<(2*n-1)){
+                    if(a[r]==1){
+                        r++;
+                        A--;
+                    }
+                }
+            }
+            if(B>A){
 
+            }
+        }
+    }
 
     return 0;
 }

@@ -58,7 +58,20 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    while(t--){
+    	int a, b;
+    	cin>>a>>b;
+    	int q=a/b;
+    	if(a%b==0){
+    		cout<<0<<"\n";
+    	}
+    	else{
+    		int ans=(q+1)*(b)-a;
+    		cout<<ans<<"\n";
+    	}
+    }
 
     return 0;
 }

@@ -53,12 +53,29 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-
-
-
+int get2(int a, int b, int c, int d, int e, int f){
+	int B=min({b,c,d});
+	
+	b-=B;
+	c-=B;
+	d-=B;
+	int A=min(a,d);
+	return (A*e+B*f);
+}
+int get1(int a, int b, int c, int d, int e, int f){
+	int A=min(a,d);
+	a-=A;
+	d-=A;
+	int B=min({b,c,d});
+	return (A*e+B*f);
+}
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int a, b, c, d, e, f;
+    cin>>a>>b>>c>>d>>e>>f;
+    int ans=get1(a,b, c, d, e, f);
+    ans=max(ans,get2(a,b, c, d, e, f));
+    cout<<ans<<"\n";
 
     return 0;
 }

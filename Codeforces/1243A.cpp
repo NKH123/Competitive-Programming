@@ -55,10 +55,33 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-
+bool comp(int A, int B){
+    return A>B;
+}
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int k;
+    cin>>k;
+    vi a;
+    while(k--){
+        int n;
+        cin>>n;
+        a.resize(n);
+        REP(i,0,n){
+            cin>>a[i];
+        }
+        sort(a.begin(),a.end(),comp);
+        int ans=1;
+        // int I=n;
+        for(int i=0;i<n;i++){
+            ans=max(ans,min(a[i],i+1));
+        }
+        cout<<ans<<"\n";
+        
+        // for(int i=0;i<n;i++){
+        //     ans=max(ans,min(a[I-i-1],)
+        // }
+    }
 
     return 0;
 }

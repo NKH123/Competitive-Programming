@@ -54,11 +54,55 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
+int n;
+vi p,c;
+vector<int>adj[2500];
+vector<int>dfs(int x){
+    // deb(x);
+    vector<int>ret;
+    for(auto g:adj[x]){
+        vector<int>x=dfs(g);
+        for(auto h:x){
+            ret.PB(h);
+        }
 
-
+    }
+    if(c[x]>ret.size()){
+        cout<<"NO\n";
+        // return 0;
+        // goto here;
+        exit(0);
+    }
+    ret.insert(ret.begin()+c[x],x);
+    return ret;
+}
 int32_t main(){
     ios::sync_with_stdio(false);
-
-
+    cin>>n;
+    p.resize(n);
+    c.resize(n);
+    int root;
+    REP(i,0,n){
+        cin>>p[i]>>c[i];
+        if(p[i]!=0){
+            adj[p[i]-1].PB(i);
+        }
+        else{
+            root=i;
+        }
+    }
+    // deb("here");
+    vector<int>order=dfs(root);
+    // deb(order);
+    vector<int>ans(n);
+    for(int i=0;i<n;i++){
+        ans[order[i]]=i+1;
+    }
+    cout<<"YES\n";
+    REP(i,0,n){
+        cout<<ans[i]<<" ";
+    }
+    cout<<"\n";
+    // label here:
     return 0;
 }

@@ -58,7 +58,42 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--){
+        int n, k;
+        cin>>n>>k;
+        int l=1, r=2*(1e9);
+        int ans=1;
+        while(l<=r){
+            int mid=(l+r)/2;
+            int comp=mid*(mid+1)/2;
+            if(comp<k){
 
+                l=mid+1;
+            }
+            else{
+                ans=mid;
+                r=mid-1;
+            }
+        }
+        int lzero=(ans)*(ans+1)/2-k;
+        int rzero=ans-1-lzero;
+        int llzero=n-lzero-2-rzero;
+        REP(i,0,llzero){
+            cout<<"a";
+        }
+        cout<<"b";
+        REP(i,0,lzero){
+            cout<<"a";
+        }
+        cout<<"b";
+        REP(i,0,rzero){
+            cout<<"a";
+        }
+        cout<<"\n";
+
+    }
 
     return 0;
 }

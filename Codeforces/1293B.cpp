@@ -59,6 +59,12 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 int32_t main(){
     ios::sync_with_stdio(false);
 
-
+    double ans=0;
+    int n;
+    cin>>n;
+    REP(i,0,n){
+        ans+=(1.0/(i+1));
+    }
+    printf("%.6f\n",ans);
     return 0;
 }

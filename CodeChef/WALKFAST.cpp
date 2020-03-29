@@ -54,11 +54,39 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-
+vi x;
+int get(int from, int to, int ti){
+    int dis=abs(x[from]-x[to]);
+    int T=dis*ti;
+    return T;
+}
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    
+    while(t--){
+        int n, a, b, c, d, p, q, y;
+        cin>>n>>a>>b>>c>>d>>p>>q>>y;
+        x.clear();
+        x.resize(n);
+        REP(i,0,n){
+            cin>>x[i];
+        }
+        a--;
+        b--;
+        c--;
+        d--;
+        int ans=get(a,b,p);
+        if(get(a,c,p)<=y){              
+            ans=min(ans,y+get(c,d,q)+get(d,b,p));
+        }
+        cout<<ans<<"\n";
 
+
+        
+    }
 
     return 0;
 }

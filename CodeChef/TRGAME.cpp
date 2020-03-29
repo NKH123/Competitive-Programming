@@ -56,9 +56,70 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 
 
-int32_t main(){
+#include<bits/stdc++.h>
+using namespace std;
+
+#define int long long
+
+int32_t main()
+{
     ios::sync_with_stdio(false);
-
-
+    // cin.tie(NULL);
+    // Your code here
+    int t;
+    cin>>t;
+    while(t--) {
+        int n;
+        cin>>n;
+        vector<vector<int> > adj(n);
+        for(int i=0; i<n-1; i++) {
+            int u, v;
+            cin>>u>>v;
+            u--, v--;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        vector<int> ans(n);
+        vector<int> siz(n);
+        function<void(int, int) > dfs = [&](int u, int pr)
+        {
+            siz[u] = 1;
+            vector<int> a;
+            for(int v : adj[u]) {
+                if(v==pr) continue;
+                dfs(v, u);
+                siz[u] += siz[v];
+                a.push_back(siz[v]);
+            }
+            a.push_back(n-siz[u]);
+            sort(a.begin(), a.end());
+            int mx = a.back();
+            // if(n-2*mx < 0) {
+            //     ans[u] = 0;
+            // }
+            // else {
+            //     if(n&1) {
+            //         ans[u] = 0;
+            //     }
+            //     else {
+            //         ans[u] = 1;
+            //     }
+            // }
+            if(mx>(n-mx)){
+                ans[u]=0;
+            }
+            else{
+                ans[u]=1;
+            }
+        };
+        dfs(0, -1);
+        for(int i=0; i<n; i++) {
+            if(n%2==1){
+                ans[i]=0;
+            }
+            cout<<ans[i];
+        }
+        cout<<"\n";
+    }
     return 0;
 }

@@ -58,7 +58,40 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    vi a;
+    while(t--){
+        int n;
+        cin>>n;
+        int N=n;
+        a.clear();
+        for(int i=2;;i++){
+            // if()
+            if(i>n){
+                break;
+            }
+            if((n%i==0)){
+                a.PB(i);
+                n=n/i;
+            }
+            if(a.size()==3){
+                break;
+            }
 
+        }
+        if(a.size()==3){
+            cout<<"YES\n";
+            a[2]=(N)/(a[0]*a[1]);
+            REP(i,0,a.size()){
+                cout<<a[i]<<" ";
+            }
+            cout<<"\n";
+        }
+        else{
+            cout<<"NO\n";
+        }
+    }
 
     return 0;
 }

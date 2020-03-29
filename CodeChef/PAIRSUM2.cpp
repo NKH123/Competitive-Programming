@@ -58,57 +58,76 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int n, k;
-    cin>>n>>k;
-    vi a(n);
-    REP(i,0,n){
-        cin>>a[i];
-    }
-    int l=0, r=0;
-    int ans=abs(a[0]-k);
-    int cur=a[0];
-    while(r<n){
-        if(cur<k){
-            ans=min(ans,abs(cur-k));
-            r++;
-            if(r<n){
-                cur+=a[r];
-            }
-        }
-        else{
-            ans=min(ans,abs(cur-k));
-            l++;
-            if(l>r){
-                r=l;
-                if(r<n)
-                    cur=a[l];
+    int t;
+    cin>>t;
+    vi b;
+    vi pref;
+    vi B;
+    while(t--){
+        int n, Q;
+        cin>>n>>Q;
+        b.clear();
+        B.clear();
+        pref.clear();
+        b.resize(n-1);
+        B.resize(n-1);
+        pref.resize(n-1);
+        REP(i,0,n-1){
+            cin>>b[i];
+            if(i%2==0){
+                B[i]=b[i];
             }
             else{
-                cur-=a[l-1];
+                B[i]=-b[i];
+            }
+        }
+        // pref[0]=b[0];
+        // for(int i=1)
+        for(int i=0;i<(n-1);i++){
+            if(i==0){
+                pref[i]=B[i];
+            }
+            else{
+                pref[i]=B[i]+pref[i-1];
+            }
+        }
+        while(Q--){
+            int p, q;
+            cin>>p>>q;
+
+            int diff=abs(p-q);
+            if(diff%2==0){
+                cout<<"UNKNOWN\n";
+            }
+            else{
+                if(diff==1){
+                    int ind=min(p,q);
+                    ind--;
+                    cout<<b[ind]<<"\n";
+                }
+                else{
+                    if(p>q){
+                        swap(p,q);
+                    }
+                    int start=p-1;
+                    int end=q-2;
+                    int ans=b[start]+b[end];
+                    //now subtract
+                    int sub=pref[end-1]-pref[start];
+                    if((start+1)%2==1){
+
+                    }
+                    else{
+                        sub=-sub;
+                    }
+                    ans+=sub;
+                    cout<<ans<<"\n";
+                }
             }
         }
     }
-    ans=min(ans,abs(cur-k));
-    if(true){
-        ans=min(ans,k);
-    }
-    cout<<ans<<"\n";
-    // vi par(n);
-    // par[0]=a[0];
-    // for(int i=1;i<n;i++){
-    //     par[i]=a[i]+par[i-1];
-    // }
-    // for(int i=0;i<n;i++){
-    //     int tar;
-    //     if(i==0){
-    //         tar=k;
-    //     }
-    //     else{
-    //         tar=k+par[i-1];
-    //     }
-        
-    // }
-    
+
+
 
     return 0;
 }

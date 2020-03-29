@@ -58,7 +58,40 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, k;
+    cin>>n>>k;
+    string s;
+    cin>>s;
+    set<char>S;
+    REP(i,0,k){
+        char A;
+        cin>>A;
+        S.insert(A);
+    }
+    int l=0, r=0;
+    int len=1;
+    int ans=0;
+    int f=0;
+    while(r<s.size()){
+        if(S.find(s[r])!=S.end()){
+            len++;
+            f=1;
+            r++;
+        }
+        else{
+            ans+=(len*(len-1))/2;
+            f=0;
+            len=1;
 
+            l=r+1;
+            r++;
+        }
+    }
+    if(f==1){
+         ans+=(len*(len-1))/2;
+    }
+
+    cout<<ans<<"\n";
 
     return 0;
 }

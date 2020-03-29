@@ -58,7 +58,14 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    string s;
+    cin>>s;
+    if(s[2]==s[3] && s[4]==s[5]){
+    	cout<<"Yes\n";
+    }
+    else{
+    	cout<<"No\n";
+    }
 
     return 0;
 }

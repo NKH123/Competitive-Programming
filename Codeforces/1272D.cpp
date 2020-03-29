@@ -55,10 +55,35 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-
+int dp[200005][2];
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    vi a(n);
+    REP(i,0,n){
+        cin>>a[i];
+    }
+    memset(dp,0,sizeof(dp));
+    dp[0][0]=1;
+    dp[0][1]=1;
+    int ans=1;
+    for(int i=1;i<n;i++){
+        dp[i][0]=1;
+        dp[i][1]=dp[i][0];
+        if(a[i]>a[i-1]){
+            dp[i][0]=1+dp[i-1][0];
+            dp[i][1]=1+dp[i-1][1];
+        }
+        
+        if(i>2){
+            if(a[i]>a[i-2])
+            dp[i][1]=max(dp[i][1],1+dp[i-2][0]);
+        }
+        ans=max({ans,dp[i][0],dp[i][1]});
+    }
+    // int ans=max(dp[n-1][0],dp[n-1][1]);
+    cout<<ans<<"\n";
 
     return 0;
 }

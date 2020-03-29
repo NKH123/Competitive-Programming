@@ -58,7 +58,25 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, m;
+    cin>>n>>m;
+    vi a(n);
+    vi b(n);
+    REP(i,0,n){
+        cin>>a[i];
+    }
+    REP(i,0,n){
+        cin>>b[i];
+    }
+    set<int>ans;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            
+        }
+    }
 
+    int A=*ans.begin();
+    cout<<A<<"\n";
 
     return 0;
 }

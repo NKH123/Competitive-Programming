@@ -58,6 +58,42 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    vi ans;
+    string S=s;
+    REP(i,0,n-1){
+        if(S[i]!='W'){
+            ans.PB(i+1);
+            S[i+1]=(S[i+1]=='W')?'B':'W';
+        }
+    }
+    if(S[n-1]=='W'){
+        cout<<ans.size()<<"\n";
+        REP(i,0,ans.size()){
+            cout<<ans[i]<<" ";
+        }
+        cout<<"\n";
+        return 0;
+    }
+    S=s;
+    REP(i,0,n-1){
+        if(S[i]!='B'){
+            ans.PB(i+1);
+            S[i+1]=(S[i+1]=='B')?'W':'B';
+        }
+    }
+    if(S[n-1]=='B'){
+        cout<<ans.size()<<"\n";
+        REP(i,0,ans.size()){
+            cout<<ans[i]<<" ";
+        }
+        cout<<"\n";
+        return 0;
+    }
+    cout<<"-1\n";
 
 
     return 0;

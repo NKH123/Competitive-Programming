@@ -58,7 +58,21 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    while(t--){
+        int n,a, b;
+        cin>>n>>a>>b;
+        int ans1, ans2;
+        ans2=a+b-1;
+        if(a+b<(n+1)){
+            ans1=1;
+        }
+        else{
+            ans1=2;
+        }
+        cout<<ans1<<" "<<ans2<<"\n";
+    }
 
     return 0;
 }

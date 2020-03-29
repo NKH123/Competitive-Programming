@@ -58,7 +58,31 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    vector<pair<double, double> >AB;
+    REP(i,0,n){
+        double A, B;
+        cin>>A>>B;
+        AB.PB({A,B});
+    }
+    vector<pair<double, double> >BB;
+    for(int i=0;i<n;i++){
+        if(i==(n-1)){
+            BB.PB({((AB[i].F+AB[0].F)/2.0),(AB[i].S+AB[0].S)/2.0});
+        }   
+        else{
+            BB.PB({((AB[i].F+AB[i+1].F)/2.0),(AB[i].S+AB[i+1].S)/2.0});
+        }
+    }
+    double ar=0;
+    REP(i,0,BB.size()){
+        int I=i;
+        int J=(i+1)%(BB.size());
+        ar+=(BB[I].F-BB[J].F)*(BB[I].S+BB[J].S)/2.0;
+    }
+    ar=abs(ar);
+    printf("%.10lf\n",ar);
 
     return 0;
 }

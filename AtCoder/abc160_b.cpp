@@ -58,6 +58,12 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int x;
+    cin>>x;
+    int ans=(1000)*(x/500);
+    x=x%500;
+    ans+=(5*(x/5));
+    cout<<ans<<"\n";    
 
 
     return 0;

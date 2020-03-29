@@ -58,7 +58,48 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    vi a;
+    set<int>S;
+    while(t--){
+    	int n, s, k;
+    	cin>>n>>s>>k;
+    	a.clear();
+    	a.resize(k);
+    	S.clear();
+    	// REP(i,1,n+1){
+    	// 	S.insert(i);
+    	// }
+    	REP(i,0,k){
+    		cin>>a[i];
+    		S.insert(a[i]);
+    	}
+    	int ans=1e18;
+    	// for(auto g:S){
+    	// 	ans=min(ans,abs(g-s));
+    	// }
+    	for(int i=s;i<=n;i++){
+    		if(S.find(i)!=S.end()){
 
+    		}
+    		else{
+    			ans=abs(i-s);
+    			break;
+    		}
+    	}
+    	for(int i=s;i>=1;i--){
+    		if(S.find(i)!=S.end()){
+
+    		}
+    		else{
+    			ans=min(ans,abs(i-s));
+    			break;
+    		}
+    	}
+    	cout<<ans<<"\n";
+
+    }
 
     return 0;
 }

@@ -58,7 +58,24 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    REP(i,0,n){
+        int x;
+        cin>>x;
+        
+        if(x<15){
+            cout<<"NO\n";
+            continue;
+        }
+        x=x%14;
+        if(x>=1 && x<=6){
+            cout<<"YES\n";
+        }
+        else{
+            cout<<"NO\n";
+        }
+    }
 
     return 0;
 }

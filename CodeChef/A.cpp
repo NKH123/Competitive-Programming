@@ -55,10 +55,51 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-
+int exam(vector<int> v) {
+    vector<int>par(v.size());
+    par.clear();
+    par[0]=v[0];
+    for(int i=1;i<v.size();i++){
+        par[i]=par[i-1]+v[i];
+    }
+    int n=par.size();
+    deb(par);
+    for(int i=0;i<par.size();i++){
+        int my=0, fr=0;
+        if(i==0){
+            my=0;
+            fr=par[n-1]-(n-par[n-1]);
+        }
+        else{
+            my=par[i-1]-(i-par[i-1]);
+            fr=par[n-1]-par[i-1]-(n-i+1-par[n-1]+par[i-1]);
+        }
+        // cout<<i<<"\n";
+        // cout<<my<<" "<<par<<"\n";
+        // cout<<"****\n";
+        deb(i);
+        deb(my);
+        deb(fr);
+        // printf("%d\n",i);
+        // printf("%d %d\n",my,par);
+        // printf("*****\n");
+        if(my>fr){
+            if(i!=0)
+            return i;
+        }
+    }
+    return n;
+}
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int n;
+    cin>>n;
+    vi v;
+    v.resize(n);
+    REP(i,0,n){
+        cin>>v[i];
+    }
+    deb(exam(v));
 
     return 0;
 }

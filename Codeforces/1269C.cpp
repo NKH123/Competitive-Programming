@@ -58,7 +58,43 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, k;
+    cin>>n>>k;
+    string x;
+    cin>>x;
+    string s;
+    // for()
+    int lmos=n-1;
+    for(int i=x.size()-1;i>=0;i--){
+        if(i-k<0){
+            break;
+        }
+        else{
+            if(x[i]>x[i-k]){
+                if(i>lmos){
+                    x[i]=x[i-k];
+                }
+                else{
+                    lmos=i-k;
+                    x[i-k]++;
+                    x[i]=x[i-k];
+                }
+            }
+            else if(x[i]<x[i-k]){
 
+                x[i]=x[i-k];
+
+            }
+        }
+    }
+    for(int i=0;;i++){
+        if(i+k==n){
+            break;
+        }
+        x[i+k]=x[i];
+    }
+    cout<<x.size()<<"\n";
+    cout<<x<<"\n";
 
     return 0;
 }

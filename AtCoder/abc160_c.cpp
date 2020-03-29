@@ -58,6 +58,21 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int k;
+    cin>>k;
+    int n;
+    cin>>n;
+    vi a(n);
+    int mini=0;
+    REP(i,0,n){
+        cin>>a[i];
+        if(i!=0){
+            mini=max(mini,a[i]-a[i-1]);
+        }
+    }
+    mini=max(mini,a[0]+k-a[n-1]);
+    int ans=k-mini;
+    cout<<ans<<"\n";
 
 
     return 0;

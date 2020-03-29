@@ -55,10 +55,35 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 #define deb(x) cerr << #x << " = " << x << endl;
 
 
-
+vector<int>a(1e7+5);
 int32_t main(){
     ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    set<int>S;
+    int sum=0;
 
+    for(int i=0;i<=1e7+1;i++){
+        sum+=(2*i+1);
+        a[i]=sum;
+        // S.insert(sum); 
+    }
+    while(t--){
+        int n, k;
+        cin>>n>>k;
+        if(n%2 != k%2){
+            cout<<"NO\n";
+        }
+        else{
+            int mini=a[k-1];
+            if(mini>n){
+                cout<<"NO\n";
+            }
+            else{
+                cout<<"YES\n";
+            }
+        }
+    }
 
     return 0;
 }

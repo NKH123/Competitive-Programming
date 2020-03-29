@@ -58,7 +58,29 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
+    int n, m;
+    cin>>n>>m;
+    vi x(n),u(n), y(m), v(m);
+    REP(i,0,n){
+        cin>>x[i]>>u[i];
+    }
+    map<int, int>M;
+    REP(i,0,n){
+        // cin>>u[i];
+        M[u[i]*x[i]]++;
+    }
 
-
+   REP(i,0,m){
+        cin>>y[i]>>v[i];
+    }
+    int ans=0;
+    REP(i,0,m){
+        // cin>>v[i];
+        if(M[v[i]*y[i]]>0){
+            M[v[i]*y[i]]--;
+            ans++;
+        }
+    }
+    cout<<ans<<"\n";
     return 0;
 }

@@ -54,11 +54,43 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
+bool check(int N){
+    int ans=0;
+    while(N>=0){
+        int sum=1;
+        int temp=0;
+        int tt=0;
+        while(sum*3<=N){
+            sum=sum*3;
+            temp++;
+        }
+        N-=sum;
+        // deb(temp);
+        ans=ans^temp;
+    }   
+    return ans==0;
 
+}
 
 int32_t main(){
     ios::sync_with_stdio(false);
-
+    int t;
+    cin>>t;
+    set<int>S;
+    for(int i=1;i<=100;i++){
+        if(check(i)){
+            S.insert(i);
+        }
+    }
+    // check(7);
+    // deb("here");
+    // deb(S);
+    while(t--){
+        int x;
+        cin>>x;
+        int ans=*(S.lower_bound(x));
+        cout<<ans<<"\n";
+    }
 
     return 0;
 }
