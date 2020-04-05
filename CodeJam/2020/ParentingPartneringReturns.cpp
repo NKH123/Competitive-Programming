@@ -60,36 +60,58 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
-    vi a;
-    set<int>S;
+    int T=t;
+    vector<pair<pair<int,int>,int> >se;
+    vi ct;
     while(t--){
-        int n, x;
-        cin>>n>>x;
-        a.clear();
-        a.resize(n);
-        S.clear();
-        REP(i,0,n){
-            cin>>a[i];
-            S.insert(a[i]);
+        int f=1;
+        int n;
+        cin>>n;
+        ct.clear();
+        ct.resize(24*60+1);
+        se.resize(n);
+        for(int i=0;i<n;i++){
+            cin>>se[i].first.first>>se[i].first.second;
+            se[i].second=i;
+            for(int j=se[i].first.first;j<se[i].first.second;j++){
+                ct[j]++;
+            }
         }
-        int ans=1;
-            for(int i=1;i<=300;i++){
-                if(S.find(i)==S.end()){
-                    if(x>0){
-                        S.insert(i);
-                        x--;
-                    }
+        for(int i=0;i<(24*60);i++){
+            if(ct[i]>2){
+                f=0;
+            }
+        }
+        if(f==0){
+            cout<<"Case #"<<T-t<<": "<<"IMPOSSIBLE\n";
+        }
+        else{
+            int C=0;
+            int J=0;
+            sort(se.begin(),se.end());
+            vi ans(n);
+            for(int i=0;i<n;i++){
+                if(C<=se[i].first.first){
+                    C=se[i].first.second;
+                    ans[se[i].second]=0;
+                }
+                else if(J<=se[i].first.first){
+                    J=se[i].first.second;
+                    ans[se[i].second]=1;
                 }
             }
-            for(int i=1;i<=300;i++){
-                if(S.find(i)!=S.end()){
-                    ans=i;
+            cout<<"Case #"<<T-t<<": ";
+            for(int i=0;i<n;i++){
+                if(ans[i]==0){
+                    cout<<"C";
                 }
                 else{
-                    break;
+                    cout<<"J";
                 }
             }
-            cout<<ans<<"\n";
+            cout<<"\n";
+        }
+
     }
 
     return 0;

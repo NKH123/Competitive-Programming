@@ -60,36 +60,40 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
-    vi a;
-    set<int>S;
+    int T=t;
     while(t--){
-        int n, x;
-        cin>>n>>x;
-        a.clear();
-        a.resize(n);
-        S.clear();
-        REP(i,0,n){
-            cin>>a[i];
-            S.insert(a[i]);
+        string s;
+        cin>>s;
+        int b=s[0]-'0';
+        cout<<"Case #"<<T-t<<": ";
+        for(int i=0;i<b;i++){
+            cout<<"(";
         }
-        int ans=1;
-            for(int i=1;i<=300;i++){
-                if(S.find(i)==S.end()){
-                    if(x>0){
-                        S.insert(i);
-                        x--;
-                    }
+        cout<<s[0];
+        for(int i=1;i<s.size();i++){
+            if(s[i]>s[i-1]){
+                for(int j=0;j<(s[i]-s[i-1]);j++){
+                    cout<<"(";
                 }
+                cout<<s[i];
+                b=s[i]-'0';
             }
-            for(int i=1;i<=300;i++){
-                if(S.find(i)!=S.end()){
-                    ans=i;
+            else if(s[i]<s[i-1]){
+                for(int j=0;j<(s[i-1]-s[i]);j++){
+                    cout<<")";
                 }
-                else{
-                    break;
-                }
+                cout<<s[i];
+                b=s[i]-'0';
             }
-            cout<<ans<<"\n";
+            else{
+                cout<<s[i];
+            }
+
+        }
+        for(int i=0;i<b;i++){
+            cout<<")";
+        }
+        cout<<"\n";
     }
 
     return 0;

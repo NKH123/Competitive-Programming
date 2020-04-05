@@ -91,7 +91,6 @@ int32_t main(){
     int l=0;
     b.PB(1);
     for(int i=0;i<a.size();i++){
-        // if(a[l]==b[i])
         if(a[i]==b[b.size()-1]){
 
         }

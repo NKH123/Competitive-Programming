@@ -60,36 +60,45 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
-    vi a;
-    set<int>S;
-    while(t--){
-        int n, x;
-        cin>>n>>x;
+    vector<vector<int> >a;
+    vector<set<int> >row;
+    vector<set<int> >col;
+    for(int T=1;T<=t;T++){
+        int n;
+        cin>>n;
         a.clear();
         a.resize(n);
-        S.clear();
         REP(i,0,n){
-            cin>>a[i];
-            S.insert(a[i]);
+            a[i].resize(n);
         }
-        int ans=1;
-            for(int i=1;i<=300;i++){
-                if(S.find(i)==S.end()){
-                    if(x>0){
-                        S.insert(i);
-                        x--;
-                    }
+        int trace=0;
+        row.clear();
+        col.clear();
+        row.resize(n);
+        col.resize(n);
+        REP(i,0,n){
+            REP(j,0,n){
+                cin>>a[i][j];
+                if(i==j){
+                    trace+=a[i][j];
                 }
+                row[i].insert(a[i][j]);
+                col[j].insert(a[i][j]);
             }
-            for(int i=1;i<=300;i++){
-                if(S.find(i)!=S.end()){
-                    ans=i;
-                }
-                else{
-                    break;
-                }
+        }
+        int R=0;
+        int C=0;
+        for(int i=0;i<n;i++){
+            if(row[i].size()<n){
+                R++;
             }
-            cout<<ans<<"\n";
+            if(col[i].size()<n){
+                C++;
+            }
+        }
+        cout<<"Case #"<<T<<": "<<trace<<" "<<R<<" "<<C<<" "<<"\n";
+
+
     }
 
     return 0;

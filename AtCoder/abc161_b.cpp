@@ -70,7 +70,6 @@ int32_t main(){
     int ct=0;
     REP(i,0,n){
         if(a[i]<tot){
-            // tot++;
             ct++;
         }
     }

@@ -102,7 +102,6 @@ int32_t main(){
         }
         Sum=0, Xor=0, Prod=1, Orr=0, And=(1LL<<62)-1;
         for(int i=n-1;i>=0;i--){
-            // cin>>a[i];
             Sum+=a[i];
             Xor^=a[i];
             Prod=(Prod*a[i])%mod;
@@ -112,9 +111,7 @@ int32_t main(){
             if(Sum==sum[n-i] && Xor==xorr[n-i] && Prod==prod[n-i] &&Orr==orr[n-i] && And==andd[n-i] ){
                 if(S.find(i)!=S.end()){
                     ans.push_back({i,n-i});
-                }
-                // S.insert(i+1);
-            }
+                }            }
         }
         cout<<ans.size()<<"\n";
         REP(i,0,ans.size()){
