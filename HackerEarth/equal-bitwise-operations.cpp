@@ -54,61 +54,42 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-class BouncingBall{
-public:
-     double getPosition(double g, double h, double p, double t){
-        g=g/100;
-        double curt=sqrt((2*h)/g);
-        double curv=sqrt(2*g*h);
-
-        vector<double>T,V;
-        T.push_back(0);
-        V.push_back(0);
-        T.push_back(curt);
-        V.push_back(curv);
-        while(curt<t){
-            double CC=curv;
-            curv=sqrt((100-p)/100.0)*CC;
-            curt=curt+2*(CC)/g;
-            T.push_back(curt);
-            V.push_back(curv);
-        }
-        deb(T);
-        deb(V);
-        double tt=T[T.size()-2];
-        double ans;
-        if(tt==0){
-            deb("down");
-            // it is down
-            ans=h-(g*t*t)/2.0;
-        }
-        else{
-            double remt=t-tt;
-            double treach=V[V.size()-1]/g;
-             double vv=V[V.size()-1];
-             deb(remt);
-            if(remt<treach){
-                deb("going up");
-                ans=vv*remt-(g*remt*remt)/2;
-            }
-            else{
-                remt=remt-(vv/g);
-                deb("going down");
-                ans=(vv*vv)/(2*g)-(g*remt*remt)/2;
-            }
+int power(int a, int b){
+    if(b==0){
+        return 1LL;
+    }
+    else{
+        int ans=power(a,b/2);
+        ans=(ans*ans)%mod;
+        if(b%2==1){
+            ans=(a*ans)%mod;
         }
         return ans;
-
-     }
-};
-
+    }
+}
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    double g, h, p, t;
-    cin>>g>>h>>p>>t;
-    BouncingBall B;
-    deb(B.getPosition(g,h,p,t));
+    int n;
+    cin>>n;
+    vi a(n);
+    REP(i,0,n){
+        cin>>a[i];
+    }
+    map<int, int>M;
+    M.clear();
+    for(int i=0;i<n;i++){
+        M[a[i]]++;
+    }
+    int ans=0;
+    for(auto g:M){
+        if(g.F!=0)
+            ans=(ans+power(2,g.S-1))%mod;
+        else{
+            ans=(ans+power(2,g.S)-1)%mod;
+        }
 
+    }
+    cout<<ans<<"\n";
     return 0;
 }

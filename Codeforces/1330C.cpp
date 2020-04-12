@@ -72,7 +72,6 @@ int32_t main(){
         }
     }
     if(f==0){
-        // deb("can't fit");
         cout<<-1<<"\n";
         return 0;
     }
@@ -80,8 +79,6 @@ int32_t main(){
         int gap=n;
         for(int i=0;i<m;i++){
             gap=min(gap,n-1-(i+(a[i])-1));
-            // deb(i);
-            // deb(gap);
         }
         if(gap==0){
             for(int i=0;i<m;i++){
@@ -98,11 +95,7 @@ int32_t main(){
                 shift[i]=min(gap,can[i]);
                 gap-=shift[i];  
             }
-            // deb(gap);
-            // deb(can);
-            // deb(shift);
             if(gap!=0){
-                // deb("gap is not 0");
                 cout<<-1<<"\n";
             }
             else{

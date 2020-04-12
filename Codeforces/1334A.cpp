@@ -54,61 +54,44 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-class BouncingBall{
-public:
-     double getPosition(double g, double h, double p, double t){
-        g=g/100;
-        double curt=sqrt((2*h)/g);
-        double curv=sqrt(2*g*h);
-
-        vector<double>T,V;
-        T.push_back(0);
-        V.push_back(0);
-        T.push_back(curt);
-        V.push_back(curv);
-        while(curt<t){
-            double CC=curv;
-            curv=sqrt((100-p)/100.0)*CC;
-            curt=curt+2*(CC)/g;
-            T.push_back(curt);
-            V.push_back(curv);
-        }
-        deb(T);
-        deb(V);
-        double tt=T[T.size()-2];
-        double ans;
-        if(tt==0){
-            deb("down");
-            // it is down
-            ans=h-(g*t*t)/2.0;
-        }
-        else{
-            double remt=t-tt;
-            double treach=V[V.size()-1]/g;
-             double vv=V[V.size()-1];
-             deb(remt);
-            if(remt<treach){
-                deb("going up");
-                ans=vv*remt-(g*remt*remt)/2;
-            }
-            else{
-                remt=remt-(vv/g);
-                deb("going down");
-                ans=(vv*vv)/(2*g)-(g*remt*remt)/2;
-            }
-        }
-        return ans;
-
-     }
-};
 
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    double g, h, p, t;
-    cin>>g>>h>>p>>t;
-    BouncingBall B;
-    deb(B.getPosition(g,h,p,t));
+    int t;
+    cin>>t;
+    vi p,c;
+    while(t--){
+        p.clear();
+        c.clear();
+        int n;
+        cin>>n;
+        p.resize(n);
+        c.resize(n);
+        int f=1;
+        REP(i,0,n){
+            cin>>p[i]>>c[i];
+            if(p[i]<c[i]){
+                f=0;
+            }
+            if(i!=0){
+                if(p[i]<p[i-1] || c[i]<c[i-1] ){
+                    f=0;
+                }
+                int ip=p[i]-p[i-1];
+                int ic=c[i]-c[i-1];
+                if(ic>ip){
+                    f=0;
+                }
+            }
+        }
+        if(f==1){
+            cout<<"YES\n";
+        }
+        else{
+            cout<<"NO\n";
+        }
+    }
 
     return 0;
 }
