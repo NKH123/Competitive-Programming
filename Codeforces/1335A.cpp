@@ -54,36 +54,28 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 #define deb(x) cerr << #x << " = " << x << endl;
 
-int power(int a, int b){
-    if(b==0){
-        return 1LL;
-    }
-    else{
-        int ans=power(a,b/2);
-        ans=(ans*ans)%mod;
-        if(b%2==1){
-            ans=(a*ans)%mod;
-        }
-        return ans;
-    }
-}
+
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int n, k;
-    cin>>n>>k;
-    int ans=0;
-    vector<int>v(k+1);
-    for(int i=k;i>=1;i--){
-        v[i]=power((k/i),n);
-        for(int j=2*i;j<=k;j+=i){
-            v[i]=(2*mod-v[j]+v[i])%mod;
-        }
+    int t;
+    cin>>t;
+    while(t--){
+    	int n;
+    	cin>>n;
+    	int ans=0;
+    	if(n==1 || n==2){
+    		cout<<ans<<"\n";
+    		continue;
+    	}
+    	if(n%2==0){
+    		ans=(n-n/2-1);
+    	}
+    	else{
+    		ans=(n-(n/2)-1);
+    	}
+    	cout<<ans<<"\n";
     }
-    for(int i=1;i<=k;i++){
-        ans=(ans+(i*v[i])%mod )%mod;
-    }
-    cout<<ans<<"\n";
 
     return 0;
 }

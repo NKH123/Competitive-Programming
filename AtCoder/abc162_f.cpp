@@ -134,7 +134,7 @@ int sum1(int v, int tl, int tr, int l, int r) {
 //updating one value of the array and rebuilding the path in the segtree above it
 //call update(1,0,n-1,pos,new_val) pos is pos in array a and new_val is the new value that replaces the old value
 
-
+vector<int>dp[2];
 
 int32_t main(){
     ios::sync_with_stdio(false);
@@ -144,63 +144,24 @@ int32_t main(){
     REP(i,0,n){
         cin>>a[i];
     }
-    // vi preodd((n)/2);
-    preodd.resize(n/2);
-    preeven.resize((n+1)/2);
-
-    // vi preeven((n+1)/2);
-    for(int i=0;i<n;i++){
-        if(i%2==0){
-            if(i==0){
-                preeven[0]=a[0];
-            }
-            else{
-                preeven[i/2]=a[i]+preeven[i/2-1];
-            }
+    dp[0].clear();
+    dp[0].resize(n);
+    dp[1].clear();
+    dp[1].resize(n);
+    dp[1][0]=a[0];
+    for(int i=1;i<n;i++){
+        if(i==1){
+            dp[0][i]=a[0];
+            dp[1][i]=a[1];
         }
         else{
-            if(i==1){
-                preodd[i/2]=a[i];
-            }
-            else{
-                preodd[i/2]=preodd[i/2-1]+a[i];
-            }
+            dp[0][i]=max(dp[0][i-1],dp[1][i-1]);
+            dp[1][i]=a[i]+dp[0][i-1];
         }
     }
-    deb(preeven);
-    deb(preodd);
-    build(1,0,preodd.size()-1);
-    build1(1,0,preeven.size()-1);
-    int ans=-(1e18);
-    int I=-1;
-    for(int i=(floor(n*1.0/2)-1);i<preeven.size();i++){
-        deb("even");
-        deb(i);
-        int temp=0;
-        if(I!=-1){
-            // temp=preeven[I];
-            temp=sum1(1,0,preeven.size()-1,0,I);
-        }
-        deb(temp);
-        ans=max(ans,preeven[i]-temp);
-        deb(ans);
-        I++;
-    }
-    I=-1;
-    
-    for(int i=(floor(n*1.0/2)-1);i<preodd.size();i++){
-        deb("odd");
-        deb(i);
-        int temp=0;
-        if(I!=-1){
-            // temp=preodd[I];
-            temp=sum(1,0,preodd.size()-1,0,I);
-        }
-        deb(temp);
-        ans=max(ans,preodd[i]-temp);
-        deb(ans);
-        I++;
-    }
+    int ans=max(dp[0][n-1],dp[1][n-1]);
     cout<<ans<<"\n";
+    // vi preodd((n)/2);
+   
     return 0;
 }
