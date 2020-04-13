@@ -62,6 +62,9 @@ int32_t main(){
     cin>>t;
     vi a, b;
     vi dp;
+    map<int, pair<int, int> >M;
+    set<pair<int, int> >S;
+    vi done;
     while(t--){
         int n;
         cin>>n;
@@ -69,87 +72,58 @@ int32_t main(){
         b.clear();
         a.resize(n);
         b.resize(n);
-        dp.clear();
-        dp.resize(n);
-        int ans=0;
+        M.clear();
         int W=0;
-        for(int i=0;i<n;i++){
-            dp[i]=i;
-        }
+        S.clear();
+        done.clear();
+        done.resize(n,0);
         for(int i=0;i<n;i++){
             cin>>a[i]>>b[i];
+            M[i]={a[i],b[i]};
+            S.insert({a[i],i});
         }
-        if(b[n-1]>a[0]){
-            W=1;
-        }
-        for(int i=1;i<n;i++){
-            if(b[i-1]>a[i]){
-                dp[i]=dp[i-1];
-            }
-        }
-        deb(dp);
-        for(int i=0;i<n;i++){
-            if(i==0){
-                if(b[n-1]>a[0]){
-                    dp[i]=dp[n-1];
-                }
-            }
-            else{
-                if(b[i-1]>a[i]){
-                    dp[i]=dp[i-1];
-                }
-            }
-        }
-        deb(dp);
-        if(n==1){
-            cout<<a[0]<<"\n";
-            continue;
-        }
-        else{
-            if(dp[0]==dp[n-1]){
-                int l=n-1;
-                for(int i=n-2;i>=0;i--){
-                    if(dp[i]==dp[i+1]){
-                        l=i;
-                    }
-                    else{
-                        break;
-                    }
-                }
-                if(l==0){
-                    //find min
-                    int mini=1e18;
-                    for(int i=0;i<n;i++){
-                        mini=min(mini,a[i]);
-                    }
-                    cout<<mini<<"\n";
+        int ans=0;
+        while(S.size()>0){
+            deb(S);
+            auto g=*(S.begin());
+            ans+=g.F;
+            int next=(g.S+1)%n;
+            deb(next);
+            deb(g);
+            deb("***************");
+            S.erase(S.find(g));
+            done[g.S]=1;
+            int prev=g.S;
+            while(done[next]==0){
+
+                deb("inside nested while loop");
+                deb(S);
+                deb("yo");
+                S.erase(S.find({M[next].first,next}));
+                M[next].first=max(0LL,M[next].first-b[prev]);
+                if(M[next].first>0){
+                    S.insert({M[next].first,next});
+                    deb("not killed so break");
+                    break;
                 }
                 else{
-                    ans+=a[l];
-                    int I=0;
-                    while(dp[I]==dp[0]){
-                        I++;
-                    }
-                    ans+=a[I];
-                    for(int i=I+1;i<l;i++){
-                        if(dp[i]!=dp[i-1]){
-                            ans+=dp[i];
-                        }
-                    }
-                    cout<<ans<<"\n";
+                    done[next]=1;
+                    deb("killed so continue;")
+                    prev=next;
+                    next=(next+1)%n;
                 }
+
             }
-            else{
-                ans=0;
-                ans+=dp[0];
-                for(int i=1;i<n;i++){
-                    if(dp[i]!=dp[i-1]){
-                        ans+=dp[i];
-                    }
-                }
-                cout<<ans<<"\n";
-            }
+            deb(S);
+            deb(ans);
+            deb("##################################");
+
+            
         }
+        cout<<ans<<"\n";
+
+        
+        
 
     }
 
