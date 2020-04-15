@@ -56,7 +56,9 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 
 vi a;
-vector<vector<int> >ct;
+// vector<vector<int> >ct;
+vector<int>ctl;
+vector<int>ctr;
 int32_t main(){
     ios::sync_with_stdio(false);
     int t;
@@ -64,14 +66,17 @@ int32_t main(){
     while(t--){
         int n;
         cin>>n;
-        ct.clear();
-        ct.resize(201,vector<int>(n,0));
+        ctl.clear();
+        // ct.resize(201,vector<int>(n,0));
+        ctl.resize(3,0);
+        ctr.clear();
+        ctr.resize(3,0);
         a.clear();
         a.resize(n);
         
         REP(i,0,n){
             cin>>a[i];
-            ct[a[i]][i]=1;
+            // ct[a[i]][i]=1;
         }
         if(n==1){
             cout<<1<<"\n";
@@ -86,28 +91,35 @@ int32_t main(){
             }
             continue;
         }
-        for(int i=1;i<=200;i++){
-            for(int j=0;j<n;j++){
-                if(j==0){
+        // for(int i=1;i<=200;i++){
+        //     for(int j=0;j<n;j++){
+        //         if(j==0){
 
-                }
-                else{
-                    ct[i][j]+=ct[i][j-1];
-                }
-            }
+        //         }
+        //         else{
+        //             ct[i][j]+=ct[i][j-1];
+        //         }
+        //     }
+        // }
+        for(int i=0;i<n;i++){
+            ctr[a[i]]++;
         }
+        // for(int i=1;i<n;i++){
+        //     ctr[i]+=ctr[i-1];
+        // }
         int ans=0;
-        for(int i=1;i<=200;i++){
+        for(int i=1;i<=1;i++){
             int cl=0;
             int cr=0;
             int l=-1, r=n;
-            // deb(i);
             int fl=0;
             int fr=0;
             while(l<r){
-                // deb("*****************");
-                // deb(l);
-                // deb(r);
+                deb(l);
+                deb(r);
+                deb(ctl);
+                deb(ctr);
+                
                 if(l>-1 && a[l]==i && fl==0){
                     cl++;
                     fl=1;
@@ -116,35 +128,39 @@ int32_t main(){
                     cr++;
                     fr=1;
                 }
-
-                // deb(cl);
-                // deb(cr);
+                deb(cl);
+                deb(cr);
                 if(cl==cr){
-                    // deb(cl);
-                    // deb(cr);
-                    // deb(l);
-                    // deb(r);
-
+                    deb("equal");
                     int maxi=0;
                     if(l!=-1 && r!=n){
-                        for(int I=1;I<=200;I++){
-                            maxi=max(maxi,ct[I][r-1]-ct[I][l]);
+                        for(int I=1;I<=1;I++){
+                            maxi=max(maxi,ctr[I]-ctl[I]);
+
                         }
-                        // deb(maxi);
                         ans=max(ans,2*cl+maxi);
-                        // deb(ans);
                     }
                     l++;
+                    if(l<n){
+                        ctl[a[l]]++;
+                    }
                     fl=0;
                     
                 }
                 else{
                     r--;
+                    if((r+1)>=0 && (r+1)<n){
+                        ctr[a[r+1]]--;
+                    }
+                    // if((r>=0) && (r)<n){
+                    //     ctr[a[r]]--;
+                    // }
                     fr=0;
                 }
             }
 
         }
+        ans=max(1LL,ans);
         cout<<ans<<"\n";
     }
 
