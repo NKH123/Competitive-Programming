@@ -118,6 +118,9 @@ int32_t main(){
         adj[A].PB(B);
         adj[B].PB(A);
     }
+    REP(i,0,n+1){
+        val[i]=-(1e18);
+    }
     // cnt[1]=dfs(1,0);
     // //deb(2);
     dfs(1,0,0);
