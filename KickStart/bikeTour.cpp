@@ -62,7 +62,7 @@ int32_t main(){
     cin>>t;
     vi a;
     for(int i=1;i<=t;i++){
-        cout<<"Case #"<<t<<": ";
+        cout<<"Case #"<<i<<": ";
         a.clear();
         int n;
         cin>>n;
