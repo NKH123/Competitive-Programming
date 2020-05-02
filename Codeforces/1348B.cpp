@@ -58,47 +58,63 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int n, k;
-    cin>>n>>k;
-    vi m(n);
-    REP(i,0,n){
-        cin>>m[i];
-    }
-    sort(m.begin(),m.end());
-    vi c(k);
-
-    REP(i,0,k){
-        cin>>c[i];
-    }
-    vector<vector<int> >ans;
-    int rem=1e18;
-    vector<int>A;
-    A.clear();
-    for(int i=0;i<m.size();i++){
-        A.PB(m[i]);
-        if(A.size()==1 || A[A.size()-1]!=A[A.size()-2]){
-            rem=min(rem,c[m[i]-1]);
-            rem--;
+    int t;
+    cin>>t;
+    vi a;set<int>S;
+    while(t--){
+        int n,k;
+        cin>>n>>k;
+        a.resize(n);
+        S.clear();
+        REP(i,0,n){
+            cin>>a[i];
+            S.insert(a[i]);
+        }
+        if(S.size()>k){
+            cout<<-1<<"\n";
         }
         else{
-            rem--;
+            vector<int>ans;
+            ans.clear();
+            ans.resize(S.size());
+            int I=0;
+            for(auto g:S){
+                ans[I]=g;
+                I++;
+            }
+
+            while(ans.size()<k){
+                ans.PB(*(S.begin()));
+            }
+            I=ans.size();
+            int pos=0;
+            while(pos<n){
+                //deb(pos);
+                //deb(ans);
+                if(a[pos]!=ans[(ans.size())%k]){
+                    while(a[pos]!=ans[(ans.size())%k]){
+                        int I=ans.size();
+                        ans.PB(ans[I%k]);
+                        //deb("PB");
+                        //deb(a[I%k]);
+                    I++;
+                    }
+                    ans.PB(a[pos]);
+                }
+                else{
+                    ans.PB(a[pos]);
+                }
+                //deb(ans);
+                //deb("******");
+                // I++;
+                pos++;
+            }
+            cout<<ans.size()<<"\n";
+            REP(i,0,ans.size()){
+                cout<<ans[i]<<" ";
+            }
+            cout<<"\n";
         }
-        if(rem==0){
-            ans.PB(A);
-            A.clear();
-            rem=1e18;
-        }
-    }
-    if(A.size()!=0){
-        ans.PB(A);
-    }
-    cout<<ans.size()<<"\n";
-    for(int i=0;i<ans.size();i++){
-        cout<<ans[i].size()<<" ";
-        for(int j=0;j<ans[i].size();j++){
-            cout<<ans[i][j]<<" ";
-        }
-        cout<<"\n";
     }
 
     return 0;

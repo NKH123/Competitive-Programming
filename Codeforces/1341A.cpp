@@ -63,13 +63,22 @@ int32_t main(){
     while(t--){
     	int n, a, b, c, d;
     	cin>>n>>a>>b>>c>>d;
-    	int f=0;
-    	for(int i=(a-b);i<=(a+b);i++){
-    		int N=n*(i);
-    		if(N>=(c-d) && N<=(c+d)){
-    			f=1;
-    		}
+    	int f=1;
+    	// for(int i=(a-b);i<=(a+b);i++){
+    	// 	int N=n*(i);
+    	// 	if(N>=(c-d) && N<=(c+d)){
+    	// 		f=1;
+    	// 	}
+    	// }
+    	int large=(a+b);
+    	int small=(a-b);
+    	if((large*n)<(c-d)){
+    		f=0;
     	}
+    	if((small*n)>(c+d)){
+    		f=0;
+    	}
+
     	if(f==1){
     		cout<<"Yes\n";
     	}

@@ -58,47 +58,37 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int n, k;
-    cin>>n>>k;
-    vi m(n);
-    REP(i,0,n){
-        cin>>m[i];
-    }
-    sort(m.begin(),m.end());
-    vi c(k);
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int A=(1LL<<n);
+        deb(A);
+        int ct=0;
+        int B=0;
+        int I=n-1;
+        for(int i=n-1;;i--){
+            if(ct==(n/2)){
+                break;
+            }
+            B+=(1LL<<i);
 
-    REP(i,0,k){
-        cin>>c[i];
-    }
-    vector<vector<int> >ans;
-    int rem=1e18;
-    vector<int>A;
-    A.clear();
-    for(int i=0;i<m.size();i++){
-        A.PB(m[i]);
-        if(A.size()==1 || A[A.size()-1]!=A[A.size()-2]){
-            rem=min(rem,c[m[i]-1]);
-            rem--;
+            ct++;
+            I=i-1;
         }
-        else{
-            rem--;
+        deb(B);
+        deb(I);
+        while(I>0){
+            A+=(1LL<<I);
+            I--;
         }
-        if(rem==0){
-            ans.PB(A);
-            A.clear();
-            rem=1e18;
-        }
-    }
-    if(A.size()!=0){
-        ans.PB(A);
-    }
-    cout<<ans.size()<<"\n";
-    for(int i=0;i<ans.size();i++){
-        cout<<ans[i].size()<<" ";
-        for(int j=0;j<ans[i].size();j++){
-            cout<<ans[i][j]<<" ";
-        }
-        cout<<"\n";
+        deb(A);
+        deb(A);
+        deb(B);
+        int ans=A-B;
+        cout<<ans<<"\n";
+
     }
 
     return 0;

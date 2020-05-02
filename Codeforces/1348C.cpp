@@ -58,48 +58,53 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int n, k;
-    cin>>n>>k;
-    vi m(n);
-    REP(i,0,n){
-        cin>>m[i];
-    }
-    sort(m.begin(),m.end());
-    vi c(k);
+    int t;
+    cin>>t;
+    vector<string >a;
+    while(t--){
+        int n, k;
+        cin>>n>>k;
+        a.clear();
+        a.resize(k);
+        string s;
+        cin>>s;
 
-    REP(i,0,k){
-        cin>>c[i];
-    }
-    vector<vector<int> >ans;
-    int rem=1e18;
-    vector<int>A;
-    A.clear();
-    for(int i=0;i<m.size();i++){
-        A.PB(m[i]);
-        if(A.size()==1 || A[A.size()-1]!=A[A.size()-2]){
-            rem=min(rem,c[m[i]-1]);
-            rem--;
+        sort(s.begin(),s.end());
+        if(k==1){
+            cout<<s<<"\n";
+            continue;
+        }
+        for(int i=0;i<k;i++){
+            // a[i].PB(s[i]);
+            a[i]+=s[i];
+        }
+        if(a[k-1]!=a[0]){
+            cout<<a[k-1]<<"\n";
         }
         else{
-            rem--;
-        }
-        if(rem==0){
-            ans.PB(A);
-            A.clear();
-            rem=1e18;
+
+            // int ct[26];
+            // memset(ct,0,sizeof(ct));
+            // vector<int>ct(26,0);
+            string ans="";
+            ans+=s[0];
+            if(s[k]==s[s.size()-1]){
+                for(int i=k;i<s.size();i+=k){
+                    ans+=s[k];
+                }
+            }
+            else{
+                for(int i=k;i<s.size();i++){
+                    ans+=s[i];
+                }
+            }
+            cout<<ans<<"\n";
+            
         }
     }
-    if(A.size()!=0){
-        ans.PB(A);
-    }
-    cout<<ans.size()<<"\n";
-    for(int i=0;i<ans.size();i++){
-        cout<<ans[i].size()<<" ";
-        for(int j=0;j<ans[i].size();j++){
-            cout<<ans[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
+        //////deb(a);
+
+    
 
     return 0;
 }
