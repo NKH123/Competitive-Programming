@@ -58,38 +58,28 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int t;
-    cin>>t;
-    while(t--){
-        int n;
-        cin>>n;
-        int A=(1LL<<n);
-        //deb(A);
-        int ct=0;
-        int B=0;
-        int I=n-1;
-        for(int i=n-1;;i--){
-            if(ct==(n/2)){
-                break;
-            }
-            B+=(1LL<<i);
+    string s;
+    cin>>s;
+    int ans=0;
+    int n=s.size();
+    int ct=0;
+    for(int i=0;i<(n);i++){
+    	if(s[i]=='C' && i>0 && s[i-1]=='B'){
+    		ans+=ct;
+    	}
+    	else if(s[i]=='B' && i<(n-1) && s[i+1]=='C'){
 
-            ct++;
-            I=i-1;
-        }
-        //deb(B);
-        //deb(I);
-        while(I>0){
-            A+=(1LL<<I);
-            I--;
-        }
-        //deb(A);
-        //deb(A);
-        //deb(B);
-        int ans=A-B;
-        cout<<ans<<"\n";
+    	}
+    	else if(s[i]=='A'){
+    		ct++;
+    	}
+    	else{
+    		ct=0;
+    	}
 
     }
+
+    cout<<ans<<"\n";
 
     return 0;
 }

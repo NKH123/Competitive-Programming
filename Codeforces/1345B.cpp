@@ -63,32 +63,25 @@ int32_t main(){
     while(t--){
         int n;
         cin>>n;
-        int A=(1LL<<n);
-        //deb(A);
-        int ct=0;
-        int B=0;
-        int I=n-1;
-        for(int i=n-1;;i--){
-            if(ct==(n/2)){
-                break;
+        int ans=0;
+        while(n>=2){
+            int l=0, r=1e8;
+            int temp=0;
+            while(l<=r){
+                int mid=((l+r)/2);
+                int cal=(mid*(3*mid+1))/2;
+                if(cal>n){
+                    r=mid-1;
+                }
+                else{
+                    temp=cal;
+                    l=mid+1;
+                }
             }
-            B+=(1LL<<i);
-
-            ct++;
-            I=i-1;
+            n-=temp;
+            ans++;
         }
-        //deb(B);
-        //deb(I);
-        while(I>0){
-            A+=(1LL<<I);
-            I--;
-        }
-        //deb(A);
-        //deb(A);
-        //deb(B);
-        int ans=A-B;
         cout<<ans<<"\n";
-
     }
 
     return 0;

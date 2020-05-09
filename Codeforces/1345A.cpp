@@ -61,34 +61,22 @@ int32_t main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
-        int A=(1LL<<n);
-        //deb(A);
-        int ct=0;
-        int B=0;
-        int I=n-1;
-        for(int i=n-1;;i--){
-            if(ct==(n/2)){
-                break;
-            }
-            B+=(1LL<<i);
-
-            ct++;
-            I=i-1;
-        }
-        //deb(B);
-        //deb(I);
-        while(I>0){
-            A+=(1LL<<I);
-            I--;
-        }
-        //deb(A);
-        //deb(A);
-        //deb(B);
-        int ans=A-B;
-        cout<<ans<<"\n";
-
+    	int n, m;
+    	cin>>n>>m;
+    	if(n>m){
+    		swap(n,m);
+    	}
+    	if(n==1){
+    		cout<<"YES\n";
+    	}
+    	else{
+    		if(n==2 && m==2){
+    			cout<<"YES\n";
+    		}
+    		else{
+    			cout<<"NO\n";
+    		}
+    	}
     }
 
     return 0;

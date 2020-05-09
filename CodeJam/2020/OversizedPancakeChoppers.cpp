@@ -60,51 +60,75 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
-    vector<string >a;
+    int T;
+    T=t;
+    vector<int>a;
+    map<int, int>M;
     while(t--){
-        int n, k;
-        cin>>n>>k;
+        int n, d;
+        cin>>n>>d;
         a.clear();
-        a.resize(k);
-        string s;
-        cin>>s;
-
-        sort(s.begin(),s.end());
-        if(k==1){
-            cout<<s<<"\n";
-            continue;
+        cout<<"Case #"<<(T-t)<<": ";
+        a.resize(n);
+        M.clear();
+        REP(i,0,n){
+            cin>>a[i];
+            M[a[i]]++;
         }
-        for(int i=0;i<k;i++){
-            // a[i].PB(s[i]);
-            a[i]+=s[i];
+        sort(a.begin(),a.end());
+        int ans=1e18;
+        for(int i=0;i<a.size();i++){
+            if(M[a[i]]>=d){
+                ans=0;
+            }
         }
-        if(a[k-1]!=a[0]){
-            cout<<a[k-1]<<"\n";
+        if(ans==0){
+            cout<<ans<<"\n";
         }
         else{
+            set<int>S;
+            S.clear();
+            for(auto g:a){
+                S.insert(g);
+            }
+            vi b;
+            b.clear();
+            int total=0;
+            for(auto g:S){
+                b.PB(g);
+                total+=M[g];
+            }
+            if(d==2){
+                cout<<1<<"\n";
+            }
+            else if(d==3){
+                int ans=2;
+                for(int i=0;i<b.size();i++){
+                    int cuts=0;
+                    int cur=M[b[i]];
 
-            // int ct[26];
-            // memset(ct,0,sizeof(ct));
-            // vector<int>ct(26,0);
-            string ans="";
-            ans+=s[0];
-            if(s[k]==s[s.size()-1]){
-                for(int i=k;i<s.size();i+=k)    {
-                    ans+=s[k];
+                    for(int j=i+1;j<b.size();j++){
+                        if(cur==2){
+                            ans=1;
+                        }
+                        if((b[j]%b[i])==(0) && (b[j]/b[i])==2){
+                                ans=min(ans,1LL);
+                        }
+                    }
+                    
                 }
+                cout<<ans<<"\n";
             }
             else{
-                for(int i=k;i<s.size();i++){
-                    ans+=s[i];
+                if(ans==(1e18)){
+                    //deb("here");
+                    ans=(d-1);
                 }
+                cout<<ans<<"\n";
             }
-            cout<<ans<<"\n";
-            
         }
+        // cout<<"\n";if()
     }
-        //////deb(a);
-
-    
 
     return 0;
 }

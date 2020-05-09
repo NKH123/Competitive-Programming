@@ -53,43 +53,60 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
+vector<vector<int> >qq;
+int n, m, q;
+bool comp(vector<int>A, vector<int>B){
+    return A[3]>B[3];
+}
+
+int ans=0;
+
+void cal(mask){
+    vector<vector<int> >A;
+    A.clear();
+    for(int i=0;i<q;i++){
+        if(((1LL<<i)&(mask))!=0){
+            A.PB(qq[i]);
+        }
+    }
+    sort(A.begin(),A.end(),comp);
+    vector<int>aa;
+    aa.clear();
+    aa.resize(n+1,-1);
+    int Ans=0;
+    for(int i=0;i<A.size();i++){
+        int a, b, c, d;
+        a=A[0];
+        b=A[1];
+        c=A[2];
+        d=A[3];
+        //both empty
+        if(aa[a]==-1 && aa[b]==-1){
+            
+        }
+        //one empty
 
 
-
+        //both not empty
+    }
+    ans=max(ans,Ans);
+}
 int32_t main(){
     ios::sync_with_stdio(false);
-    int t;
-    cin>>t;
-    while(t--){
-        int n;
-        cin>>n;
-        int A=(1LL<<n);
-        //deb(A);
-        int ct=0;
-        int B=0;
-        int I=n-1;
-        for(int i=n-1;;i--){
-            if(ct==(n/2)){
-                break;
-            }
-            B+=(1LL<<i);
-
-            ct++;
-            I=i-1;
+    
+    cin>>n>>m>>q;
+    qq.resize(q);
+    for(int I=0;i<q;I++){
+        for(int i=0;i<4;i++){
+            int A;
+            cin>>A;
+            qq[I].PB(A);
         }
-        //deb(B);
-        //deb(I);
-        while(I>0){
-            A+=(1LL<<I);
-            I--;
-        }
-        //deb(A);
-        //deb(A);
-        //deb(B);
-        int ans=A-B;
-        cout<<ans<<"\n";
+    }
+    sort(qq.begin(),qq.end(),comp);
+    for(int i=1;i<(1<<q);i++){
 
     }
-
+    cout<<ans<<"\n";
     return 0;
 }

@@ -60,35 +60,37 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
+    int T=t;
     while(t--){
-        int n;
-        cin>>n;
-        int A=(1LL<<n);
-        //deb(A);
-        int ct=0;
-        int B=0;
-        int I=n-1;
-        for(int i=n-1;;i--){
-            if(ct==(n/2)){
-                break;
+        int x, y;
+        cin>>x>>y;
+        string s;
+        cin>>s;
+        int ans=1e18;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='N'){
+                y++;
             }
-            B+=(1LL<<i);
-
-            ct++;
-            I=i-1;
+            if(s[i]=='S'){
+                y--;
+            }
+            if(s[i]=='E'){
+                x++;
+            }
+            if(s[i]=='W'){
+                x--;
+            }
+            if((abs(x)+abs(y))<=(i+1)){
+                ans=min(ans,i+1);
+            }
         }
-        //deb(B);
-        //deb(I);
-        while(I>0){
-            A+=(1LL<<I);
-            I--;
+        cout<<"Case #"<<(T-t)<<": ";
+        if(ans==(1e18)){
+            cout<<"IMPOSSIBLE\n";
         }
-        //deb(A);
-        //deb(A);
-        //deb(B);
-        int ans=A-B;
-        cout<<ans<<"\n";
-
+        else{
+            cout<<ans<<"\n";
+        }
     }
 
     return 0;

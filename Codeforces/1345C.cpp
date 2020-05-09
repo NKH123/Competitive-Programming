@@ -60,34 +60,67 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
+    vi a;
+    // set<int>emp,two;
+    set<int>To;
+    // map<int, int>M;
     while(t--){
         int n;
         cin>>n;
-        int A=(1LL<<n);
-        //deb(A);
-        int ct=0;
-        int B=0;
-        int I=n-1;
-        for(int i=n-1;;i--){
-            if(ct==(n/2)){
-                break;
-            }
-            B+=(1LL<<i);
+        a.clear();
+        a.resize(n);
+        // emp.clear();
+        // one.clear();
+        // two.clear();
+        // M.clear();
+        REP(i,0,n){
+            cin>>a[i];
+            // M[a[i]]=1;
+        }
+        To.clear();
+        for(int i=0;i<n;i++){
+            int from=i;
+            int to=(from)+(a[i%n]);
+            // if(emp.find(to)!=emp.end()){
+            //     // two.insert(to);
+            //     emp.erase(emp.find(to));
 
-            ct++;
-            I=i-1;
+            // }
+            // else{
+            //     two.insert(to);
+            // }
+            // M[from]--;
+            // M[to]++;
+            To.insert(to);
         }
-        //deb(B);
-        //deb(I);
-        while(I>0){
-            A+=(1LL<<I);
-            I--;
+        vi b;
+        b.clear();
+        b.resize(n);
+        for(auto g:To){
+            // deb((g%n));
+            int A=g%n;
+            A=(A+n)%n;
+            b[A]=1;
         }
-        //deb(A);
-        //deb(A);
-        //deb(B);
-        int ans=A-B;
-        cout<<ans<<"\n";
+
+        int f=1;
+        for(int i=0;i<n;i++){
+            if(b[i]==0){
+                f=0;
+            }
+        }
+        // deb(M);
+        // for(auto g:M){
+        //     if(g.second==-1){
+        //         f=1;
+        //     }
+        // }
+        if(f==0){
+            cout<<"NO\n";
+        }
+        else{
+            cout<<"YES\n";
+        }
 
     }
 
