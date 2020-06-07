@@ -60,16 +60,18 @@ public:
     /** Initialize your data structure here. */
     struct Vertex{
         int next[26];
-        bool flag;
+        bool flag=false;
         Vertex(){
-            memset(next,26,-1);
-            flag=false;
+            fill(begin(next), end(next), -1);
         }
     };
     vector<Vertex>T;
     Trie() {
         T.clear();
-        T.resize(1);
+        // T.resize(1);
+        // T.emplace_back();
+       	Vertex v;
+       	T.push_back(v);
     }
     
     /** Inserts a word into the trie. */
@@ -126,7 +128,9 @@ public:
  * bool param_3 = obj->startsWith(prefix);
  */
 int32_t main(){
+	deb(-1);
     Trie* obj=new Trie();
+    deb(0);
     obj->insert("apple");
     deb(1);
     deb(obj->search("apple"));

@@ -53,29 +53,63 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
+class NumArray {
+public:
+    vector<int>nums;
+    vector<int>T;
+    void add(int ind,int val){
+        for(int i=ind;i<n;i=(i|()i+1)){
+            T[i]+=val;
+        }
+    }
+    int sum(int r){
+        if(r<0){
+            return 0;
+        }
+        else{
+            int ret=r;
+            int ans=0;
+            while(ret>=0){
+                ans+=T[ret];
+                ret=(ret&(ret+1))-1;
+            }
+            return ans;
+        }
+    }
+    NumArray(vector<int>& A) {
+        nums=A;
+        T.clear();
+        T.resize(nums.size());
+        // build(1,0,nums.size()-1,nums);
+        for(int i=0;i<A.size();i++){
+            nums[i]=A[i];
+            add(i,A[i]);
+        }
+    }
+    
+    void update(int i, int val) {
+        add(i,-nums[i]);
+        nums[i]=val;
+        add(i,val);
+    }
+    
+    int sumRange(int i, int j) {
+        // return query(1,0,nums.size()-1,i,j);
+        return sum(r)-sum(l-1);
+    }
+};
 
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(i,val);
+ * int param_2 = obj->sumRange(i,j);
+ */
 
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int t;
-    cin>>t;
-    vector<int>s;
-    while(t--){
-        int n;
-        cin>>n;
-        s.clear();
-        s.resize(n);
-        REP(i,0,n){
-            cin>>s[i];
-        }
-        sort(s.begin(),s.end());
-        int ans=1e18;
-        for(int i=1;i<s.size();i++){
-            ans=min(ans,s[i]-s[i-1]);
-        }
-        cout<<ans<<"\n";
-    }
+
 
     return 0;
 }

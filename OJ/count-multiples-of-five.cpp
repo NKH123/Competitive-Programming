@@ -53,28 +53,64 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 }
 
 #define deb(x) cerr << #x << " = " << x << endl;
-
-
-
+vi a;
+vi T;
+int build(int v, int l, int r){
+	if(l>r)return 0;
+	if(l==r){
+		if(a[l]%5==0){
+			T[v]=1;
+		}
+		else{
+			T[v]=0;
+		}
+		return T[v];
+	}
+	else{
+		int mid=(l+r)/2;
+		T[v]=build(v*2,l,mid)+build(v*2+1,mid+1,r);
+		return T[v];
+	}
+}
+int query(int v, int sl, int sr, int l, int r){
+	if(sl>sr){
+		return 0;
+	}
+	else if(sl>r || sr<l){
+		return 0;
+	}
+	else if(sl>=l && sr<=r){
+		return T[v];
+	}
+	else{
+		int smid=(sl+sr)/2;
+		int ans=query(2*v,sl,smid,l,min(r,smid))+query(2*v+1,smid+1,sr,max(smid+1,l),r);
+		return ans;
+	}
+}
 int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
-    vector<int>s;
     while(t--){
-        int n;
-        cin>>n;
-        s.clear();
-        s.resize(n);
-        REP(i,0,n){
-            cin>>s[i];
-        }
-        sort(s.begin(),s.end());
-        int ans=1e18;
-        for(int i=1;i<s.size();i++){
-            ans=min(ans,s[i]-s[i-1]);
-        }
-        cout<<ans<<"\n";
+    	int n, q;
+    	cin>>n>>q;
+    	a.clear();
+    	a.resize(n);
+    	REP(i,0,n){
+    		cin>>a[i];
+    	}
+    	T.clear();
+    	T.resize(4*n+5);
+    	build(1,0,n-1);
+    	// deb(T);
+    	while(q--){
+    		int l, r;
+    		cin>>l>>r;
+    		l--, r--;
+    		int ans=query(1,0,n-1,l,r);
+    		cout<<ans<<"\n";
+    	}
     }
 
     return 0;

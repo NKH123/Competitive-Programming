@@ -60,19 +60,51 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
-    vector<int>s;
+    vector<vector<int> >a;
     while(t--){
-        int n;
-        cin>>n;
-        s.clear();
-        s.resize(n);
-        REP(i,0,n){
-            cin>>s[i];
+        int n, m;int x, y;
+        cin>>n>>m>>x>>y;
+        a.clear();
+        a.resize(n,vector<int>(m));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                char A;
+                cin>>A;
+                if(A=='.'){
+                    a[i][j]=0;
+                }
+                else{
+                    a[i][j]=1;
+                }
+            }
         }
-        sort(s.begin(),s.end());
-        int ans=1e18;
-        for(int i=1;i<s.size();i++){
-            ans=min(ans,s[i]-s[i-1]);
+        int ans=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(j!=(m-1)){
+                    if(a[i][j]==0){
+                        if(a[i][j]==0 && a[i][j+1]==0){
+                            if((2*x)>y){
+                                ans+=y;
+                                a[i][j+1]=1;
+                            }
+                            else{
+                                ans+=x;
+                            }
+                        }   
+                        else{
+                            ans+=x;
+                        }
+                        a[i][j]=1;
+                    }
+                }
+                else{
+                    if(a[i][j]==0){
+                        ans+=x;
+                        a[i][j]=1;
+                    }
+                }
+            }
         }
         cout<<ans<<"\n";
     }

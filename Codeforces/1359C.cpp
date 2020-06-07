@@ -58,23 +58,53 @@ ostream &operator << ( ostream & os, const map< F, S > &v ) {
 
 int32_t main(){
     ios::sync_with_stdio(false);
-    int t;
-    cin>>t;
-    vector<int>s;
-    while(t--){
-        int n;
-        cin>>n;
-        s.clear();
-        s.resize(n);
-        REP(i,0,n){
-            cin>>s[i];
+    int T;
+    cin>>T;
+    while(T--){
+        int c, h, t;
+        cin>>h>>c>>t;
+        int ct=1;
+        int temp=0;
+        double avg=(c+h)/2.0;
+        if(t<=avg){
+            cout<<2<<"\n";
         }
-        sort(s.begin(),s.end());
-        int ans=1e18;
-        for(int i=1;i<s.size();i++){
-            ans=min(ans,s[i]-s[i-1]);
+        else{
+            int l=1, r=1e18;
+            int ans=0;
+            double yoabs=1e18;
+            while(l<=r){
+                int mid=(l+r)/2;
+                int no=(2*mid)-1;
+                int cno=no/2;
+                int hno=cno+1;
+                double temp=1.0*((cno*c)+(hno*h))/(cno+hno);
+                if(temp>=(t)){
+                    l=mid+1;
+                    ans=mid;
+                    yoabs=min(yoabs,abs(temp-t));
+                }
+                else{
+                    r=mid-1;
+                }
+            }
+            //check just smaller
+            int Ans=ans;
+            Ans++;
+            int no=(2*Ans)-1;
+            int cno=no/2;
+            int hno=cno+1;
+            double temp=1.0*((cno*c)+(hno*h))/(cno+hno);
+            double zabs=abs(temp-t);
+            if(zabs<yoabs){
+                int AAns=(2*Ans)-1;
+                cout<<AAns<<"\n";
+            }
+            else{
+                int AAns=(2*ans)-1;
+                cout<<AAns<<"\n";
+            }
         }
-        cout<<ans<<"\n";
     }
 
     return 0;

@@ -60,21 +60,24 @@ int32_t main(){
     ios::sync_with_stdio(false);
     int t;
     cin>>t;
-    vector<int>s;
     while(t--){
-        int n;
-        cin>>n;
-        s.clear();
-        s.resize(n);
-        REP(i,0,n){
-            cin>>s[i];
-        }
-        sort(s.begin(),s.end());
-        int ans=1e18;
-        for(int i=1;i<s.size();i++){
-            ans=min(ans,s[i]-s[i-1]);
-        }
-        cout<<ans<<"\n";
+    	int n, m, k;
+    	cin>>n>>m>>k;
+    	int No=n/k;
+    	if(No>=m){
+    		cout<<m<<"\n";
+    	}
+    	else{
+    		int ini=n/k;
+    		m-=(n/k);
+    		k--;
+    		int ans=(m/k);
+    		if(m%k!=0){
+    			ans++;
+    		}
+    		int Ans=(ini-ans);
+    		cout<<Ans<<"\n";
+    	}
     }
 
     return 0;
