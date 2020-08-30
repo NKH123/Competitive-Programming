@@ -65,10 +65,19 @@ int32_t main(){
         int n;
         cin>>n;
         a.resize(n);
+        int sum = 0;
+        int mx = 0;
         REP(i,0,n) {
             cin>>a[i];
+            sum += a[i];
+            mx = max(mx, a[i]);
         }
-        
+        if(mx > (sum - mx) || (sum%2)==1) {
+            cout<<"T\n";
+        } else {
+            cout<<"HL\n";
+        }
+
     }
 
     return 0;
